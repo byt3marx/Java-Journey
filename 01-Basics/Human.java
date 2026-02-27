@@ -17,7 +17,7 @@ class Human {
     System.out.println("Country: " + country);
     System.out.println("Learning Java: " + isLearningJava);
 
-    //learning about how java with variables and data types//
+    //learning how java handles variables and data types//
 
     int a = 5;
     int b = 2;
