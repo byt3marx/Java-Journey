@@ -17,28 +17,26 @@ class smartCalculator {
     
 
     if (operation.equals("+")) { //.equals compares actual text content, == compares memory locations
-      double sum = num1 + num2;
-      System.out.println("The sum of your numbers is: " + sum);
-    }
-    
-    if (operation.equals("-")) {
-      double difference = num1 - num2;
-      System.out.println("The difference of your numbers is: " + difference);
-    }
-
-    if (operation.equals("*")) {
-      double product = num1 * num2;
-      System.out.println("The product of your numbers is: " + product);
-    }
-
-    if (operation.equals("/")) {
-      double quotient = num1 / num2;
-      System.out.println("The quotient of your numbers is: " + quotient);
-    }
-
-    if (operation.equals("%")) {
-      double remainder = num1 % num2;
-      System.out.println("The remainder of your numbers is: " + remainder);
+        double sum = num1 + num2;
+        System.out.println("The sum of your numbers is: " + sum);
+    } else if (operation.equals("-")) {
+        double difference = num1 - num2;
+        System.out.println("The difference of your numbers is: " + difference);
+    } else if (operation.equals("*")) {
+        double product = num1 * num2;
+        System.out.println("The product of your numbers is: " + product);
+    } else if (operation.equals("/")) {
+        if (num2 == 0) {
+          System.out.println("Cannot divide by zero.");
+        } else {
+            double quotient = num1 / num2;
+            System.out.println("The quotient of your numbers is: " + quotient);
+        }
+   } else if (operation.equals("%")) {
+        double remainder = num1 % num2;
+        System.out.println("The remainder of your numbers is: " + remainder);
+    } else {
+        System.out.println("Invalid operation.");
     }
 
 
