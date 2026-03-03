@@ -10,10 +10,11 @@ from beginner to confident programmer.
     My-Java-Journey/
     │
     ├── 01-Basics/
-    │   ├── HelloWorld.java
-    │   ├── VariablesDemo.java
-    │   ├── EvenOdd.java
-    │   ├── BasicCalculator.java
+    │   ├── welcome.java
+    │   ├── human.java
+    │   ├── simpleCalculator.java
+    │   ├── calculator.java
+    │   ├── smartCalculator.java
     │
     ├── 02-Interactive-Logic/
     │   ├── SmartCalculator.java
