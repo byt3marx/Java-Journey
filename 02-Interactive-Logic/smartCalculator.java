@@ -31,26 +31,32 @@ class smartCalculator {
 
     System.out.println("Enter second number: ");
     double num2 = scanner.nextDouble();
-       
-    if (operation.equals("+")) { //.equals compares actual text content, == compares memory locations
+
+    switch (operation) {
+      case "+":
         System.out.println("Result: " + (num1 + num2));
-    } 
-    else if (operation.equals("-")) {
-          System.out.println("Result: " + (num1 - num2));
-    } 
-    else if (operation.equals("*")) {
+       break;
+
+      case "-":
+        System.out.println("Result: " + (num1 - num2));
+       break;
+
+      case "*":
         System.out.println("Result: " + (num1 * num2));
-    } 
-    else if (operation.equals("/")) {
-        if (num2 == 0) {
+       break;
+
+      case "/":
+        if (num2 ==0) {
           System.out.println("Cannot divide by zero.");
         } else {
-            System.out.println("Result: " + (num1 / num2));
+        System.out.println("Result: " + (num1 / num2));
         }
-   } 
-   else if (operation.equals("%")) {
+        break;
+
+      case "%":
         System.out.println("Result: " + (num1 % num2));
-    } 
+        break;
+    }
     
     System.out.println("Do you want to continue? (yes/no): ");
     scanner.nextLine(); //clears leftover newline
