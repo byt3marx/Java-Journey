@@ -1,61 +1,81 @@
 # My Java Journey ☕
 
-A collection of all my Java exercises and projects.
+A structured collection of my Java exercises and projects as I progress
+from beginner to confident programmer.
+
+------------------------------------------------------------------------
+
+## 📁 Project Structure
+
+    My-Java-Journey/
+    │
+    ├── 01-Basics/
+    │   ├── HelloWorld.java
+    │   ├── VariablesDemo.java
+    │   ├── EvenOdd.java
+    │   ├── BasicCalculator.java
+    │
+    ├── 02-Interactive-Logic/
+    │   ├── SmartCalculator.java
+    │
+    └── README.md
 
 ------------------------------------------------------------------------
 
 ## 📁 Progress
 
--   **[01-Basics](./01-Basics)**: Hello World, Variables, Data Types,
-    Scanner, Operators, Conditions, Smart Calculator.
--   **[02-Logic](#)**: Coming soon!
+-   **[01-Basics](./01-Basics)**\
+    Hello World, variables, data types, Scanner, arithmetic operators,
+    modulo, conditionals, basic calculator.
+
+-   **[02-Interactive-Logic](./02-Interactive-Logic)**\
+    Smart Calculator with loops, nested validation, defensive
+    programming, and structured control flow.
 
 ------------------------------------------------------------------------
 
-## 🧠 What I've Learned So Far (Week 1)
+# 🧠 Week 1 Complete -- Foundations & Control Flow
 
-### 🔹 How Java Works
+## 🔹 How Java Works
 
--   Java programs are written in `.java` files.
--   Code must be compiled using:
+-   Java source code is written in `.java` files.
+-   Code must be compiled:
 
 ``` bash
 javac FileName.java
 ```
 
 -   This creates a `.class` file (bytecode).
--   The program runs using:
+-   The program runs with:
 
 ``` bash
 java FileName
 ```
 
-Execution flow:
+### Execution Flow
 
     .java → javac → .class → JVM → Program runs
 
 ------------------------------------------------------------------------
 
-### 🔹 Basic Program Structure
+## 🔹 Program Structure
 
-Every Java program starts like this:
+Every Java program contains:
 
 ``` java
 public class ClassName {
     public static void main(String[] args) {
-        // Code starts here
+        // Program starts here
     }
 }
 ```
 
-Important rules: - File name must match the public class name. - Java is
+Key rules: - File name must match the public class name. - Java is
 case-sensitive. - Every statement ends with `;`.
 
 ------------------------------------------------------------------------
 
-### 🔹 Variables & Data Types
-
-I learned to use:
+## 🔹 Variables & Data Types
 
 ``` java
 int age = 25;
@@ -65,8 +85,7 @@ boolean isStudent = true;
 ```
 
 Key concepts: - Java is strongly typed. - Types must match assigned
-values. - `String` cannot be assigned to `int`. - Casting allows type
-conversion:
+values. - Casting allows type conversion:
 
 ``` java
 double result = (double) 5 / 2;
@@ -74,7 +93,7 @@ double result = (double) 5 / 2;
 
 ------------------------------------------------------------------------
 
-### 🔹 Integer vs Double Division
+## 🔹 Integer vs Double Division
 
 ``` java
 int a = 5;
@@ -84,15 +103,13 @@ System.out.println(a / b); // 2
 
 Integer division removes decimals.
 
-Using double:
-
 ``` java
 System.out.println(5.0 / 2); // 2.5
 ```
 
 ------------------------------------------------------------------------
 
-### 🔹 User Input (Scanner)
+## 🔹 User Input (Scanner)
 
 ``` java
 import java.util.Scanner;
@@ -107,19 +124,17 @@ int number = scanner.nextInt();
 double value = scanner.nextDouble();
 ```
 
-Important: - `nextInt()` does not consume the newline. - Must use an
-extra `scanner.nextLine()` when mixing with `nextLine()`.
+Important: - `nextInt()` and `nextDouble()` do not consume newline. -
+Must clear buffer before using `nextLine()`.
 
 ------------------------------------------------------------------------
 
-### 🔹 Operators
-
-Arithmetic operators:
+## 🔹 Operators
 
     +  -  *  /  %
 
-Modulo `%` is used for: - Checking even/odd - Remainders - Divisibility
-checks
+Modulo `%` is used for: - Even/odd checks - Remainders - Divisibility
+logic
 
 Example:
 
@@ -131,7 +146,7 @@ if (num % 2 == 0) {
 
 ------------------------------------------------------------------------
 
-### 🔹 Conditional Statements
+## 🔹 Conditional Logic
 
 ``` java
 if (condition) {
@@ -142,49 +157,59 @@ else {
 }
 ```
 
-Important: - `else if` stops checking once a match is found. - Separate
-`if` statements check all conditions. - Always include a final `else`
-for invalid input.
+Important: - `else if` stops checking after a match. - Separate `if`
+statements check all conditions. - Always handle invalid input.
 
 ------------------------------------------------------------------------
 
-### 🔹 String Comparison
+## 🔹 Loops
 
-Wrong:
-
-``` java
-if (operation == "+")
-```
-
-Correct:
+### While Loop
 
 ``` java
-if (operation.equals("+"))
-```
-
--   `==` compares memory location.
--   `.equals()` compares actual text content.
-
-------------------------------------------------------------------------
-
-### 🔹 Defensive Programming
-
-Example:
-
-``` java
-if (num2 == 0) {
-    System.out.println("Cannot divide by zero.");
+while (condition) {
+    // repeat while true
 }
 ```
 
-Programs should handle invalid input safely.
+Used to: - Repeat calculator logic - Validate user input - Build
+interactive systems
 
 ------------------------------------------------------------------------
 
-## 🛠 Projects Completed
+## 🔹 Nested Validation Loops
+
+Implemented layered control flow:
+
+-   Main loop controls program repetition.
+-   Inner loop validates operation input.
+-   Inner loop validates continue input.
+-   Defensive division handling.
+-   Case-insensitive input handling.
+
+This structured approach prevents: - Invalid progression - Infinite
+loops - Crashes - Poor user experience
+
+------------------------------------------------------------------------
+
+## 🛠 Projects Completed (Week 1)
 
 -   Hello World
 -   Personal Info App
 -   Even/Odd Checker
 -   Basic Calculator
--   Smart Calculator with validation and error handling
+-   Smart Calculator (Interactive, validated, loop-driven)
+
+------------------------------------------------------------------------
+
+## 🚀 Next Focus
+
+-   Switch statements
+-   Advanced control flow
+-   Cleaner structural design
+-   Modular thinking (methods)
+-   Menu-based systems
+
+------------------------------------------------------------------------
+
+Week 1 complete.
