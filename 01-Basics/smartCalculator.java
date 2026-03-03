@@ -15,25 +15,25 @@ class smartCalculator {
     double num2 = scanner.nextDouble();
        
     if (operation.equals("+")) { //.equals compares actual text content, == compares memory locations
-        double sum = num1 + num2;
-        System.out.println("Result: " + sum);
-    } else if (operation.equals("-")) {
-        double difference = num1 - num2;
-        System.out.println("Result: " + difference);
-    } else if (operation.equals("*")) {
-        double product = num1 * num2;
-        System.out.println("Result: " + product);
-    } else if (operation.equals("/")) {
+        System.out.println("Result: " + (num1 + num2));
+    } 
+    else if (operation.equals("-")) {
+          System.out.println("Result: " + (num1 - num2));
+    } 
+    else if (operation.equals("*")) {
+        System.out.println("Result: " + (num1 * num2));
+    } 
+    else if (operation.equals("/")) {
         if (num2 == 0) {
           System.out.println("Cannot divide by zero.");
         } else {
-            double quotient = num1 / num2;
-            System.out.println("Result: " + quotient);
+            System.out.println("Result: " + (num1 / num2));
         }
-   } else if (operation.equals("%")) {
-        double remainder = num1 % num2;
-        System.out.println("Result: " + remainder);
-    } else {
+   } 
+   else if (operation.equals("%")) {
+        System.out.println("Result: " + (num1 % num2));
+    } 
+    else {
         System.out.println("Invalid operation.");
     }
 
