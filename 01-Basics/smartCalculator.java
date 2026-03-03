@@ -8,14 +8,12 @@ class smartCalculator {
     System.out.println("Enter first number: ");
     double num1 = scanner.nextDouble();
 
-    System.out.println("Enter second number: ");
-    double num2 = scanner.nextDouble();
-    scanner.nextLine();
-
     System.out.println("Choose operation (+, -, *, /, %): ");
     String operation = scanner.next();
-    
 
+    System.out.println("Enter second number: ");
+    double num2 = scanner.nextDouble();
+       
     if (operation.equals("+")) { //.equals compares actual text content, == compares memory locations
         double sum = num1 + num2;
         System.out.println("The sum of your numbers is: " + sum);
