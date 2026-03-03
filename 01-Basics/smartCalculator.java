@@ -5,6 +5,11 @@ class smartCalculator {
 
     Scanner scanner = new Scanner(System.in);
 
+    String answer = "yes";
+
+    
+    while (answer.equals("yes")) {
+    
     System.out.println("Enter first number: ");
     double num1 = scanner.nextDouble();
 
@@ -35,6 +40,20 @@ class smartCalculator {
     } 
     else {
         System.out.println("Invalid operation.");
+    }
+    
+    System.out.println("Do you want to continue? (yes/no): ");
+    scanner.nextLine(); //clears leftover newline
+    
+    while (true) {
+      answer = scanner.nextLine().toLowerCase();
+
+      if (answer.equals("yes") || answer.equals("no")) {
+        break;
+      } else {
+        System.out.println("Invalid input. Please type yes or no: ");
+      }
+    }
     }
 
     scanner.close();
