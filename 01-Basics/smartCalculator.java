@@ -16,27 +16,26 @@ class smartCalculator {
        
     if (operation.equals("+")) { //.equals compares actual text content, == compares memory locations
         double sum = num1 + num2;
-        System.out.println("The sum of your numbers is: " + sum);
+        System.out.println("Result: " + sum);
     } else if (operation.equals("-")) {
         double difference = num1 - num2;
-        System.out.println("The difference of your numbers is: " + difference);
+        System.out.println("Result: " + difference);
     } else if (operation.equals("*")) {
         double product = num1 * num2;
-        System.out.println("The product of your numbers is: " + product);
+        System.out.println("Result: " + product);
     } else if (operation.equals("/")) {
         if (num2 == 0) {
           System.out.println("Cannot divide by zero.");
         } else {
             double quotient = num1 / num2;
-            System.out.println("The quotient of your numbers is: " + quotient);
+            System.out.println("Result: " + quotient);
         }
    } else if (operation.equals("%")) {
         double remainder = num1 % num2;
-        System.out.println("The remainder of your numbers is: " + remainder);
+        System.out.println("Result: " + remainder);
     } else {
         System.out.println("Invalid operation.");
     }
-
 
     scanner.close();
   }
