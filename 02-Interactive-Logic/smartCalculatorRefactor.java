@@ -22,14 +22,24 @@ enum Operation {
 class SmartCalculatorRefactor {
 
   public static double getNumber(Scanner scanner, String prompt) { //prints a prompt and reads double
-    System.out.print(prompt);
-    return scanner.nextDouble();
+    while (true) {
+      System.out.println(prompt);
+
+      if (scanner.hasNextDouble()) {
+        double v = scanner.nextDouble();
+        scanner.nextLine();
+        return v;
+      }
+      System.out.println("Invalid number. Try again.");
+      scanner.nextLine();
+    }   
   }
 
   public static Operation getOperation(Scanner scanner) { //repeatedly asks for operation until valid one is entered
       while (true) {
       System.out.print("Choose operation (+, -, *, /, %): ");
       String input = scanner.next();
+      scanner.nextLine(); //clears the buffer
 
       Operation op = Operation.fromSymbol(input);
 
