@@ -93,7 +93,7 @@ class SmartCalculatorRefactor {
   public static String askToContinue(Scanner scanner) { //asks yes/no until valid
     while (true) {
       System.out.print("Do you want to continue? (Yes/No): ");
-      String ans = scanner.nextLine().toLowerCase();
+      String ans = scanner.nextLine().trim().toLowerCase();
 
       if(ans.equals("yes") || ans.equals("no")) {
         return ans;
@@ -118,9 +118,7 @@ class SmartCalculatorRefactor {
       }
       
       answer = askToContinue(scanner);
-
     }
-    scanner.close();
-    
+    scanner.close();   
   }
 }
