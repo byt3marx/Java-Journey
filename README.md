@@ -3,9 +3,12 @@
 A structured collection of my Java exercises and projects as I progress
 from beginner to confident programmer.
 
+This repository documents my **step‑by‑step Java learning journey**,
+including projects, refactors, and concepts learned each week.
+
 ------------------------------------------------------------------------
 
-## 📁 Project Structure
+# 📁 Project Structure
 
     My-Java-Journey/
     │
@@ -18,199 +21,136 @@ from beginner to confident programmer.
     │
     ├── 02-Interactive-Logic/
     │   ├── SmartCalculator.java
+    │   ├── SmartCalculatorRefactor.java
     │
-    └── README.md
+    ├── README.md
+    └── README_Professional.md
+
+Each folder represents a **stage of learning**, with increasingly
+structured and advanced implementations.
 
 ------------------------------------------------------------------------
 
-## 📁 Progress
+# 🎯 Goals of This Repository
 
--   **[01-Basics](./01-Basics)**\
-    Hello World, variables, data types, Scanner, arithmetic operators,
-    modulo, conditionals, basic calculator.
-
--   **[02-Interactive-Logic](./02-Interactive-Logic)**\
-    Smart Calculator with loops, nested validation, defensive
-    programming, and structured control flow.
+-   Document my Java learning progress
+-   Build increasingly complex Java programs
+-   Refactor code into cleaner, more maintainable structures
+-   Practice defensive programming and validation
+-   Apply object‑oriented principles step‑by‑step
 
 ------------------------------------------------------------------------
 
-# 🧠 Week 1 Complete -- Foundations & Control Flow
+# 📚 Learning Roadmap
 
-## 🔹 How Java Works
+The repository follows a structured learning path:
 
--   Java source code is written in `.java` files.
--   Code must be compiled:
-
-``` bash
-javac FileName.java
-```
-
--   This creates a `.class` file (bytecode).
--   The program runs with:
-
-``` bash
-java FileName
-```
-
-### Execution Flow
-
-    .java → javac → .class → JVM → Program runs
+    Week 1 → Java Fundamentals
+    Week 2 → Control Flow & Interactive Programs
+    Week 3 → Methods, Refactoring & Enums
+    Week 4 → Object-Oriented Programming
+    Week 5 → Collections & Data Structures
+    Week 6 → Larger Projects
 
 ------------------------------------------------------------------------
 
-## 🔹 Program Structure
+# 🧠 Concepts Covered So Far
 
-Every Java program contains:
+## Java Fundamentals
 
-``` java
-public class ClassName {
-    public static void main(String[] args) {
-        // Program starts here
-    }
-}
-```
+-   Java program structure
+-   Compilation and execution
+-   Variables and data types
+-   Arithmetic operators
+-   Integer vs floating‑point division
+-   Scanner input
 
-Key rules: - File name must match the public class name. - Java is
-case-sensitive. - Every statement ends with `;`.
+## Control Flow
 
-------------------------------------------------------------------------
+-   if / else logic
+-   switch statements
+-   while loops
+-   nested validation loops
+-   defensive programming
 
-## 🔹 Variables & Data Types
+## Program Structure
 
-``` java
-int age = 25;
-double height = 1.75;
-String name = "John";
-boolean isStudent = true;
-```
+-   modular design
+-   helper methods
+-   parameter passing
+-   return values
+-   separation of concerns
 
-Key concepts: - Java is strongly typed. - Types must match assigned
-values. - Casting allows type conversion:
+## Input Handling
 
-``` java
-double result = (double) 5 / 2;
-```
+-   parsing input with `Double.parseDouble()`
+-   try / catch exception handling
+-   robust validation loops
 
-------------------------------------------------------------------------
+## Enums & Polymorphism
 
-## 🔹 Integer vs Double Division
-
-``` java
-int a = 5;
-int b = 2;
-System.out.println(a / b); // 2
-```
-
-Integer division removes decimals.
-
-``` java
-System.out.println(5.0 / 2); // 2.5
-```
+-   enums for fixed operation types
+-   mapping user input to enum values
+-   polymorphic method implementations
+-   removing switch statements with behavior-driven enums
 
 ------------------------------------------------------------------------
 
-## 🔹 User Input (Scanner)
+# 🛠 Projects
 
-``` java
-import java.util.Scanner;
-Scanner scanner = new Scanner(System.in);
-```
+### Hello World
 
-Reading input:
+Basic Java program demonstrating compilation and execution.
 
-``` java
-String text = scanner.nextLine();
-int number = scanner.nextInt();
-double value = scanner.nextDouble();
-```
+### Personal Info App
 
-Important: - `nextInt()` and `nextDouble()` do not consume newline. -
-Must clear buffer before using `nextLine()`.
+Simple program using variables and output formatting.
 
-------------------------------------------------------------------------
+### Even/Odd Checker
 
-## 🔹 Operators
+Uses modulo operator and conditional logic.
 
-    +  -  *  /  %
+### Basic Calculator
 
-Modulo `%` is used for: - Even/odd checks - Remainders - Divisibility
-logic
+Performs arithmetic operations using user input.
 
-Example:
+### Smart Calculator
 
-``` java
-if (num % 2 == 0) {
-    System.out.println("Even");
-}
-```
+Interactive calculator with validation loops and defensive input
+handling.
+
+### Smart Calculator Refactor
+
+Refactored version featuring: - modular helper methods - robust input
+parsing - enum-driven operations - polymorphic calculation logic
 
 ------------------------------------------------------------------------
 
-## 🔹 Conditional Logic
+# 🚀 Upcoming Topics
 
-``` java
-if (condition) {
-}
-else if (condition) {
-}
-else {
-}
-```
+Planned next steps in the learning journey:
 
-Important: - `else if` stops checking after a match. - Separate `if`
-statements check all conditions. - Always handle invalid input.
+-   Classes and Objects
+-   Constructors
+-   Encapsulation
+-   ArrayList collections
+-   Object-based program design
+-   Larger interactive systems
 
 ------------------------------------------------------------------------
 
-## 🔹 Loops
+# 📈 Long-Term Vision
 
-### While Loop
+This repository will gradually evolve into a collection of:
 
-``` java
-while (condition) {
-    // repeat while true
-}
-```
-
-Used to: - Repeat calculator logic - Validate user input - Build
-interactive systems
+-   Java learning projects
+-   refactored code examples
+-   object‑oriented systems
+-   small applications demonstrating core programming concepts
 
 ------------------------------------------------------------------------
 
-## 🔹 Nested Validation Loops
+# 👨‍💻 Author
 
-Implemented layered control flow:
-
--   Main loop controls program repetition.
--   Inner loop validates operation input.
--   Inner loop validates continue input.
--   Defensive division handling.
--   Case-insensitive input handling.
-
-This structured approach prevents: - Invalid progression - Infinite
-loops - Crashes - Poor user experience
-
-------------------------------------------------------------------------
-
-## 🛠 Projects Completed (Week 1)
-
--   Hello World
--   Personal Info App
--   Even/Odd Checker
--   Basic Calculator
--   Smart Calculator (Interactive, validated, loop-driven)
-
-------------------------------------------------------------------------
-
-## 🚀 Next Focus
-
--   Switch statements
--   Advanced control flow
--   Cleaner structural design
--   Modular thinking (methods)
--   Menu-based systems
-
-------------------------------------------------------------------------
-
-Week 1 complete.
+Personal Java learning repository documenting the journey from beginner
+to confident Java developer.
