@@ -1,11 +1,42 @@
 import java.util.Scanner;
 
 enum Operation {
-  ADD,
-  SUBTRACT,
-  MULTIPLY,
-  DIVIDE,
-  MODULO;
+  ADD {
+    @Override
+    public double apply(double a, double b) {
+      return a + b;
+    }
+  },
+  SUBTRACT {
+    @Override
+    public double apply(double a, double b) {
+      return a - b;
+    }
+  },
+  MULTIPLY {
+    @Override
+    public double apply(double a, double b) {
+      return a * b;
+    }
+  },
+  DIVIDE {
+    @Override
+    public double apply(double a, double b) {
+
+      if (b == 0) {
+        return Double.NaN;
+      }
+      return a / b;
+    }
+  },
+  MODULO {
+    @Override
+    public double apply(double a, double b) {
+      return a % b;
+    }
+  };
+
+  public abstract double apply(double a, double b);
 
   public static Operation fromSymbol(String symbol) { //converts user input into Operation
     symbol = symbol.toLowerCase();
@@ -69,27 +100,6 @@ class SmartCalculatorRefactor {
     }
   }
 
-  public static double calculate(double num1, double num2, Operation op) { //does the calculation
-    switch (op) {
-      case ADD:
-        return num1 + num2;
-      case SUBTRACT:
-        return num1 - num2;
-      case MULTIPLY:
-        return num1 * num2;
-      case DIVIDE:
-        if (num2 == 0) {
-          System.out.println("Cannot divide by zero.");
-          return Double.NaN;
-        } 
-        return num1 / num2;
-      case MODULO:
-        return num1 % num2;
-        default: 
-          return 0;
-    }
-  }
-
   public static String askToContinue(Scanner scanner) { //asks yes/no until valid
     while (true) {
       System.out.print("Do you want to continue? (Yes/No): ");
@@ -111,9 +121,11 @@ class SmartCalculatorRefactor {
       double num1 = getNumber(scanner, "Enter first number: ");
       Operation op = getOperation(scanner);
       double num2 = getNumber(scanner, "Enter second number: ");
-
-      double result = calculate(num1, num2, op);
-      if (!Double.isNaN(result)) {
+      double result = op.apply(num1, num2);
+      
+      if (Double.isNaN(result)) {
+        System.out.println("Cannot divide by zero.");
+      } else {
         System.out.println("Result: " + result);
       }
       
