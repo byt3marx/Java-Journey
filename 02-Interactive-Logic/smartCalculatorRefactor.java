@@ -41,23 +41,24 @@ class SmartCalculatorRefactor {
 
   public static double getNumber(Scanner scanner, String prompt) { //prints a prompt and reads double
     while (true) {
-      System.out.println(prompt);
+      System.out.print(prompt);
 
-      if (scanner.hasNextDouble()) {
-        double v = scanner.nextDouble();
-        scanner.nextLine();
-        return v;
+      String line = scanner.nextLine().trim();
+
+      try {
+        double number = Double.parseDouble(line);
+        return number;
+      } 
+      catch (NumberFormatException e) {
+        System.out.println("Invalid number. Try again.");
       }
-      System.out.println("Invalid number. Try again.");
-      scanner.nextLine();
     }   
   }
 
   public static Operation getOperation(Scanner scanner) { //repeatedly asks for operation until valid one is entered
       while (true) {
       System.out.print("Choose operation (+, -, *, /, %): ");
-      String input = scanner.next();
-      scanner.nextLine(); //clears the buffer
+      String input = scanner.nextLine().trim();
 
       Operation op = Operation.fromSymbol(input);
 
@@ -90,7 +91,6 @@ class SmartCalculatorRefactor {
   }
 
   public static String askToContinue(Scanner scanner) { //asks yes/no until valid
-    scanner.nextLine(); //clear leftover newline from nextDouble/next()
     while (true) {
       System.out.print("Do you want to continue? (Yes/No): ");
       String ans = scanner.nextLine().toLowerCase();
