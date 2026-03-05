@@ -8,12 +8,30 @@ enum Operation {
   MODULO;
 
   public static Operation fromSymbol(String symbol) { //converts user input into Operation
+    symbol = symbol.toLowerCase();
+    
     switch(symbol) {
-      case "+": return ADD;
-      case "-": return SUBTRACT;
-      case "*": return MULTIPLY;
-      case "/": return DIVIDE;
-      case "%": return MODULO;
+      
+      case "+":
+      case "add":
+         return ADD;
+      
+      case "-":
+      case "subtract":
+         return SUBTRACT;
+      
+      case "*":
+      case "multiply":
+         return MULTIPLY;
+      
+      case "/":
+      case "divide":
+         return DIVIDE;
+      
+      case "%":
+      case "modulo":
+         return MODULO;
+      
       default: return null;
     }
   }
