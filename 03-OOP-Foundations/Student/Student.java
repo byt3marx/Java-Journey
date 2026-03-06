@@ -16,6 +16,14 @@ class Student {
     return age;
   }
 
+  public String setName() {
+    return name;
+  }
+
+  public int setAge() {
+    return age;
+  }
+
   public String toString() {
     return name + " (" + age + ")";
   }
