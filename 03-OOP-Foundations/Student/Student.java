@@ -16,12 +16,15 @@ class Student {
     return age;
   }
 
-  public String setName() {
-    return name;
+  public void setName(String name) {
+    this.name = name;
   }
 
-  public int setAge() {
-    return age;
+  public void setAge(int age) {
+    if (age <= 0 || age > 120) {
+      System.out.println("Invalid age.");
+    }
+    this.age = age;
   }
 
   public String toString() {
