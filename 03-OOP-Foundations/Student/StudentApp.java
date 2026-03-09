@@ -1,24 +1,21 @@
+import java.util.ArrayList;
+
 class StudentApp {
 
   public static void main(String[] args) {
 
-    Student s1 = new Student("Anna", 20);
-    Student s2 = new Student("Mark", 22);
-    Student s3 = new Student("Igor", 5);
+    ArrayList<Student> students = new ArrayList<>();
 
-    System.out.println(s1.getName());
-    System.out.println(s1.getAge());
-    System.out.println(s2.getName());
-    System.out.println(s2.getAge());
+    students.add(new Student("Anna", 20));
+    students.add(new Student("Marx", 22));
+    students.add(new Student("Rok", 25));
 
-    s1.setAge(-10);
-    System.out.println(s2.getAge());
+    for (Student s : students) {
+      System.out.println(s);
+    }
 
-    s3.setName("Rok");
-    s3.setAge(25);
-    System.out.println(s3.getName());
-    System.out.println(s3.getAge());
-
+    students.get(1).setName("Mark");
+    System.out.println(students.get(1));
     
   }
 }
