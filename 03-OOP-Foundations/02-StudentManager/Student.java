@@ -28,7 +28,7 @@ class Student {
     if (age >= 0 || age <= 120) {
       this.age = age;
     } else {
-      System.out.println("Invalid age.")
+      System.out.println("Invalid age.");
     }
   }
   public String toString() {
