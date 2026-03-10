@@ -63,6 +63,8 @@ class Main {
           break;
 
         case "5":
+          manager.showStudents();
+
           System.out.println("Enter student number to edit: ");
           String editInput = scanner.nextLine();
 
