@@ -40,6 +40,24 @@ class StudentManager {
       }
     }
 
+  public void editStudent(int index, String newName, int newAge) {
+    if (students.isEmpty()) {
+      System.out.println("No students to edit.");
+      return;
+    }
+
+    if (index < 0 || index >= students.size()) {
+      System.out.println("Invalid student number.");
+      return;
+    }
+
+    Student student = students.get(index);
+    student.setName(newName);
+    student.setAge(newAge);
+
+    System.out.println("Updated: " + student);
+  }
+
   public void removeStudent(int index) {
 
     if (students.isEmpty()) {
