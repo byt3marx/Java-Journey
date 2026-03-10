@@ -25,13 +25,28 @@ class StudentManager {
     }
   }
 
+  public void findStudentByName(String name) {
+      
+      boolean found = false;
+
+      for (Student s: students) {
+        if (s.getName().equalsIgnoreCase(name)) {
+          System.out.println("Found: " + s);
+          found = true;
+        }
+      }
+      if (!found) {
+        System.out.println("Student not found.");
+      }
+    }
+
   public void removeStudent(int index) {
 
     if (students.isEmpty()) {
       System.out.println("No students to remove.");
       return;
     }
-    
+
     if (index < 0 || index >= students.size()) {
       System.out.println("Invalid student number.");
       return;
