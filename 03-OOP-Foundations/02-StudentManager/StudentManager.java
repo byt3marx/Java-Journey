@@ -26,6 +26,12 @@ class StudentManager {
   }
 
   public void removeStudent(int index) {
+
+    if (students.isEmpty()) {
+      System.out.println("No students to remove.");
+      return;
+    }
+    
     if (index < 0 || index >= students.size()) {
       System.out.println("Invalid student number.");
       return;
