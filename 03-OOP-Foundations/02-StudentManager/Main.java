@@ -36,11 +36,11 @@ class Main {
           break;
         
         case "2":
-          manager.showStudent();
+          manager.showStudents();
           break;
 
         case "3":
-          manager.showStudent();
+          manager.showStudents();
 
           System.out.println("Enter student number to remove: ");
           String removeInput = scanner.nextLine();

@@ -14,7 +14,7 @@ class StudentManager {
     System.out.println("Student added.");
   }
 
-  public void showStudent() {
+  public void showStudents() {
     if(students.isEmpty()) {
       System.out.println("No students in the list.");
       return;
