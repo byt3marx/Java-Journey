@@ -54,6 +54,13 @@ class Main {
           break;
 
         case "4":
+          System.out.println("Enter student name to search:");
+          String searchName = scanner.nextLine();
+
+          manager.findStudentByName(searchName);
+          break;
+
+        case "5":
           running = false;
           System.out.println("Program ended.");
           break;
