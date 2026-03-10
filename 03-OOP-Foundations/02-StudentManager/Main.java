@@ -15,7 +15,8 @@ class Main {
       System.out.println("2. Show students");
       System.out.println("3. Remove student");
       System.out.println("4. Search student by name");
-      System.out.println("5. Exit");
+      System.out.println("5. Edit student");
+      System.out.println("6. Exit");
       System.out.println("Choose option: ");
 
       String input = scanner.nextLine();
@@ -62,6 +63,27 @@ class Main {
           break;
 
         case "5":
+          System.out.println("Enter student number to edit: ");
+          String editInput = scanner.nextLine();
+
+          try {
+            int studentNumber = Integer.parseInt(editInput);
+            System.out.println("Enter new name: ");
+            String newName = scanner.nextLine();
+
+            System.out.println("Enter new age: ");
+            String newAgeInput = scanner.nextLine();
+
+            int newAge = Integer.parseInt(newAgeInput);
+
+            manager.editStudent(studentNumber - 1, newName, newAge);
+
+          } catch (NumberFormatException e) {
+            System.out.println("Invalid number.");
+          }
+          break;
+
+        case "6":
           running = false;
           System.out.println("Program ended.");
           break;
