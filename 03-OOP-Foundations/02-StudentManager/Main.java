@@ -120,6 +120,11 @@ class Main {
   }
 
   private static void searchStudentFlow(Scanner scanner, StudentManager manager) {
+    if (!manager.hasStudents()) {
+      System.out.println("No students in the list.");
+      return;
+    }
+    
     System.out.print("Enter student name to search: ");
     String searchName = scanner.nextLine();
 
