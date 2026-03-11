@@ -44,6 +44,10 @@ class StudentManager {
   }
 
   public void findStudentByName(String name) {
+    if (students.isEmpty()) {
+      System.out.println("No students in the list.");
+      return;
+    }
       
       boolean found = false;
 
