@@ -14,7 +14,7 @@ class StudentManager {
 
   public void addStudent(String name, int age) {
     if (!isValidName(name)) {
-      System.out.println("Invalid name. Use letters and spaces only.");
+      System.out.print("Invalid name. Use letters and spaces only.");
       return;
     }
 

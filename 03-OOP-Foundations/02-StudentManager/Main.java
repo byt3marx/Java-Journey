@@ -17,7 +17,7 @@ class Main {
       System.out.println("4. Search student by name");
       System.out.println("5. Edit student");
       System.out.println("6. Exit");
-      System.out.println("Choose option: ");
+      System.out.print("Choose option: ");
 
       String input = scanner.nextLine();
 
@@ -57,32 +57,32 @@ class Main {
 
   private static void addStudentFlow(Scanner scanner, StudentManager manager) {
     
-    System.out.println("Enter student name: ");
+    System.out.print("Enter student name: ");
     String name = scanner.nextLine();
 
-    System.out.println("Enter student age: ");
+    System.out.print("Enter student age: ");
     String ageInput = scanner.nextLine();
 
     try {
         int age = Integer.parseInt(ageInput);
         manager.addStudent(name, age);
     } catch (NumberFormatException e) {
-        System.out.println("Invalid age. Please enter a whole number.");
+        System.out.print("Invalid age. Please enter a whole number.");
     }
   }
 
   private static void editStudentFlow(Scanner scanner, StudentManager manager) {
     manager.showStudents();
 
-    System.out.println("Enter student number to edit: ");
+    System.out.print("Enter student number to edit: ");
     String editInput = scanner.nextLine();
 
     try {
       int studentNumber = Integer.parseInt(editInput);
-      System.out.println("Enter new name: ");
+      System.out.print("Enter new name: ");
       String newName = scanner.nextLine();
 
-      System.out.println("Enter new age: ");
+      System.out.print("Enter new age: ");
       String newAgeInput = scanner.nextLine();
 
       int newAge = Integer.parseInt(newAgeInput);
@@ -97,7 +97,7 @@ class Main {
   private static void removeStudentFlow(Scanner scanner, StudentManager manager) {
     manager.showStudents();
 
-    System.out.println("Enter student number to remove: ");
+    System.out.print("Enter student number to remove: ");
     String removeInput = scanner.nextLine();
 
     try {
@@ -110,7 +110,7 @@ class Main {
   }
 
   private static void searchStudentFlow(Scanner scanner, StudentManager manager) {
-    System.out.println("Enter student name to search: ");
+    System.out.print("Enter student name to search: ");
     String searchName = scanner.nextLine();
 
     manager.findStudentByName(searchName);
