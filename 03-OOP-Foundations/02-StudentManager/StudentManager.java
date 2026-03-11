@@ -8,9 +8,13 @@ class StudentManager {
     students = new ArrayList<>();
   }
 
+  private boolean isValidName(String name) {
+    return name != null && !name.isBlank() && name.matches("[\\p{L} .'-]+");
+  }
+
   public void addStudent(String name, int age) {
-    if (name == null || name.isBlank()) {
-      System.out.println("Invalid name.");
+    if (!isValidName(name)) {
+      System.out.println("Invalid name. Use letters and spaces only.");
       return;
     }
 
@@ -39,7 +43,7 @@ class StudentManager {
       
       boolean found = false;
 
-      for (Student s: students) {
+      for (Student s : students) {
         if (s.getName().equalsIgnoreCase(name)) {
           System.out.println("Found: " + s);
           found = true;
@@ -61,8 +65,8 @@ class StudentManager {
       return;
     }
 
-    if (newName == null || newName.isBlank()) {
-      System.out.println("Invalid name.");
+    if (!isValidName(newName)) {
+      System.out.println("Invalid name. Use letters and spaces only.");
       return;
     }
 

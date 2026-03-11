@@ -17,10 +17,10 @@ class Student {
   }
 
   public void setName(String name) {
-    if (name != null && !name.isBlank()) {
+    if (name != null && !name.isBlank() && name.matches("[\\p{L} .'-]+")) {
       this.name = name;
     } else {
-      System.out.println("Invalid name.");
+      System.out.println("Invalid name. Use letters and spaces only.");
     }
   }
 
@@ -31,6 +31,7 @@ class Student {
       System.out.println("Invalid age.");
     }
   }
+
   public String toString() {
     return name + " (" + age + ")";
   }
