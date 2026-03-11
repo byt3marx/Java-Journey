@@ -33,7 +33,7 @@ class StudentManager {
   }
 
   public void showStudents() {
-    if(students.isEmpty()) {
+    if(!hasStudents()) {
       System.out.println("No students in the list.");
       return;
     }
@@ -44,7 +44,7 @@ class StudentManager {
   }
 
   public void findStudentByName(String name) {
-    if (students.isEmpty()) {
+    if (!hasStudents()) {
       System.out.println("No students in the list.");
       return;
     }
@@ -63,7 +63,7 @@ class StudentManager {
     }
 
   public void editStudent(int index, String newName, int newAge) {
-    if (students.isEmpty()) {
+    if (!hasStudents()) {
       System.out.println("No students to edit.");
       return;
     }
@@ -91,8 +91,7 @@ class StudentManager {
   }
 
   public void removeStudent(int index) {
-
-    if (students.isEmpty()) {
+    if (!hasStudents()) {
       System.out.println("No students to remove.");
       return;
     }
