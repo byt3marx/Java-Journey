@@ -9,6 +9,16 @@ class StudentManager {
   }
 
   public void addStudent(String name, int age) {
+    if (name == null || name.isBlank()) {
+      System.out.println("Invalid name.");
+      return;
+    }
+
+    if (age < 0 || age > 120) {
+      System.out.println("Invalid age.");
+      return;
+    }
+
     Student student = new Student(name, age);
     students.add(student);
     System.out.println("Student added.");
@@ -48,6 +58,16 @@ class StudentManager {
 
     if (index < 0 || index >= students.size()) {
       System.out.println("Invalid student number.");
+      return;
+    }
+
+    if (newName == null || newName.isBlank()) {
+      System.out.println("Invalid name.");
+      return;
+    }
+
+    if (newAge < 0 || newAge > 120) {
+      System.out.println("Invalid age.");
       return;
     }
 
