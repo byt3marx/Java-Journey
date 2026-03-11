@@ -23,18 +23,7 @@ class Main {
 
       switch (input) {
         case "1":
-          System.out.println("Enter student name: ");
-          String name = scanner.nextLine();
-
-          System.out.println("Enter student age: ");
-          String ageInput = scanner.nextLine();
-
-          try {
-            int age = Integer.parseInt(ageInput);
-            manager.addStudent(name, age);
-          } catch (NumberFormatException e) {
-            System.out.println("Invalid age. Please enter a whole number.");
-          }
+          addStudentFlow(scanner, manager);
           break;
         
         case "2":
@@ -42,47 +31,15 @@ class Main {
           break;
 
         case "3":
-          manager.showStudents();
-
-          System.out.println("Enter student number to remove: ");
-          String removeInput = scanner.nextLine();
-
-          try {
-            int studentNumber = Integer.parseInt(removeInput);
-            manager.removeStudent(studentNumber -1);
-          } catch (NumberFormatException e) {
-            System.out.println("Invalid number.");
-          }
+          removeStudentFlow(scanner, manager);
           break;
 
         case "4":
-          System.out.println("Enter student name to search:");
-          String searchName = scanner.nextLine();
-
-          manager.findStudentByName(searchName);
+          searchStudentFlow(scanner, manager);
           break;
 
         case "5":
-          manager.showStudents();
-
-          System.out.println("Enter student number to edit: ");
-          String editInput = scanner.nextLine();
-
-          try {
-            int studentNumber = Integer.parseInt(editInput);
-            System.out.println("Enter new name: ");
-            String newName = scanner.nextLine();
-
-            System.out.println("Enter new age: ");
-            String newAgeInput = scanner.nextLine();
-
-            int newAge = Integer.parseInt(newAgeInput);
-
-            manager.editStudent(studentNumber - 1, newName, newAge);
-
-          } catch (NumberFormatException e) {
-            System.out.println("Invalid number.");
-          }
+          editStudentFlow(scanner, manager);
           break;
 
         case "6":
@@ -96,5 +53,66 @@ class Main {
     }
 
     scanner.close();
+  }
+
+  private static void addStudentFlow(Scanner scanner, StudentManager manager) {
+    
+    System.out.println("Enter student name: ");
+    String name = scanner.nextLine();
+
+    System.out.println("Enter student age: ");
+    String ageInput = scanner.nextLine();
+
+    try {
+        int age = Integer.parseInt(ageInput);
+        manager.addStudent(name, age);
+    } catch (NumberFormatException e) {
+        System.out.println("Invalid age. Please enter a whole number.");
+    }
+  }
+
+  private static void editStudentFlow(Scanner scanner, StudentManager manager) {
+    manager.showStudents();
+
+    System.out.println("Enter student number to edit: ");
+    String editInput = scanner.nextLine();
+
+    try {
+      int studentNumber = Integer.parseInt(editInput);
+      System.out.println("Enter new name: ");
+      String newName = scanner.nextLine();
+
+      System.out.println("Enter new age: ");
+      String newAgeInput = scanner.nextLine();
+
+      int newAge = Integer.parseInt(newAgeInput);
+
+      manager.editStudent(studentNumber - 1, newName, newAge);
+
+    } catch (NumberFormatException e) {
+      System.out.println("Invalid number.");
+    }
+  }
+
+  private static void removeStudentFlow(Scanner scanner, StudentManager manager) {
+    manager.showStudents();
+
+    System.out.println("Enter student number to remove: ");
+    String removeInput = scanner.nextLine();
+
+    try {
+      int studentNumber = Integer.parseInt(removeInput);
+      manager.removeStudent(studentNumber - 1);
+    } catch (NumberFormatException e) {
+      System.out.println("Invalid number.");
+    }
+
+  }
+
+  private static void searchStudentFlow(Scanner scanner, StudentManager manager) {
+    System.out.println("Enter student name to search: ");
+    String searchName = scanner.nextLine();
+
+    manager.findStudentByName(searchName);
   }
 }
