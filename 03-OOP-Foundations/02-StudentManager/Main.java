@@ -72,6 +72,11 @@ class Main {
   }
 
   private static void editStudentFlow(Scanner scanner, StudentManager manager) {
+    if(!manager.hasStudents()) {
+      System.out.println("No students to edit.");
+      return;
+    }
+    
     manager.showStudents();
 
     System.out.print("Enter student number to edit: ");
@@ -95,6 +100,11 @@ class Main {
   }
 
   private static void removeStudentFlow(Scanner scanner, StudentManager manager) {
+    if (!manager.hasStudents()) {
+      System.out.println("No students to remove.");
+      return;
+    }
+    
     manager.showStudents();
 
     System.out.print("Enter student number to remove: ");

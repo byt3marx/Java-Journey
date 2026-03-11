@@ -12,6 +12,10 @@ class StudentManager {
     return name != null && !name.isBlank() && name.matches("[\\p{L} .'-]+");
   }
 
+  public boolean hasStudents() {
+    return !students.isEmpty();
+  }
+
   public void addStudent(String name, int age) {
     if (!isValidName(name)) {
       System.out.print("Invalid name. Use letters and spaces only.");
