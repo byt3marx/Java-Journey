@@ -194,9 +194,19 @@ class Main {
       System.out.println("No students in the list.");
       return;
     }
-    
-    System.out.print("Enter student name to search: ");
-    String searchName = scanner.nextLine();
+
+    String searchName;
+
+    while (true) {
+      System.out.print("Enter student name to search: ");
+      searchName = scanner.nextLine();
+
+      if (manager.isValidName(searchName)) {
+        break;
+      }
+      
+      System.out.println("Invalid name.");
+    }
 
     manager.findStudentByName(searchName);
   }
