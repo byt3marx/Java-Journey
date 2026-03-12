@@ -20,6 +20,10 @@ class StudentManager {
     return !students.isEmpty();
   }
 
+  public int getStudentCount() {
+    return students.size();
+  }
+
   public void addStudent(String name, int age) {
     if (!isValidName(name)) {
       System.out.print("Invalid name. Only letters allowed.");

@@ -103,24 +103,59 @@ class Main {
     
     manager.showStudents();
 
-    System.out.print("Enter student number to edit: ");
-    String editInput = scanner.nextLine();
+    int studentNumber;
 
-    try {
-      int studentNumber = Integer.parseInt(editInput);
+    while (true) {
+      System.out.print("Enter student number to edit: ");
+      String editInput = scanner.nextLine();
+
+      try {
+        studentNumber = Integer.parseInt(editInput);
+
+        if (studentNumber >= 1 && studentNumber <= manager.getStudentCount()) {
+          break;
+        }
+
+        System.out.println("Invalid student number.");
+      } catch (NumberFormatException e) {
+        System.out.println("Invalid number. Enter whole number.");
+      }
+    }
+
+    String newName;
+
+    while (true) {
       System.out.print("Enter new name: ");
-      String newName = scanner.nextLine();
+      newName = scanner.nextLine();
 
+      if (manager.isValidName(newName)) {
+        break;
+      }
+
+      System.out.println("Invalid name.");
+    }
+
+    int newAge;
+
+    while (true) {
       System.out.print("Enter new age: ");
       String newAgeInput = scanner.nextLine();
 
-      int newAge = Integer.parseInt(newAgeInput);
+      try {
+        newAge = Integer.parseInt(newAgeInput);
 
-      manager.editStudent(studentNumber - 1, newName, newAge);
+        if (manager.isValidAge(newAge)) {
+          break;
+        }
 
-    } catch (NumberFormatException e) {
-      System.out.println("Invalid number.");
+        System.out.println("Invalid age. Age must be between 0 and 120.");
+
+      } catch (NumberFormatException e) {
+        System.out.println("Invalid age. Enter whole number.");
+      }
     }
+
+    manager.editStudent(studentNumber - 1, newName, newAge);
   }
 
   private static void removeStudentFlow(Scanner scanner, StudentManager manager) {
