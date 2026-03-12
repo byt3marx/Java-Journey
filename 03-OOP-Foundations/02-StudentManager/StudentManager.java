@@ -12,6 +12,10 @@ class StudentManager {
     return name != null && !name.isBlank() && name.matches("[\\p{L} .'-]+");
   }
 
+  public boolean isValidAge(int age) {
+    return age >= 0 && age <= 120;
+  }
+
   public boolean hasStudents() {
     return !students.isEmpty();
   }
@@ -22,7 +26,7 @@ class StudentManager {
       return;
     }
 
-    if (age < 0 || age > 120) {
+    if (!isValidAge(age)) {
       System.out.println("Invalid age.");
       return;
     }
@@ -78,7 +82,7 @@ class StudentManager {
       return;
     }
 
-    if (newAge < 0 || newAge > 120) {
+    if (!isValidAge(newAge)) {
       System.out.println("Invalid age.");
       return;
     }

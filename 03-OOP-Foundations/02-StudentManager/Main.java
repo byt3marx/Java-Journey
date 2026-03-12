@@ -56,24 +56,43 @@ class Main {
   }
 
   private static void addStudentFlow(Scanner scanner, StudentManager manager) {
-    
-    System.out.print("Enter student name: ");
-    String name = scanner.nextLine();
 
-    if (!manager.isValidName(name)) {
+    String name;
+
+    while (true) {
+
+      System.out.print("Enter student name: ");
+      name = scanner.nextLine();
+
+      if (manager.isValidName(name)){
+          break;
+      }
+      
       System.out.println("Invalid name. Only letters allowed.");
-      return;
     }
 
-    System.out.print("Enter student age: ");
-    String ageInput = scanner.nextLine();
+    int age;
 
-    try {
-        int age = Integer.parseInt(ageInput);
-        manager.addStudent(name, age);
-    } catch (NumberFormatException e) {
-        System.out.print("Invalid age. Please enter a whole number.");
+    while (true) {
+      
+      System.out.print("Enter student age: ");
+      String ageInput = scanner.nextLine();
+
+      try {
+        age = Integer.parseInt(ageInput);
+
+        if (manager.isValidAge(age)) {
+          break;
+        }
+
+        System.out.println("Age must be between 0 and 120.");
+      } catch (NumberFormatException e) {
+
+        System.out.println("Invalid age. Enter a number.");
+      }
     }
+
+    manager.addStudent(name, age);
   }
 
   private static void editStudentFlow(Scanner scanner, StudentManager manager) {
