@@ -20,7 +20,7 @@ class Student {
     if (name != null && !name.isBlank() && name.matches("[\\p{L} .'-]+")) {
       this.name = name;
     } else {
-      System.out.println("Invalid name. Use letters and spaces only.");
+      System.out.println("Invalid name. Only letters allowed.");
     }
   }
 

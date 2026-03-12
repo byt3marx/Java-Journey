@@ -60,6 +60,11 @@ class Main {
     System.out.print("Enter student name: ");
     String name = scanner.nextLine();
 
+    if (name == null || name.isBlank() || !name.matches("[\\p{L} .'-]+")) {
+      System.out.println("Invalid name. Only letters allowed.");
+      return;
+    }
+
     System.out.print("Enter student age: ");
     String ageInput = scanner.nextLine();
 
