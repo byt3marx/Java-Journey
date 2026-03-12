@@ -82,7 +82,7 @@ class StudentManager {
     }
 
     if (!isValidName(newName)) {
-      System.out.println("Invalid name. Use letters and spaces only.");
+      System.out.println("Invalid name. Only letters allowed.");
       return;
     }
 

@@ -132,7 +132,7 @@ class Main {
         break;
       }
 
-      System.out.println("Invalid name.");
+      System.out.println("Invalid name. Only letters allowed.");
     }
 
     int newAge;
@@ -186,7 +186,7 @@ class Main {
       }
     }
 
-    manager.removeStudent(removeStudent);
+    manager.removeStudent(removeStudent - 1);
   }
 
   private static void searchStudentFlow(Scanner scanner, StudentManager manager) {
@@ -205,7 +205,7 @@ class Main {
         break;
       }
       
-      System.out.println("Invalid name.");
+      System.out.println("Invalid name. Only letters allowed.");
     }
 
     manager.findStudentByName(searchName);
