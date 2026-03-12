@@ -8,7 +8,7 @@ class StudentManager {
     students = new ArrayList<>();
   }
 
-  private boolean isValidName(String name) {
+  public boolean isValidName(String name) {
     return name != null && !name.isBlank() && name.matches("[\\p{L} .'-]+");
   }
 
@@ -18,7 +18,7 @@ class StudentManager {
 
   public void addStudent(String name, int age) {
     if (!isValidName(name)) {
-      System.out.print("Invalid name. Use letters and spaces only.");
+      System.out.print("Invalid name. Only letters allowed.");
       return;
     }
 

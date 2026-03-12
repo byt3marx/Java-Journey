@@ -60,7 +60,7 @@ class Main {
     System.out.print("Enter student name: ");
     String name = scanner.nextLine();
 
-    if (name == null || name.isBlank() || !name.matches("[\\p{L} .'-]+")) {
+    if (!manager.isValidName(name)) {
       System.out.println("Invalid name. Only letters allowed.");
       return;
     }
