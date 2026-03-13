@@ -26,10 +26,12 @@ class StudentManager {
 
   public void addStudent(String name, int age) {
     if (!isValidName(name)) {
+     // System.out.println("Invalid name. Only letters allowed.");
       return;
     }
 
     if (!isValidAge(age)) {
+     // System.out.println("Invalid age.");
       return;
     }
 
@@ -40,7 +42,7 @@ class StudentManager {
 
   public void showStudents() {
     if(!hasStudents()) {
-      System.out.println("No students in the list.");
+     // System.out.println("No students in the list.");
       return;
     }
 
@@ -51,7 +53,7 @@ class StudentManager {
 
   public void findStudentByName(String name) {
     if (!hasStudents()) {
-      System.out.println("No students in the list.");
+     // System.out.println("No students in the list.");
       return;
     }
       
@@ -75,17 +77,17 @@ class StudentManager {
     }
 
     if (index < 0 || index >= students.size()) {
-      System.out.println("Invalid student number.");
+     // System.out.println("Invalid student number.");
       return;
     }
 
     if (!isValidName(newName)) {
-      System.out.println("Invalid name. Only letters allowed.");
+     // System.out.println("Invalid name. Only letters allowed.");
       return;
     }
 
     if (!isValidAge(newAge)) {
-      System.out.println("Invalid age.");
+     // System.out.println("Invalid age.");
       return;
     }
 
@@ -98,12 +100,12 @@ class StudentManager {
 
   public void removeStudent(int index) {
     if (!hasStudents()) {
-      System.out.println("No students to remove.");
+     // System.out.println("No students to remove.");
       return;
     }
 
     if (index < 0 || index >= students.size()) {
-      System.out.println("Invalid student number.");
+     // System.out.println("Invalid student number.");
       return;
     }
 
