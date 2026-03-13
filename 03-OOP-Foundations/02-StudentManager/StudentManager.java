@@ -26,12 +26,10 @@ class StudentManager {
 
   public void addStudent(String name, int age) {
     if (!isValidName(name)) {
-      System.out.print("Invalid name. Only letters allowed.");
       return;
     }
 
     if (!isValidAge(age)) {
-      System.out.println("Invalid age.");
       return;
     }
 
