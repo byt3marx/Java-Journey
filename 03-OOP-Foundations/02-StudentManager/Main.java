@@ -91,38 +91,9 @@ class Main {
       }
     }
 
-    String newName;
+    String newName = readValidName(scanner, manager, "Enter new student name: ");
 
-    while (true) {
-      System.out.print("Enter new name: ");
-      newName = scanner.nextLine();
-
-      if (manager.isValidName(newName)) {
-        break;
-      }
-
-      System.out.println("Invalid name. Only letters allowed.");
-    }
-
-    int newAge;
-
-    while (true) {
-      System.out.print("Enter new age: ");
-      String newAgeInput = scanner.nextLine();
-
-      try {
-        newAge = Integer.parseInt(newAgeInput);
-
-        if (manager.isValidAge(newAge)) {
-          break;
-        }
-
-        System.out.println("Invalid age. Age must be between 0 and 120.");
-
-      } catch (NumberFormatException e) {
-        System.out.println("Invalid age. Enter whole number.");
-      }
-    }
+    int newAge = readValidAge(scanner, manager, "Enter new age: ");
 
     manager.editStudent(studentNumber - 1, newName, newAge);
   }
