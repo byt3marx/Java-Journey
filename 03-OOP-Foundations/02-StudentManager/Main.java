@@ -71,26 +71,7 @@ class Main {
       System.out.println("Invalid name. Only letters allowed.");
     }
 
-    int age;
-
-    while (true) {
-      
-      System.out.print("Enter student age: ");
-      String ageInput = scanner.nextLine();
-
-      try {
-        age = Integer.parseInt(ageInput);
-
-        if (manager.isValidAge(age)) {
-          break;
-        }
-
-        System.out.println("Age must be between 0 and 120.");
-      } catch (NumberFormatException e) {
-
-        System.out.println("Invalid age. Enter a number.");
-      }
-    }
+    int age = readValidAge(scanner, manager, "Enter student age: ");
 
     manager.addStudent(name, age);
   }
@@ -209,5 +190,27 @@ class Main {
     }
 
     manager.findStudentByName(searchName);
+  }
+
+  private static int readValidAge(Scanner scanner, StudentManager manager, String prompt) {
+
+    while (true) {
+
+      System.out.print(prompt);
+      String ageInput = scanner.nextLine();
+
+      try {
+        int age = Integer.parseInt(ageInput);
+
+        if (manager.isValidAge(age)) {
+          return age;
+        }
+
+        System.out.println("Age must be between 0 and 120.");
+
+      } catch (NumberFormatException e) {
+        System.out.println("Invalid age. Enter a number.");
+      }
+    }
   }
 }
