@@ -72,30 +72,13 @@ class Main {
     
     manager.showStudents();
 
-    int studentNumber;
-
-    while (true) {
-      System.out.print("Enter student number to edit: ");
-      String editInput = scanner.nextLine();
-
-      try {
-        studentNumber = Integer.parseInt(editInput);
-
-        if (studentNumber >= 1 && studentNumber <= manager.getStudentCount()) {
-          break;
-        }
-
-        System.out.println("Invalid student number.");
-      } catch (NumberFormatException e) {
-        System.out.println("Invalid number. Enter whole number.");
-      }
-    }
+    int studentNumber = readValidStudentNumber(scanner, manager, "Enter student number to edit: ");
 
     String newName = readValidName(scanner, manager, "Enter new student name: ");
 
     int newAge = readValidAge(scanner, manager, "Enter new age: ");
 
-    manager.editStudent(studentNumber - 1, newName, newAge);
+    manager.editStudent(studentNumber, newName, newAge);
   }
 
   private static void removeStudentFlow(Scanner scanner, StudentManager manager) {
@@ -189,4 +172,27 @@ class Main {
       
     }
   }
+
+  private static int readValidStudentNumber(Scanner scanner, StudentManager manager, String prompt) {
+
+    while (true) {
+      
+      System.out.print(prompt);
+      String input = scanner.nextLine();
+
+      try {
+        int studentNumber = Integer.parseInt(input);
+
+        if (studentNumber >= 1 && studentNumber <= manager.getStudentCount()) {
+          return studentNumber - 1;
+        }
+
+        System.out.println("Invalid student number.");
+
+      } catch (NumberFormatException e) {
+        System.out.println("Invalid number. Enter a whole number.");
+      }
+    }
+  }
+
 }
