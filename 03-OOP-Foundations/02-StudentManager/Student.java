@@ -18,7 +18,7 @@ class Student {
 
   public void setName(String name) {
     if (name != null && !name.isBlank() && name.matches("[\\p{L} .'-]+")) {
-      this.name = name;
+      this.name = name.trim();
     } else {
       System.out.println("Invalid name. Only letters allowed.");
     }

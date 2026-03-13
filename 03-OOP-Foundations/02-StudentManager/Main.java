@@ -57,19 +57,7 @@ class Main {
 
   private static void addStudentFlow(Scanner scanner, StudentManager manager) {
 
-    String name;
-
-    while (true) {
-
-      System.out.print("Enter student name: ");
-      name = scanner.nextLine();
-
-      if (manager.isValidName(name)){
-          break;
-      }
-      
-      System.out.println("Invalid name. Only letters allowed.");
-    }
+    String name = readValidName(scanner, manager, "Enter student name: ");
 
     int age = readValidAge(scanner, manager, "Enter student age: ");
 
@@ -192,6 +180,7 @@ class Main {
     manager.findStudentByName(searchName);
   }
 
+  
   private static int readValidAge(Scanner scanner, StudentManager manager, String prompt) {
 
     while (true) {
@@ -211,6 +200,22 @@ class Main {
       } catch (NumberFormatException e) {
         System.out.println("Invalid age. Enter a number.");
       }
+    }
+  }
+  
+  private static String readValidName(Scanner scanner, StudentManager manager, String prompt) {
+
+    while (true) {
+      
+      System.out.print(prompt);
+      String name = scanner.nextLine().trim();
+
+      if (manager.isValidName(name)) {
+        return name;
+      }
+        
+      System.out.println("Invalid name. Only letters allowed.");
+      
     }
   }
 }
