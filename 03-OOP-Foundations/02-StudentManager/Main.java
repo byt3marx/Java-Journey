@@ -100,18 +100,7 @@ class Main {
       return;
     }
 
-    String searchName;
-
-    while (true) {
-      System.out.print("Enter student name to search: ");
-      searchName = scanner.nextLine();
-
-      if (manager.isValidName(searchName)) {
-        break;
-      }
-      
-      System.out.println("Invalid name. Only letters allowed.");
-    }
+    String searchName = readValidName(scanner, manager, "Enter student name to search: ");
 
     manager.findStudentByName(searchName);
   }
