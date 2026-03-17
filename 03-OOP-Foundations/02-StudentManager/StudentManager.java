@@ -72,7 +72,7 @@ class StudentManager {
 
   public void editStudent(int index, String newName, int newAge) {
     if (!hasStudents()) {
-      System.out.println("No students to edit.");
+     // System.out.println("No students to edit.");
       return;
     }
 
