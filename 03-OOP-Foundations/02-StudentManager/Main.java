@@ -89,27 +89,9 @@ class Main {
     
     manager.showStudents();
 
-    int removeStudent;
+    int removeStudent = readValidStudentNumber(scanner, manager, "Enter student number to remove: ");
 
-    while (true) {
-      System.out.print("Enter student number to remove: ");
-      String removeStudentInput = scanner.nextLine();
-
-      try {
-        removeStudent = Integer.parseInt(removeStudentInput);
-
-        if (removeStudent >= 1 && removeStudent <= manager.getStudentCount()) {
-          break;
-        }
-
-        System.out.println("Invalid student number.");
-
-      } catch (NumberFormatException e) {
-        System.out.println("Invalid number.");
-      }
-    }
-
-    manager.removeStudent(removeStudent - 1);
+    manager.removeStudent(removeStudent);
   }
 
   private static void searchStudentFlow(Scanner scanner, StudentManager manager) {
