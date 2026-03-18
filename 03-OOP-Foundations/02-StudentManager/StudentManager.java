@@ -1,4 +1,9 @@
 import java.util.ArrayList;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.util.Scanner;
 
 class StudentManager {
 
@@ -111,5 +116,23 @@ class StudentManager {
 
     Student removedStudent = students.remove(index);
     System.out.println("Removed: " + removedStudent);
+  }
+
+  public void saveToFile(String studentsFile) {
+
+    try {
+      FileWriter writer = new FileWriter(studentsFile);
+
+      for (Student student : students) {
+        writer.write(student.getName() + "," + student.getAge());
+        writer.write("\n");
+      }
+
+      writer.close();
+
+    } catch(IOException e) {
+      e.printStackTrace();
+    }
+
   }
 }
