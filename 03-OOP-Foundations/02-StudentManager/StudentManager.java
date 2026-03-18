@@ -133,6 +133,31 @@ class StudentManager {
     } catch(IOException e) {
       e.printStackTrace();
     }
-
   }
+
+  public void loadFromFile(String studentsFile) {
+
+    try {
+      Scanner scanner = new Scanner(new File(studentsFile));
+      students.clear();
+
+      while (scanner.hasNextLine()) {
+        String line = scanner.nextLine();
+        String[] parts = line.split(",");
+
+        if (parts.length != 2) continue;
+
+        String name = parts[0].trim();
+        int age = Integer.parseInt(parts[1].trim());
+
+        Student student = new Student(name, age);
+        students.add(student);
+      }
+      scanner.close();
+
+    } catch (FileNotFoundException e) {
+      e.printStackTrace();
+    }
+  }
+
 }
