@@ -23,6 +23,15 @@ including projects, refactors, and concepts learned each week.
     │   ├── SmartCalculator.java
     │   ├── SmartCalculatorRefactor.java
     │
+    ├── 03-OOP-Foundations/
+    │   ├── Student/
+    │   │   ├── Student.java
+    │   │   └──StudentApp.java
+    │   └── StudentManager/
+    │       ├── Student.java
+    │       ├── StudentManager.java
+    │       └── Main.java
+    │
     ├── README.md
     └── README_Professional.md
 
@@ -94,6 +103,36 @@ The repository follows a structured learning path:
 -   polymorphic method implementations
 -   removing switch statements with behavior-driven enums
 
+## Object-Oriented Programming (OOP)
+
+-   classes and objects
+-   fields and constructors
+-   `this` keyword
+-   encapsulation (private fields, getters, setters)
+-   object references and memory model
+-   default values (`null`, `0`)
+-   `toString()` method
+
+## Collections
+
+-   using `ArrayList` to store objects
+-   managing multiple objects in a collection
+-   index vs user-friendly numbering (1-based vs 0-based)
+
+## Input Validation & Refactoring
+
+-   reusable input methods
+-   `readValidName(...)`
+-   `readValidAge(...)`
+-   `readValidStudentNumber(...)`
+-   removing duplicated validation loops
+-   centralized validation logic
+-   input sanitization (`trim`)
+-   layered validation:
+    - UI layer (Main)
+    - logic layer (StudentManager)
+    - data layer (Student)
+
 ------------------------------------------------------------------------
 
 # 🛠 Projects
@@ -124,6 +163,19 @@ handling.
 Refactored version featuring: - modular helper methods - robust input
 parsing - enum-driven operations - polymorphic calculation logic
 
+### Student Manager
+
+Console-based application for managing students.
+
+Features: - add student - show students - edit student - remove student -
+search student
+
+Implements: - `ArrayList<Student>` storage - menu-driven CLI -
+input validation loops - reusable helper methods - clean separation of
+concerns (UI / logic / data)
+
+Refactored to reduce duplication and improve code structure.
+
 ------------------------------------------------------------------------
 
 # 🚀 Upcoming Topics
@@ -135,6 +187,9 @@ Planned next steps in the learning journey:
 -   Encapsulation
 -   ArrayList collections
 -   Object-based program design
+-   File I/O (saving and loading data)
+-   Sorting collections (by name, age)
+-   Improving search functionality
 -   Larger interactive systems
 
 ------------------------------------------------------------------------
