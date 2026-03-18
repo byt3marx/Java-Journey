@@ -7,6 +7,8 @@ class Main {
     Scanner scanner = new Scanner(System.in);
     StudentManager manager = new StudentManager();
 
+    manager.loadFromFile("students.txt");
+
     boolean running = true;
 
     while (running) {
@@ -43,8 +45,9 @@ class Main {
           break;
 
         case "6":
+          manager.saveToFile("students.txt");
+          System.out.println("Data saved. Exiting program.");
           running = false;
-          System.out.println("Program ended.");
           break;
 
         default:
