@@ -42,7 +42,7 @@ class StudentManager {
 
   public void showStudents() {
     if(!hasStudents()) {
-     // System.out.println("No students in the list.");
+      System.out.println("No students in the list.");
       return;
     }
 
