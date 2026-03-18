@@ -2,3 +2,6 @@ Marko,37
 Tina,35
 Miha,33
 Sasha,28
+Primoz,37
+Luka,36
+Gregor,32
