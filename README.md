@@ -392,14 +392,145 @@ Features implemented:
 
 ---
 
-## 🚀 Next Focus
+# 🧠 Week 4 Complete -- Object-Oriented Programming & Student Manager
 
-* Classes and objects
-* Constructors
-* Encapsulation
-* Collections (`ArrayList`)
-* Object-based program design
+## 🔹 Classes and Objects
+
+Introduced object-oriented programming through custom classes.
+
+Concepts learned:
+
+* defining classes  
+* creating objects  
+* fields and constructors  
+* object state  
+
+Example:
+
+```java
+Student s1 = new Student("Anna", 20);
+```
 
 ---
 
-Week 3 complete.
+## 🔹 Constructors and `this`
+
+Used constructors to initialize object data.
+
+```java
+public Student(String name, int age) {
+    this.name = name;
+    this.age = age;
+}
+```
+
+---
+
+## 🔹 Encapsulation
+
+Fields made private and accessed via getters and setters.
+
+```java
+private String name;
+private int age;
+```
+
+---
+
+## 🔹 Object References & Memory
+
+```java
+Student s1 = new Student("Anna", 20);
+Student s2 = s1;
+```
+
+---
+
+## 🔹 toString() Method
+
+```java
+public String toString() {
+    return name + " (" + age + ")";
+}
+```
+
+---
+
+## 🔹 ArrayList & Collections
+
+```java
+ArrayList<Student> students = new ArrayList<>();
+```
+
+---
+
+## 🔹 Index vs User Input
+
+```java
+index = input - 1;
+```
+
+---
+
+## 🔹 Student Manager System
+
+Features:
+
+* Add student  
+* Show students  
+* Edit student  
+* Remove student  
+* Search student  
+
+---
+
+## 🔹 Program Architecture
+
+* Main → UI  
+* StudentManager → logic  
+* Student → model  
+
+---
+
+## 🔹 Input Validation Refactor
+
+```java
+readValidName(...)
+readValidAge(...)
+readValidStudentNumber(...)
+```
+
+---
+
+## 🔹 Layered Validation
+
+* UI validation  
+* logic validation  
+* model protection  
+
+---
+
+## 🔹 Input Sanitization
+
+```java
+name = name.trim();
+```
+
+---
+
+## 🛠 Projects Completed (Week 4)
+
+* Student  
+* StudentApp  
+* Student Manager  
+
+---
+
+## 🚀 Next Focus
+
+* File I/O (saving and loading data)  
+* Sorting collections  
+* Improving search functionality  
+* Larger interactive systems  
+
+---
