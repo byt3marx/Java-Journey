@@ -9,10 +9,18 @@ public class SortStudents {
     students.add(new Student("Denis", 43));
     students.add(new Student("Cecilija", 28));
 
-    Collections.sort(students);
+    Collections.sort(students, (s1, s2) -> s1.getAge() - s2.getAge());
+
+    for(Student s : students) {
+      System.out.println(s.getName() + " (" + s.getAge() + ")");
+      
+    }
+
+    Collections.sort(students, (s1, s2) -> s2.getAge() - s1.getAge());
 
     for(Student s : students) {
       System.out.println(s.getName() + " (" + s.getAge() + ")");
     }
+
   }
 }
