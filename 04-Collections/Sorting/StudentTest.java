@@ -1,10 +1,10 @@
 import java.util.*;
 
-public class Student implements Comparable<Student> {
+public class StudentTest implements Comparable<StudentTest> {
   private String name;
   private int age;
 
-  public Student(String name, int age) {
+  public StudentTest(String name, int age) {
     this.name = name;
     this.age = age;
   }
@@ -18,7 +18,7 @@ public class Student implements Comparable<Student> {
   }
 
   @Override
-  public int compareTo(Student other) {
+  public int compareTo(StudentTest other) {
     return this.name.compareTo(other.name);
   }
 }
