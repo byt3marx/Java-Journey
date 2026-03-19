@@ -103,7 +103,7 @@ class StudentManager {
     return true;
   }
 
-  public boolean editStudent(int index, String newName, int newAge) {
+  public boolean editStudentBoth(int index, String newName, int newAge) {
     if (!hasStudents()) {
       return false;
     }
