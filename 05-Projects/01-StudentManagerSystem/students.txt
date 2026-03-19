@@ -5,3 +5,14 @@ Sasha,28
 Primoz,37
 Luka,36
 Gregor,32
+Arben,38
+Teodor,36
+Jozica,62
+Martin,66
+Sara,30
+Rok,35
+Marko,41
+Urban,32
+Urska,33
+Uros,25
+Zan,23
