@@ -63,7 +63,10 @@ class Main {
 
             case "3":
               editStudentFlow(scanner, manager);
-              break;             
+              break;
+            
+            default:
+              System.out.println("Invalid edit option.");
           }
           break;
         
