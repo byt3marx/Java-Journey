@@ -62,7 +62,7 @@ class Main {
               break;
 
             case "3":
-              editStudentFlow(scanner, manager);
+              editStudentBothFlow(scanner, manager);
               break;
             
             default:
@@ -146,7 +146,7 @@ class Main {
     }
   }
 
-  private static void editStudentFlow(Scanner scanner, StudentManager manager) {
+  private static void editStudentBothFlow(Scanner scanner, StudentManager manager) {
     if(!manager.hasStudents()) {
       System.out.println("No students to edit.");
       return;
@@ -160,7 +160,7 @@ class Main {
 
     int newAge = readValidAge(scanner, manager, "Enter new age: ");
 
-    boolean success = manager.editStudent(studentNumber, newName, newAge);
+    boolean success = manager.editStudentBoth(studentNumber, newName, newAge);
 
     if (success) {
       System.out.println("Student updated.");
