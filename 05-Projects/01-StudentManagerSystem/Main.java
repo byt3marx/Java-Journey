@@ -43,7 +43,28 @@ class Main {
           break;
 
         case "5":
-          editStudentFlow(scanner, manager);
+          System.out.println("1. Edit name");
+          System.out.println("2. Edit age");
+          System.out.println("3. Edit both");
+
+          System.out.print("Choose option: ");
+
+          String editChoice = scanner.nextLine();
+
+          switch (editChoice) {
+            
+            case "1":
+              editStudentNameFlow(scanner, manager);
+              break;
+
+            case "2":
+              editStudentAgeFlow(scanner, manager);
+              break;
+
+            case "3":
+              editStudentFlow(scanner, manager);
+              break;             
+          }
           break;
         
         case "6":
@@ -79,6 +100,49 @@ class Main {
     manager.addStudent(name, age);
   }
 
+  public static void editStudentNameFlow(Scanner scanner, StudentManager manager) {
+    if(!manager.hasStudents()) {
+      System.out.println("No students to edit.");
+      return;
+    }
+
+    manager.showStudents();
+
+    int studentNumber = readValidStudentNumber(scanner, manager, "Enter student number to edit: ");
+    String newName = readValidName(scanner, manager, "Enter new student name: ");
+
+    boolean success = manager.editStudentName(studentNumber, newName);
+
+    if (success) {
+      System.out.println("Student name updated.");
+      manager.showStudents();
+    } else {
+      System.out.println("Could not update student name.");
+    }
+  }
+
+  public static void editStudentAgeFlow(Scanner scanner, StudentManager manager) {
+    if(!manager.hasStudents()) {
+      System.out.println("No students to edit.");
+      return;
+    }
+
+    manager.showStudents();
+
+    int studentNumber = readValidStudentNumber(scanner, manager, "Enter student number to edit: ");
+    int newAge = readValidAge(scanner, manager, "Enter new student age: ");
+
+    boolean success = manager.editStudentAge(studentNumber, newAge);
+
+    if (success) {
+      System.out.println("Student age updated.");
+      manager.showStudents();
+    } else {
+      System.out.println("Could not update student age.");
+      return;
+    }
+  }
+
   private static void editStudentFlow(Scanner scanner, StudentManager manager) {
     if(!manager.hasStudents()) {
       System.out.println("No students to edit.");
@@ -93,7 +157,15 @@ class Main {
 
     int newAge = readValidAge(scanner, manager, "Enter new age: ");
 
-    manager.editStudent(studentNumber, newName, newAge);
+    boolean success = manager.editStudent(studentNumber, newName, newAge);
+
+    if (success) {
+      System.out.println("Student updated.");
+      manager.showStudents();
+    } else {
+      System.out.println("Could not update student.");
+      return;
+    }
   }
 
   private static void removeStudentFlow(Scanner scanner, StudentManager manager) {
