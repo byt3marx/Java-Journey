@@ -1,5 +1,3 @@
-import java.util.*;
-
 public class StudentTest implements Comparable<StudentTest> {
   private String name;
   private int age;
