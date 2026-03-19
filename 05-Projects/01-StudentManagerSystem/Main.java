@@ -18,7 +18,9 @@ class Main {
       System.out.println("3. Remove student");
       System.out.println("4. Search student by name");
       System.out.println("5. Edit student");
-      System.out.println("6. Exit");
+      System.out.println("6. Sort students by name");
+      System.out.println("7. Sort students by age");
+      System.out.println("8. Exit");
       System.out.print("Choose option: ");
 
       String input = scanner.nextLine();
@@ -43,8 +45,18 @@ class Main {
         case "5":
           editStudentFlow(scanner, manager);
           break;
-
+        
         case "6":
+          manager.sortByName();
+          manager.showStudents();
+          break;
+
+        case "7":
+          manager.sortByAge();
+          manager.showStudents();
+          break;
+
+        case "8":
           manager.saveToFile("students.txt");
           System.out.println("Data saved. Exiting program.");
           running = false;
@@ -107,7 +119,6 @@ class Main {
 
     manager.findStudentByName(searchName);
   }
-
   
   private static int readValidAge(Scanner scanner, StudentManager manager, String prompt) {
 
