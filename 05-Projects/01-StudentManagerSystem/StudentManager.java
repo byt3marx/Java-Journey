@@ -32,12 +32,10 @@ class StudentManager {
 
   public void addStudent(String name, int age) {
     if (!isValidName(name)) {
-     // System.out.println("Invalid name. Only letters allowed.");
       return;
     }
 
     if (!isValidAge(age)) {
-     // System.out.println("Invalid age.");
       return;
     }
 
@@ -59,7 +57,6 @@ class StudentManager {
 
   public void findStudentByName(String name) {
     if (!hasStudents()) {
-     // System.out.println("No students in the list.");
       return;
     }
       
@@ -75,43 +72,67 @@ class StudentManager {
         System.out.println("Student not found.");
       }
     }
-
-  public void editStudent(int index, String newName, int newAge) {
-    if (!hasStudents()) {
-     // System.out.println("No students to edit.");
-      return;
-    }
-
+  
+  public boolean editStudentName(int index, String newName) {
     if (index < 0 || index >= students.size()) {
-     // System.out.println("Invalid student number.");
-      return;
+      return false;
     }
 
     if (!isValidName(newName)) {
-     // System.out.println("Invalid name. Only letters allowed.");
-      return;
+      return false;
+    }
+
+    Student student = students.get(index);
+    student.setName(newName);
+
+    return true;
+  }
+
+  public boolean editStudentAge(int index, int newAge) {
+    if (index < 0 || index >= students.size()) {
+      return false;
     }
 
     if (!isValidAge(newAge)) {
-     // System.out.println("Invalid age.");
-      return;
+      return false;
+    }
+
+    Student student = students.get(index);
+    student.setAge(newAge);
+
+    return true;
+  }
+
+  public boolean editStudent(int index, String newName, int newAge) {
+    if (!hasStudents()) {
+      return false;
+    }
+
+    if (index < 0 || index >= students.size()) {
+      return false;
+    }
+
+    if (!isValidName(newName)) {
+      return false;
+    }
+
+    if (!isValidAge(newAge)) {
+      return false;
     }
 
     Student student = students.get(index);
     student.setName(newName);
     student.setAge(newAge);
 
-    System.out.println("Updated: " + student);
+    return true;
   }
 
   public void removeStudent(int index) {
     if (!hasStudents()) {
-     // System.out.println("No students to remove.");
       return;
     }
 
     if (index < 0 || index >= students.size()) {
-     // System.out.println("Invalid student number.");
       return;
     }
 
