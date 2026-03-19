@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Scanner;
+import java.util.*;
 
 class StudentManager {
 
@@ -158,6 +159,14 @@ class StudentManager {
     } catch (FileNotFoundException e) {
       e.printStackTrace();
     }
+  }
+
+  public void sortByName() {
+    Collections.sort(students);
+  }
+
+  public void sortByAge() {
+    Collections.sort(students, (s1, s2) -> s1.getAge() - s2.getAge());
   }
 
 }
