@@ -100,7 +100,14 @@ class Main {
 
     int age = readValidAge(scanner, manager, "Enter student age: ");
 
-    manager.addStudent(name, age);
+    boolean success = manager.addStudent(name, age);
+
+    if (success) {
+      System.out.println("Student added.");
+      manager.showStudents();
+    } else {
+      System.out.println("Could not add student.");
+    }
   }
 
   public static void editStudentNameFlow(Scanner scanner, StudentManager manager) {

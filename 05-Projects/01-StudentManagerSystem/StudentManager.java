@@ -30,18 +30,19 @@ class StudentManager {
     return students.size();
   }
 
-  public void addStudent(String name, int age) {
+  public boolean addStudent(String name, int age) {
     if (!isValidName(name)) {
-      return;
+      return false;
     }
 
     if (!isValidAge(age)) {
-      return;
+      return false;
     }
 
     Student student = new Student(name, age);
     students.add(student);
-    System.out.println("Student added.");
+
+    return true;
   }
 
   public void showStudents() {
