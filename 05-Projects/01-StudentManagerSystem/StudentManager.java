@@ -128,17 +128,15 @@ class StudentManager {
     return true;
   }
 
-  public void removeStudent(int index) {
-    if (!hasStudents()) {
-      return;
-    }
+  public Student removeStudent(int index) {
 
     if (index < 0 || index >= students.size()) {
-      return;
+      return null;
     }
 
     Student removedStudent = students.remove(index);
-    System.out.println("Removed: " + removedStudent);
+
+    return removedStudent;
   }
 
   public void saveToFile(String studentsFile) {
