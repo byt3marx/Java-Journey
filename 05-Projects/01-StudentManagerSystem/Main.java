@@ -188,7 +188,13 @@ class Main {
 
     int removeStudent = readValidStudentNumber(scanner, manager, "Enter student number to remove: ");
 
-    manager.removeStudent(removeStudent);
+    Student removedStudent = manager.removeStudent(removeStudent);
+
+    if (removedStudent != null) {
+      System.out.println("Removed: " + removedStudent);
+    } else {
+      System.out.println("Student could not be removed.");
+    }
   }
 
   private static void searchStudentFlow(Scanner scanner, StudentManager manager) {
