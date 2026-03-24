@@ -1,9 +1,7 @@
-import java.util.ArrayList;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.util.Scanner;
 import java.util.*;
 
 class StudentManager {
@@ -56,7 +54,7 @@ class StudentManager {
     }
   }
 
-  public void findStudentByName(String name) {
+ /*  public void findStudentByName(String name) {
     if (!hasStudents()) {
       return;
     }
@@ -72,6 +70,25 @@ class StudentManager {
       if (!found) {
         System.out.println("Student not found.");
       }
+    }*/
+
+    public List<Student> findStudentsByName(String name) {
+
+      List<Student> foundStudents = new ArrayList<>();
+
+      String search = name.trim().toUpperCase();
+
+      for (Student s : students) {
+
+        String studentName = s.getName().toUpperCase();
+
+        if(studentName.startsWith(search)) {
+          foundStudents.add(s);
+        }
+      } 
+      
+      return foundStudents;
+
     }
   
   public boolean editStudentName(int index, String newName) {
