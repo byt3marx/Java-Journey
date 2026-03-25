@@ -17,7 +17,7 @@ class Main {
       System.out.println("1. Add student");
       System.out.println("2. Show students");
       System.out.println("3. Remove student");
-      System.out.println("4. Search student by name");
+      System.out.println("4. Search students by name");
       System.out.println("5. Edit student");
       System.out.println("6. Sort students by name");
       System.out.println("7. Sort students by age");
@@ -40,7 +40,7 @@ class Main {
           break;
 
         case "4":
-          searchStudentFlow(scanner, manager);
+          searchStudentsFlow(scanner, manager);
           break;
 
         case "5":
@@ -198,7 +198,7 @@ class Main {
     }
   }
 
-  private static void searchStudentFlow(Scanner scanner, StudentManager manager) {
+  private static void searchStudentsFlow(Scanner scanner, StudentManager manager) {
     if (!manager.hasStudents()) {
       System.out.println("No students in the list.");
       return;
