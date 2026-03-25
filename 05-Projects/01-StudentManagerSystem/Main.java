@@ -1,3 +1,4 @@
+import java.util.List;
 import java.util.Scanner;
 
 class Main {
@@ -203,9 +204,26 @@ class Main {
       return;
     }
 
-    String searchName = readValidName(scanner, manager, "Enter student name to search: ");
+    String searchName = readValidName(scanner, manager, "Enter name (leave empty to show all): ");
 
-    manager.findStudentByName(searchName);
+    List<Student> result = manager.findStudentsByName(searchName);
+
+    if (result.size() == 0) {
+      System.out.println("No students found.");
+    }
+
+    else if (result.size() == 1) {
+      System.out.println("Found student: " + result.get(0));
+    }
+
+    else {
+
+      System.out.println("Found students:");
+
+      for (int i = 0; i < result.size(); i++) {
+        System.out.println((i + 1) + ". " + result.get(i));
+      }
+    }
   }
   
   private static int readValidAge(Scanner scanner, StudentManager manager, String prompt) {
