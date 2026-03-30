@@ -28,6 +28,10 @@ class StudentManager {
     return students.size();
   }
 
+  public int getIndexOfStudent(Student student) {
+      return students.indexOf(student);
+  }
+
   public boolean addStudent(String name, int age) {
     if (!isValidName(name)) {
       return false;
