@@ -4,3 +4,9 @@ target/
 .settings/
 .classpath
 .project
+
+# IntelliJ IDEA files
+.idea/
+*.iml
+out/
+gen/
