@@ -208,12 +208,16 @@ class Main {
 
     List<Student> result = manager.findStudentsByName(searchName);
 
+    Student selectedStudent;
+
     if (result.size() == 0) {
       System.out.println("No students found.");
+      return;
     }
 
     else if (result.size() == 1) {
       System.out.println("Found student: " + result.get(0));
+      selectedStudent = result.get(0);
     }
 
     else {
@@ -223,7 +227,93 @@ class Main {
       for (int i = 0; i < result.size(); i++) {
         System.out.println((i + 1) + ". " + result.get(i));
       }
+
+      int choice = readValidChoice(scanner, result.size(), "Choose student: ");
+
+      selectedStudent = result.get(choice - 1);
     }
+
+    System.out.println("\nSelected student: " + selectedStudent);
+
+    System.out.println("1. Edit");
+    System.out.println("2. Remove");
+    System.out.println("3. Back");
+
+    int actionChoice = readValidChoice(scanner, 3, "Choose option: ");
+
+    int index = manager.getIndexOfStudent(selectedStudent);
+
+    switch (actionChoice) {
+
+        case 1:
+
+            System.out.println("\nEditing student: " + selectedStudent);
+
+            System.out.println("1. Edit name");
+            System.out.println("2. Edit age");
+            System.out.println("3. Edit both");
+            System.out.println("4. Back");
+
+            int editChoice = readValidChoice(scanner, 4, "Choose option: ");
+
+            switch (editChoice) {
+
+                case 1: {
+                    String newName = readValidName(scanner, manager, "Enter new student name: ");
+                    boolean success = manager.editStudentName(index, newName);
+
+                    if (success) {
+                        System.out.println("Student name updated: " + selectedStudent);
+                    } else {
+                        System.out.println("Could not update student name.");
+                    }
+                    break;
+                }
+
+                case 2: {
+                    int newAge = readValidAge(scanner, manager, "Enter new student age: ");
+                    boolean success = manager.editStudentAge(index, newAge);
+
+                    if (success) {
+                        System.out.println("Student age updated: " + selectedStudent);
+                    } else {
+                        System.out.println("Could not update student age.");
+                    }
+                    break;
+                }
+
+                case 3: {
+                    String newName = readValidName(scanner, manager, "Enter new student name: ");
+                    int newAge = readValidAge(scanner, manager, "Enter new student age: ");
+
+                    boolean success = manager.editStudentBoth(index, newName, newAge);
+
+                    if (success) {
+                        System.out.println("Student updated: " + selectedStudent);
+                    } else {
+                        System.out.println("Could not update student.");
+                    }
+                    break;
+                }
+
+                case 4:
+                    break;
+            }
+            break;
+
+        case 2:
+            Student removedStudent = manager.removeStudent(index);
+
+            if (removedStudent != null) {
+                System.out.println("Removed: " + removedStudent);
+            } else {
+                System.out.println("Student could not be removed.");
+            }
+            return;
+
+        case 3:
+            return;
+      }
   }
   
   private static int readValidAge(Scanner scanner, StudentManager manager, String prompt) {
@@ -284,6 +374,27 @@ class Main {
         System.out.println("Invalid number. Enter a whole number.");
       }
     }
+  }
+
+  private static int readValidChoice(Scanner scanner, int max, String prompt) {
+
+      while (true) {
+          System.out.print(prompt);
+          String input = scanner.nextLine();
+
+          try {
+              int choice = Integer.parseInt(input);
+
+              if (choice >= 1 && choice <= max) {
+                  return choice;
+              }
+
+              System.out.println("Invalid choice. Enter a number between 1 and " + max + ".");
+
+          } catch (NumberFormatException e) {
+              System.out.println("Invalid number. Enter whole number.");
+          }
+      }
   }
 
 }
