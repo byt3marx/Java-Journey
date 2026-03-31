@@ -217,7 +217,6 @@ class Main {
 
     while (true) {
         if (result.size() == 1) {
-            System.out.println("Found student: " + result.get(0));
             selectedStudent = result.get(0);
         } else {
             System.out.println("Found students:");
