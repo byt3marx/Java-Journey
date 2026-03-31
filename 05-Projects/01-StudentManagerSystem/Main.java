@@ -266,6 +266,7 @@ class Main {
 
                     if (success) {
                         System.out.println("Student name updated: " + selectedStudent);
+                        return;
                     } else {
                         System.out.println("Could not update student name.");
                     }
@@ -278,6 +279,7 @@ class Main {
 
                     if (success) {
                         System.out.println("Student age updated: " + selectedStudent);
+                        return;
                     } else {
                         System.out.println("Could not update student age.");
                     }
@@ -292,6 +294,7 @@ class Main {
 
                     if (success) {
                         System.out.println("Student updated: " + selectedStudent);
+                        return;
                     } else {
                         System.out.println("Could not update student.");
                     }
