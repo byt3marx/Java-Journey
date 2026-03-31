@@ -216,12 +216,13 @@ class Main {
     }
 
     while (true) {
+
         if (result.size() == 1) {
             selectedStudent = result.get(0);
         } else {
             System.out.println("Found students:");
 
-            for (int i = 0; i <result.size(); i++) {
+            for (int i = 0; i < result.size(); i++) {
                 System.out.println((i + 1) + ". " + result.get(i));
             }
 
@@ -229,6 +230,10 @@ class Main {
 
             selectedStudent = result.get(choice - 1);
         }
+
+        boolean backToSelection = false;
+
+        while (true) {
 
     System.out.println("\nSelected student: " + selectedStudent);
 
@@ -264,7 +269,7 @@ class Main {
                     } else {
                         System.out.println("Could not update student name.");
                     }
-                    break;
+                    return;
                 }
 
                 case 2: {
@@ -276,7 +281,7 @@ class Main {
                     } else {
                         System.out.println("Could not update student age.");
                     }
-                    break;
+                    return;
                 }
 
                 case 3: {
@@ -290,13 +295,13 @@ class Main {
                     } else {
                         System.out.println("Could not update student.");
                     }
-                    break;
+                    return;
                 }
 
                 case 4:
                     break;
             }
-            return;
+            break;
 
         case 2:
             Student removedStudent = manager.removeStudent(index);
@@ -311,9 +316,16 @@ class Main {
         case 3:
             if (result.size() == 1) {
                 return;
+            }  else {
+                backToSelection = true;
             }
             break;
-    }
+        }
+
+        if (backToSelection) {
+            break;
+        }
+        }
     }
   }
   
