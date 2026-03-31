@@ -124,8 +124,8 @@ class Main {
     boolean success = manager.editStudentName(studentNumber, newName);
 
     if (success) {
-      System.out.println("Student name updated.");
-      manager.showStudents();
+        Student updatedStudent = manager.getStudent(studentNumber);
+      System.out.println("Student name updated: " + updatedStudent);
     } else {
       System.out.println("Could not update student name.");
     }
@@ -145,8 +145,8 @@ class Main {
     boolean success = manager.editStudentAge(studentNumber, newAge);
 
     if (success) {
-      System.out.println("Student age updated.");
-      manager.showStudents();
+        Student updatedStudent = manager.getStudent(studentNumber);
+      System.out.println("Student age updated: " + updatedStudent);
     } else {
       System.out.println("Could not update student age.");
       return;
@@ -170,8 +170,8 @@ class Main {
     boolean success = manager.editStudentBoth(studentNumber, newName, newAge);
 
     if (success) {
-      System.out.println("Student updated.");
-      manager.showStudents();
+        Student updatedStudent = manager.getStudent(studentNumber);
+      System.out.println("Student updated: " + updatedStudent);
     } else {
       System.out.println("Could not update student.");
       return;
