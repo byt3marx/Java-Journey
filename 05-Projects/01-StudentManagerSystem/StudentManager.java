@@ -24,6 +24,10 @@ class StudentManager {
     return !students.isEmpty();
   }
 
+  public Student getStudent(int index) {
+      return students.get(index);
+  }
+
   public int getStudentCount() {
     return students.size();
   }
@@ -71,10 +75,8 @@ class StudentManager {
       if(studentName.startsWith(search)) {
         foundStudents.add(s);
       }
-    } 
-      
+    }
     return foundStudents;
-
   }
   
   public boolean editStudentName(int index, String newName) {
