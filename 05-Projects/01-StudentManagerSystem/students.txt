@@ -10,15 +10,14 @@ Gregor,31
 Jenny,39
 Jozica,62
 Kristjan,42
-Laura,30
 Lea,38
 Liam,7
 Luka,36
-Marco,44
+Marcco,44
 Marko,37
 Martin,66
 Matej,37
-Mateja,35
+Mateja,36
 Miha,33
 Milena,51
 Miča,55
@@ -43,3 +42,4 @@ Vanja,36
 Zdenka,38
 Šanaja,7
 Žan,23
+Laura,30
