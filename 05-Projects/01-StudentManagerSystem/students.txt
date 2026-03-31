@@ -43,3 +43,5 @@ Zdenka,38
 Šanaja,7
 Žan,23
 Laura,30
+Pištan,35
+KeKeC,120

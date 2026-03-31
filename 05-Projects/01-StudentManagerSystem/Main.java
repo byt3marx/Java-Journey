@@ -101,11 +101,10 @@ class Main {
 
     int age = readValidAge(scanner, manager, "Enter student age: ");
 
-    boolean success = manager.addStudent(name, age);
+    Student addedStudent = manager.addStudent(name, age);
 
-    if (success) {
-      System.out.println("Student added.");
-      manager.showStudents();
+    if (addedStudent != null) {
+      System.out.println("Student added: " + addedStudent);
     } else {
       System.out.println("Could not add student.");
     }

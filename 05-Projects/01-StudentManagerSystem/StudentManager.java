@@ -32,19 +32,19 @@ class StudentManager {
       return students.indexOf(student);
   }
 
-  public boolean addStudent(String name, int age) {
+  public Student addStudent(String name, int age) {
     if (!isValidName(name)) {
-      return false;
+      return null;
     }
 
     if (!isValidAge(age)) {
-      return false;
+      return null;
     }
 
     Student student = new Student(name, age);
     students.add(student);
 
-    return true;
+    return student;
   }
 
   public void showStudents() {
