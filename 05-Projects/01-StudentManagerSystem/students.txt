@@ -44,4 +44,4 @@ Zdenka,38
 Žan,23
 Laura,30
 Pištan,35
-KeKeC,120
+Kekec,119
