@@ -215,23 +215,21 @@ class Main {
       return;
     }
 
-    else if (result.size() == 1) {
-      System.out.println("Found student: " + result.get(0));
-      selectedStudent = result.get(0);
-    }
+    while (true) {
+        if (result.size() == 1) {
+            System.out.println("Found student: " + result.get(0));
+            selectedStudent = result.get(0);
+        } else {
+            System.out.println("Found students:");
 
-    else {
+            for (int i = 0; i <result.size(); i++) {
+                System.out.println((i + 1) + ". " + result.get(i));
+            }
 
-      System.out.println("Found students:");
+            int choice = readValidChoice(scanner, result.size(), "Choose student: ");
 
-      for (int i = 0; i < result.size(); i++) {
-        System.out.println((i + 1) + ". " + result.get(i));
-      }
-
-      int choice = readValidChoice(scanner, result.size(), "Choose student: ");
-
-      selectedStudent = result.get(choice - 1);
-    }
+            selectedStudent = result.get(choice - 1);
+        }
 
     System.out.println("\nSelected student: " + selectedStudent);
 
@@ -299,7 +297,7 @@ class Main {
                 case 4:
                     break;
             }
-            break;
+            return;
 
         case 2:
             Student removedStudent = manager.removeStudent(index);
@@ -312,8 +310,12 @@ class Main {
             return;
 
         case 3:
-            return;
-      }
+            if (result.size() == 1) {
+                return;
+            }
+            break;
+    }
+    }
   }
   
   private static int readValidAge(Scanner scanner, StudentManager manager, String prompt) {
