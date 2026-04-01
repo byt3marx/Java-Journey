@@ -29,6 +29,9 @@ class StudentManager {
   }
 
   public Student getStudent(int index) {
+      if (!isValidIndex(index)) {
+          return null;
+      }
       return students.get(index);
   }
 
