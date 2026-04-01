@@ -141,14 +141,11 @@ class StudentManager {
   }
 
   public Student removeStudent(int index) {
-
     if (!isValidIndex(index)) {
       return null;
     }
 
-    Student removedStudent = students.remove(index);
-
-    return removedStudent;
+    return students.remove(index);
   }
 
   public void saveToFile(String studentsFile) {
