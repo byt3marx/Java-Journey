@@ -19,17 +19,13 @@ class Student implements Comparable<Student> {
   public void setName(String name) {
     if (name != null && !name.isBlank() && name.matches("[\\p{L} .'-]+")) {
       this.name = name.trim();
-    } /*else {
-      System.out.println("Invalid name. Only letters allowed.");
-    }*/
+    }
   }
 
   public void setAge(int age) {
     if (age >= 0 && age <= 120) {
       this.age = age;
-    } /*else {
-      System.out.println("Invalid age.");
-    }*/
+    }
   }
 
   public String toString() {
