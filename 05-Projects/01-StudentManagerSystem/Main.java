@@ -219,7 +219,7 @@ class Main {
         if (result.size() == 1) {
             selectedStudent = result.get(0);
         } else {
-            System.out.println("Found students:");
+            System.out.println("Found " + result.size() + " students:");
 
             for (int i = 0; i < result.size(); i++) {
                 System.out.println((i + 1) + ". " + result.get(i));
