@@ -203,7 +203,7 @@ class Main {
       return;
     }
 
-    String searchName = readValidName(scanner, manager, "Enter name (leave empty to show all): ");
+    String searchName = readValidName(scanner, manager, "Enter name: ");
 
     List<Student> result = manager.findStudentsByName(searchName);
 
@@ -269,8 +269,8 @@ class Main {
                     } else {
                         System.out.println("Could not update student name.");
                     }
-                    return;
                 }
+                break;
 
                 case 2: {
                     int newAge = readValidAge(scanner, manager, "Enter new student age: ");
@@ -282,8 +282,8 @@ class Main {
                     } else {
                         System.out.println("Could not update student age.");
                     }
-                    return;
                 }
+                break;
 
                 case 3: {
                     String newName = readValidName(scanner, manager, "Enter new student name: ");
@@ -297,8 +297,8 @@ class Main {
                     } else {
                         System.out.println("Could not update student.");
                     }
-                    return;
                 }
+                break;
 
                 case 4:
                     break;

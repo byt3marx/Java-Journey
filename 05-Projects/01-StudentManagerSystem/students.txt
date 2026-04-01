@@ -13,7 +13,7 @@ Kristjan,42
 Lea,38
 Liam,7
 Luka,36
-Marcco,44
+Marco,44
 Marko,37
 Martin,66
 Matej,37
@@ -29,7 +29,7 @@ Rok,35
 Rok,38
 Rudi,56
 Sara,30
-Saša,28
+Saša,27
 Sebastian,38
 Teodor,36
 Tia-Talin,12
