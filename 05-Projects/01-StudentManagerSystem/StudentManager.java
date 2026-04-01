@@ -95,7 +95,7 @@ class StudentManager {
       return false;
     }
 
-    Student student = students.get(index);
+    Student student = getStudent(index);
     student.setName(newName);
 
     return true;
@@ -110,7 +110,7 @@ class StudentManager {
       return false;
     }
 
-    Student student = students.get(index);
+    Student student = getStudent(index);
     student.setAge(newAge);
 
     return true;
@@ -133,7 +133,7 @@ class StudentManager {
       return false;
     }
 
-    Student student = students.get(index);
+    Student student = getStudent(index);
     student.setName(newName);
     student.setAge(newAge);
 
