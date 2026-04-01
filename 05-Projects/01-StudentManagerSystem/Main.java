@@ -106,7 +106,7 @@ class Main {
     if (addedStudent != null) {
       System.out.println("Student added: " + addedStudent);
     } else {
-      System.out.println("Could not add student.");
+      System.out.println("Student could not be added.");
     }
   }
 
@@ -127,7 +127,7 @@ class Main {
         Student updatedStudent = manager.getStudent(studentNumber);
       System.out.println("Student name updated: " + updatedStudent);
     } else {
-      System.out.println("Could not update student name.");
+      System.out.println("Student name could not be updated.");
     }
   }
 
@@ -148,7 +148,7 @@ class Main {
         Student updatedStudent = manager.getStudent(studentNumber);
       System.out.println("Student age updated: " + updatedStudent);
     } else {
-      System.out.println("Could not update student age.");
+      System.out.println("Student age could not be updated.");
       return;
     }
   }
@@ -165,7 +165,7 @@ class Main {
 
     String newName = readValidName(scanner, manager, "Enter new student name: ");
 
-    int newAge = readValidAge(scanner, manager, "Enter new age: ");
+    int newAge = readValidAge(scanner, manager, "Enter new student age: ");
 
     boolean success = manager.editStudentBoth(studentNumber, newName, newAge);
 
@@ -173,7 +173,7 @@ class Main {
         Student updatedStudent = manager.getStudent(studentNumber);
       System.out.println("Student updated: " + updatedStudent);
     } else {
-      System.out.println("Could not update student.");
+      System.out.println("Student could not be updated.");
       return;
     }
   }
@@ -191,7 +191,7 @@ class Main {
     Student removedStudent = manager.removeStudent(removeStudent);
 
     if (removedStudent != null) {
-      System.out.println("Removed: " + removedStudent);
+      System.out.println("Student removed: " + removedStudent);
     } else {
       System.out.println("Student could not be removed.");
     }
@@ -309,7 +309,7 @@ class Main {
             Student removedStudent = manager.removeStudent(index);
 
             if (removedStudent != null) {
-                System.out.println("Removed: " + removedStudent);
+                System.out.println("Student removed: " + removedStudent);
             } else {
                 System.out.println("Student could not be removed.");
             }
