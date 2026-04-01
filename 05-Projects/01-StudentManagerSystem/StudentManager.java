@@ -20,6 +20,10 @@ class StudentManager {
     return age >= 0 && age <= 120;
   }
 
+  private boolean isValidIndex(int index) {
+      return index >= 0 && index < students.size();
+  }
+
   public boolean hasStudents() {
     return !students.isEmpty();
   }
@@ -80,7 +84,7 @@ class StudentManager {
   }
   
   public boolean editStudentName(int index, String newName) {
-    if (index < 0 || index >= students.size()) {
+    if (!isValidIndex(index)) {
       return false;
     }
 
@@ -95,7 +99,7 @@ class StudentManager {
   }
 
   public boolean editStudentAge(int index, int newAge) {
-    if (index < 0 || index >= students.size()) {
+    if (!isValidIndex(index)) {
       return false;
     }
 
@@ -114,7 +118,7 @@ class StudentManager {
       return false;
     }
 
-    if (index < 0 || index >= students.size()) {
+    if (!isValidIndex(index)) {
       return false;
     }
 
@@ -135,7 +139,7 @@ class StudentManager {
 
   public Student removeStudent(int index) {
 
-    if (index < 0 || index >= students.size()) {
+    if (!isValidIndex(index)) {
       return null;
     }
 
