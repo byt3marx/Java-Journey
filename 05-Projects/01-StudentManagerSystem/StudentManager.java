@@ -88,6 +88,16 @@ class StudentManager {
     }
     return foundStudents;
   }
+
+  public Student findStudentsById(int id) {
+
+      for (Student s : students) {
+          if(s.getId() == id){
+              return s;
+          }
+      }
+      return null;
+  }
   
   public boolean editStudentName(int index, String newName) {
     if (!isValidIndex(index)) {
@@ -149,6 +159,15 @@ class StudentManager {
     }
 
     return students.remove(index);
+  }
+
+  public Student removeStudentById(int id) {
+      for (int i = 0; i < students.size(); i++) {
+          if (students.get(i).getId() == id) {
+              return removeStudent(i);
+          }
+      }
+      return null;
   }
 
   public void saveToFile(String studentsFile) {
