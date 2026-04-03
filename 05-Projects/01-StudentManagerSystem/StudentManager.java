@@ -8,6 +8,8 @@ class StudentManager {
 
   private ArrayList<Student> students;
 
+  private int nextId = 1;
+
   public StudentManager() {
     students = new ArrayList<>();
   }
@@ -52,8 +54,9 @@ class StudentManager {
       return null;
     }
 
-    Student student = new Student(name, age);
+    Student student = new Student(nextId,name, age);
     students.add(student);
+    nextId ++;
 
     return student;
   }
@@ -154,7 +157,7 @@ class StudentManager {
       FileWriter writer = new FileWriter(studentsFile);
 
       for (Student student : students) {
-        writer.write(student.getName() + "," + student.getAge());
+        writer.write(student.getId() + "," + student.getName() + "," + student.getAge());
         writer.write("\n");
       }
 
@@ -171,19 +174,28 @@ class StudentManager {
       Scanner scanner = new Scanner(new File(studentsFile));
       students.clear();
 
+      int highestId = 0; //tracks max ID
+
       while (scanner.hasNextLine()) {
         String line = scanner.nextLine();
         String[] parts = line.split(",");
 
-        if (parts.length != 2) continue;
+        if (parts.length != 3) continue;
 
-        String name = parts[0].trim();
-        int age = Integer.parseInt(parts[1].trim());
+        int id = Integer.parseInt(parts[0].trim());
+        String name = parts[1].trim();
+        int age = Integer.parseInt(parts[2].trim());
 
-        Student student = new Student(name, age);
+        Student student = new Student(id, name, age);
         students.add(student);
+
+        if (id > highestId) {
+            highestId = id;
+        }
       }
       scanner.close();
+
+      nextId = highestId + 1; //set next ID
 
     } catch (FileNotFoundException e) {
       e.printStackTrace();

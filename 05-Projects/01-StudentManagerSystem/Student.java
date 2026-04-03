@@ -5,9 +5,9 @@ class Student implements Comparable<Student> {
   private final int id;
 
   public Student(int id, String name, int age) {
+    this.id = id;
     setName(name); //important to use setName instead of this.name = name, because the constructor also uses validation
     setAge(age);
-    this.id = id;
   }
 
   public String getName() {
