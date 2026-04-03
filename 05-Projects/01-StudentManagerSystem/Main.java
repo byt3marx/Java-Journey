@@ -225,7 +225,7 @@ class Main {
                 System.out.println((i + 1) + ". " + result.get(i));
             }
 
-            selectedStudent = readValidId(scanner, manager, "Enter student ID: ");
+            selectedStudent = readValidIdFromList(scanner, result, "Enter student ID: ");
 
         }
 
@@ -429,6 +429,29 @@ class Main {
               System.out.println("Invalid number. Enter whole number.");
           }
       }
-    }
+  }
+
+  private static Student readValidIdFromList(Scanner scanner, List<Student> result, String prompt) {
+
+      while (true) {
+          System.out.print(prompt);
+          String input = scanner.nextLine();
+
+          try {
+              int id = Integer.parseInt(input);
+
+              for (Student s : result) {
+                  if (s.getId() == id) {
+                      return s;
+                  }
+              }
+
+              System.out.println("Student with this ID is not in the search results.");
+
+              } catch (NumberFormatException e) {
+                System.out.println("Invalid number. Enter whole number.");
+          }
+      }
+  }
 
 }
