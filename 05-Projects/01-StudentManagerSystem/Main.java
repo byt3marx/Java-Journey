@@ -225,9 +225,8 @@ class Main {
                 System.out.println((i + 1) + ". " + result.get(i));
             }
 
-            int choice = readValidChoice(scanner, result.size(), "Choose student: ");
+            selectedStudent = readValidId(scanner, manager, "Enter student ID: ");
 
-            selectedStudent = result.get(choice - 1);
         }
 
         boolean backToSelection = false;
