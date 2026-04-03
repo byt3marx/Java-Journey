@@ -89,7 +89,7 @@ class StudentManager {
     return foundStudents;
   }
 
-  public Student findStudentsById(int id) {
+  public Student findStudentById(int id) {
 
       for (Student s : students) {
           if(s.getId() == id){
