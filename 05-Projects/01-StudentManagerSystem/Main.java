@@ -412,4 +412,24 @@ class Main {
       }
   }
 
+  private Student readValidId(Scanner scanner, StudentManager manager, String prompt) {
+
+      while (true) {
+          System.out.print(prompt);
+          String input = scanner.nextLine();
+
+          try {
+              int id = Integer.parseInt(input);
+              Student student = manager.findStudentsById(id);
+
+              if(student != null) {
+                  return student;
+              }
+              System.out.println("Student with this ID does not exist");
+          } catch (NumberFormatException e) {
+              System.out.println("Invalid number. Enter whole number.");
+          }
+      }
+    }
+
 }
