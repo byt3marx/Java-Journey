@@ -118,14 +118,13 @@ class Main {
 
     manager.showStudents();
 
-    int studentNumber = readValidStudentNumber(scanner, manager, "Enter student number to edit: ");
+    Student selectedStudent = readValidId(scanner, manager, "Enter student ID to edit: ");
     String newName = readValidName(scanner, manager, "Enter new student name: ");
 
-    boolean success = manager.editStudentName(studentNumber, newName);
+    boolean success = manager.editStudentNameById(selectedStudent.getId(), newName);
 
     if (success) {
-        Student updatedStudent = manager.getStudent(studentNumber);
-      System.out.println("Student name updated: " + updatedStudent);
+      System.out.println("Student name updated: " + selectedStudent);
     } else {
       System.out.println("Student name could not be updated.");
     }
