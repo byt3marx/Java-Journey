@@ -186,9 +186,9 @@ class Main {
     
     manager.showStudents();
 
-    int removeStudent = readValidStudentNumber(scanner, manager, "Enter student number to remove: ");
+    Student studentToRemove = readValidId(scanner, manager, "Enter student ID to remove: ");
 
-    Student removedStudent = manager.removeStudent(removeStudent);
+    Student removedStudent = manager.removeStudentById(studentToRemove.getId());
 
     if (removedStudent != null) {
       System.out.println("Student removed: " + removedStudent);
