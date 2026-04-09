@@ -138,17 +138,15 @@ class Main {
 
     manager.showStudents();
 
-    int studentNumber = readValidStudentNumber(scanner, manager, "Enter student number to edit: ");
+    Student selectedStudent = readValidId(scanner, manager, "Enter student ID to edit: ");
     int newAge = readValidAge(scanner, manager, "Enter new student age: ");
 
-    boolean success = manager.editStudentAge(studentNumber, newAge);
+    boolean success = manager.editStudentAgeById(selectedStudent.getId(), newAge);
 
     if (success) {
-        Student updatedStudent = manager.getStudent(studentNumber);
-      System.out.println("Student age updated: " + updatedStudent);
+      System.out.println("Student age updated: " + selectedStudent);
     } else {
       System.out.println("Student age could not be updated.");
-      return;
     }
   }
 
@@ -423,7 +421,7 @@ class Main {
               if(student != null) {
                   return student;
               }
-              System.out.println("Student with this ID does not exist");
+              System.out.println("Student with this ID does not exist.");
           } catch (NumberFormatException e) {
               System.out.println("Invalid number. Enter whole number.");
           }
