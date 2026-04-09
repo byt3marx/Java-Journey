@@ -30,20 +30,20 @@ class StudentManager {
     return !students.isEmpty();
   }
 
-  public Student getStudent(int index) {
+  /*public Student getStudent(int index) {
       if (!isValidIndex(index)) {
           return null;
       }
       return students.get(index);
-  }
+  }*/
 
   public int getStudentCount() {
     return students.size();
   }
 
-  public int getIndexOfStudent(Student student) {
+  /*public int getIndexOfStudent(Student student) {
       return students.indexOf(student);
-  }
+  }*/
 
   public Student addStudent(String name, int age) {
     if (!isValidName(name)) {
@@ -99,7 +99,7 @@ class StudentManager {
       return null;
   }
   
-  public boolean editStudentName(int index, String newName) {
+  /*public boolean editStudentName(int index, String newName) {
     if (!isValidIndex(index)) {
       return false;
     }
@@ -112,7 +112,7 @@ class StudentManager {
     student.setName(newName);
 
     return true;
-  }
+  }*/
 
   public boolean editStudentNameById(int id, String newName) {
       Student student = findStudentById(id);
@@ -127,7 +127,7 @@ class StudentManager {
       return true;
   }
 
-  public boolean editStudentAge(int index, int newAge) {
+  /*public boolean editStudentAge(int index, int newAge) {
     if (!isValidIndex(index)) {
       return false;
     }
@@ -140,7 +140,7 @@ class StudentManager {
     student.setAge(newAge);
 
     return true;
-  }
+  }*/
 
   public boolean editStudentAgeById (int id, int newAge) {
       Student student = findStudentById(id);
@@ -155,7 +155,7 @@ class StudentManager {
       return true;
   }
 
-  public boolean editStudentBoth(int index, String newName, int newAge) {
+  /*public boolean editStudentBoth(int index, String newName, int newAge) {
     if (!hasStudents()) {
       return false;
     }
@@ -177,7 +177,7 @@ class StudentManager {
     student.setAge(newAge);
 
     return true;
-  }
+  }*/
 
   public boolean editStudentBothById (int id, String newName, int newAge) {
       Student student = findStudentById(id);
