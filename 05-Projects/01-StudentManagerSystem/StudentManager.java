@@ -142,6 +142,19 @@ class StudentManager {
     return true;
   }
 
+  public boolean editStudentAgeById (int id, int newAge) {
+      Student student = findStudentById(id);
+
+      if (student == null) {
+          return false;
+      }
+      if(!isValidAge(newAge)){
+          return false;
+      }
+      student.setAge(newAge);
+      return true;
+  }
+
   public boolean editStudentBoth(int index, String newName, int newAge) {
     if (!hasStudents()) {
       return false;
