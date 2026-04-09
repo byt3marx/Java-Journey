@@ -18,10 +18,11 @@ class Main {
       System.out.println("2. Show students");
       System.out.println("3. Remove student");
       System.out.println("4. Search students by name");
-      System.out.println("5. Edit student");
-      System.out.println("6. Sort students by name");
-      System.out.println("7. Sort students by age");
-      System.out.println("8. Exit");
+      System.out.println("5. Find student by ID");
+      System.out.println("6. Edit student");
+      System.out.println("7. Sort students by name");
+      System.out.println("8. Sort students by age");
+      System.out.println("9. Exit");
       System.out.print("Choose option: ");
 
       String input = scanner.nextLine();
@@ -44,6 +45,10 @@ class Main {
           break;
 
         case "5":
+          readValidId(scanner, manager, "Enter student ID: ");
+          break;
+
+        case "6":
           System.out.println("1. Edit name");
           System.out.println("2. Edit age");
           System.out.println("3. Edit both");
@@ -71,17 +76,17 @@ class Main {
           }
           break;
         
-        case "6":
+        case "7":
           manager.sortByName();
           manager.showStudents();
           break;
 
-        case "7":
+        case "8":
           manager.sortByAge();
           manager.showStudents();
           break;
 
-        case "8":
+        case "9":
           manager.saveToFile("students.txt");
           System.out.println("Data saved. Exiting program.");
           running = false;
@@ -224,105 +229,104 @@ class Main {
 
         }
 
-        boolean backToSelection = false;
+        boolean goBack = handleSelectedStudentMenu(scanner, manager, selectedStudent);
 
-        while (true) {
-
-    System.out.println("\nSelected student: " + selectedStudent);
-
-    System.out.println("1. Edit");
-    System.out.println("2. Remove");
-    System.out.println("3. Back");
-
-    int actionChoice = readValidChoice(scanner, 3, "Choose option: ");
-
-   // int index = manager.getIndexOfStudent(selectedStudent);
-
-    switch (actionChoice) {
-
-        case 1:
-
-            System.out.println("\nEditing student: " + selectedStudent);
-
-            System.out.println("1. Edit name");
-            System.out.println("2. Edit age");
-            System.out.println("3. Edit both");
-            System.out.println("4. Back");
-
-            int editChoice = readValidChoice(scanner, 4, "Choose option: ");
-
-            switch (editChoice) {
-
-                case 1: {
-                    String newName = readValidName(scanner, manager, "Enter new student name: ");
-                    boolean success = manager.editStudentNameById(selectedStudent.getId(), newName);
-
-                    if (success) {
-                        System.out.println("Student name updated: " + selectedStudent);
-                        return;
-                    } else {
-                        System.out.println("Student name could not be updated.");
-                    }
-                }
-                break;
-
-                case 2: {
-                    int newAge = readValidAge(scanner, manager, "Enter new student age: ");
-                    boolean success = manager.editStudentAgeById(selectedStudent.getId(), newAge);
-
-                    if (success) {
-                        System.out.println("Student age updated: " + selectedStudent);
-                        return;
-                    } else {
-                        System.out.println("Student age could not be updated.");
-                    }
-                }
-                break;
-
-                case 3: {
-                    String newName = readValidName(scanner, manager, "Enter new student name: ");
-                    int newAge = readValidAge(scanner, manager, "Enter new student age: ");
-
-                    boolean success = manager.editStudentBothById(selectedStudent.getId(), newName, newAge);
-
-                    if (success) {
-                        System.out.println("Student updated: " + selectedStudent);
-                        return;
-                    } else {
-                        System.out.println("Student could not be updated.");
-                    }
-                }
-                break;
-
-                case 4:
-                    break;
-            }
-            break;
-
-        case 2:
-            Student removedStudent = manager.removeStudentById(selectedStudent.getId());
-
-            if (removedStudent != null) {
-                System.out.println("Student removed: " + removedStudent);
-            } else {
-                System.out.println("Student could not be removed.");
-            }
-            return;
-
-        case 3:
-            if (result.size() == 1) {
+        if (goBack) {
+            if(result.size() == 1) {
                 return;
-            }  else {
-                backToSelection = true;
+            } else {
+                continue; //go back to result selection
             }
-            break;
-        }
-
-        if (backToSelection) {
-            break;
-        }
+        } else {
+            return; //edit/remove finished
         }
     }
+  }
+
+  private static boolean handleSelectedStudentMenu(Scanner scanner, StudentManager manager, Student selectedStudent) {
+
+      while (true) {
+          System.out.println("\nSelected student: " + selectedStudent);
+
+          System.out.println("1. Edit student");
+          System.out.println("2. Remove student");
+          System.out.println("3. Back");
+
+          int actionChoice = readValidChoice(scanner, 3, "Choose option: ");
+
+          switch (actionChoice) {
+
+              case 1:
+                  System.out.println("\nEditing student: " + selectedStudent);
+
+                  System.out.println("1. Edit name");
+                  System.out.println("2. Edit age");
+                  System.out.println("3. Edit both");
+                  System.out.println("4. Back");
+
+                  int editChoice = readValidChoice(scanner, 4, "Choose option: ");
+
+                  switch (editChoice) {
+
+                      case 1: {
+                          String newName = readValidName(scanner, manager, "Enter new student name: ");
+                          boolean success = manager.editStudentNameById(selectedStudent.getId(), newName);
+
+                          if (success) {
+                              System.out.println("Student name updated: " + selectedStudent);
+                              return false;
+                          } else {
+                              System.out.println("Student name could not be updated.");
+                          }
+                      }
+                      break;
+
+                      case 2: {
+                          int newAge = readValidAge(scanner, manager, "Enter new student age: ");
+                          boolean success = manager.editStudentAgeById(selectedStudent.getId(), newAge);
+
+                          if (success) {
+                              System.out.println("Student age updated: " + selectedStudent);
+                              return false;
+                          } else {
+                              System.out.println("Student age could not be updated.");
+                          }
+                      }
+                      break;
+
+                      case 3: {
+                          String newName = readValidName(scanner, manager, "Enter new student name: ");
+                          int newAge = readValidAge(scanner, manager, "Enter new student age: ");
+                          boolean success = manager.editStudentBothById(selectedStudent.getId(), newName, newAge);
+
+                          if (success) {
+                              System.out.println("Student updated: " + selectedStudent);
+                              return false;
+                          } else {
+                              System.out.println("Student could not be updated.");
+                          }
+                      }
+                      break;
+
+                      case 4:
+                          break;
+                  }
+                  break;
+
+              case 2:
+                  Student removedStudent = manager.removeStudentById(selectedStudent.getId());
+
+                  if (removedStudent != null) {
+                      System.out.println("Student removed: " + removedStudent);
+                  } else {
+                      System.out.println("Student could not be removed.");
+                  }
+                  return false;
+
+              case 3:
+                  return true;
+          }
+      }
   }
   
   private static int readValidAge(Scanner scanner, StudentManager manager, String prompt) {
