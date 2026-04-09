@@ -204,7 +204,7 @@ class Main {
 
     Student selectedStudent;
 
-    if (result.size() == 0) {
+    if (result.isEmpty()) {
       System.out.println("No students found.");
       return;
     }
@@ -217,7 +217,7 @@ class Main {
             System.out.println("Found " + result.size() + " students:");
 
             for (int i = 0; i < result.size(); i++) {
-                System.out.println((i + 1) + ". " + result.get(i));
+                System.out.println(result.get(i));
             }
 
             selectedStudent = readValidIdFromList(scanner, result, "Enter student ID: ");
@@ -236,7 +236,7 @@ class Main {
 
     int actionChoice = readValidChoice(scanner, 3, "Choose option: ");
 
-    int index = manager.getIndexOfStudent(selectedStudent);
+   // int index = manager.getIndexOfStudent(selectedStudent);
 
     switch (actionChoice) {
 
@@ -255,26 +255,26 @@ class Main {
 
                 case 1: {
                     String newName = readValidName(scanner, manager, "Enter new student name: ");
-                    boolean success = manager.editStudentName(index, newName);
+                    boolean success = manager.editStudentNameById(selectedStudent.getId(), newName);
 
                     if (success) {
                         System.out.println("Student name updated: " + selectedStudent);
                         return;
                     } else {
-                        System.out.println("Could not update student name.");
+                        System.out.println("Student name could not be updated.");
                     }
                 }
                 break;
 
                 case 2: {
                     int newAge = readValidAge(scanner, manager, "Enter new student age: ");
-                    boolean success = manager.editStudentAge(index, newAge);
+                    boolean success = manager.editStudentAgeById(selectedStudent.getId(), newAge);
 
                     if (success) {
                         System.out.println("Student age updated: " + selectedStudent);
                         return;
                     } else {
-                        System.out.println("Could not update student age.");
+                        System.out.println("Student age could not be updated.");
                     }
                 }
                 break;
@@ -283,13 +283,13 @@ class Main {
                     String newName = readValidName(scanner, manager, "Enter new student name: ");
                     int newAge = readValidAge(scanner, manager, "Enter new student age: ");
 
-                    boolean success = manager.editStudentBoth(index, newName, newAge);
+                    boolean success = manager.editStudentBothById(selectedStudent.getId(), newName, newAge);
 
                     if (success) {
                         System.out.println("Student updated: " + selectedStudent);
                         return;
                     } else {
-                        System.out.println("Could not update student.");
+                        System.out.println("Student could not be updated.");
                     }
                 }
                 break;
@@ -300,7 +300,7 @@ class Main {
             break;
 
         case 2:
-            Student removedStudent = manager.removeStudent(index);
+            Student removedStudent = manager.removeStudentById(selectedStudent.getId());
 
             if (removedStudent != null) {
                 System.out.println("Student removed: " + removedStudent);
