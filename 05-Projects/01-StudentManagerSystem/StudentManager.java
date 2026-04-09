@@ -179,6 +179,24 @@ class StudentManager {
     return true;
   }
 
+  public boolean editStudentBothById (int id, String newName, int newAge) {
+      Student student = findStudentById(id);
+
+      if(student == null) {
+          return false;
+      }
+      if(!isValidName(newName)) {
+          return false;
+      }
+      if(!isValidAge(newAge)) {
+          return false;
+      }
+
+      student.setName(newName);
+      student.setAge(newAge);
+      return true;
+  }
+
   public Student removeStudent(int index) {
     if (!isValidIndex(index)) {
       return null;
