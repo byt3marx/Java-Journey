@@ -68,7 +68,7 @@ class StudentManager {
     }
 
     for (int i = 0; i < students.size(); i++) {
-      System.out.println((i + 1) + ". " + students.get(i));
+      System.out.println(students.get(i));
     }
   }
 
@@ -271,6 +271,10 @@ class StudentManager {
 
   public void sortByAge() {
     Collections.sort(students, (s1, s2) -> Integer.compare(s1.getAge(), s2.getAge()));
+  }
+
+  public void sortById() {
+      students.sort((s1, s2) -> Integer.compare(s1.getId(), s2.getId()));
   }
 
 }
