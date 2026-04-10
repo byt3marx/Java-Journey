@@ -45,7 +45,7 @@ class Main {
           break;
 
         case "5":
-          readValidId(scanner, manager, "Enter student ID: ");
+          findStudentByIdFlow(scanner, manager);
           break;
 
         case "6":
@@ -242,6 +242,19 @@ class Main {
         }
     }
   }
+
+  private static void findStudentByIdFlow (Scanner scanner, StudentManager manager) {
+      if (!manager.hasStudents()) {
+          System.out.println("No students in the list.");
+          return;
+      }
+
+      manager.showStudents();
+
+      Student selectedStudent = readValidId(scanner, manager, "Enter student ID: ");
+
+      handleSelectedStudentMenu(scanner, manager, selectedStudent);
+    }
 
   private static boolean handleSelectedStudentMenu(Scanner scanner, StudentManager manager, Student selectedStudent) {
 
