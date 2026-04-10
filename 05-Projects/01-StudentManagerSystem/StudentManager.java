@@ -66,7 +66,6 @@ class StudentManager {
       System.out.println("No students in the list.");
       return;
     }
-    sortById();
 
     for (Student s : students) {
       System.out.println(s);
