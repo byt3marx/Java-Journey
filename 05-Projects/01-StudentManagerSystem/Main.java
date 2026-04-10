@@ -54,12 +54,15 @@ class Main {
           System.out.println("2. Edit age");
           System.out.println("3. Edit both");
 
-          System.out.print("Choose option: ");
+          System.out.print("Choose option (0 to go back): ");
 
           String editChoice = scanner.nextLine();
 
           switch (editChoice) {
-            
+
+            case "0":
+              break;
+
             case "1":
               editStudentNameFlow(scanner, manager);
               break;
@@ -104,9 +107,7 @@ class Main {
   private static void addStudentFlow(Scanner scanner, StudentManager manager) {
 
     String name = readValidName(scanner, manager, "Enter student name: ");
-
     int age = readValidAge(scanner, manager, "Enter student age: ");
-
     Student addedStudent = manager.addStudent(name, age);
 
     if (addedStudent != null) {
@@ -165,9 +166,7 @@ class Main {
     manager.showStudents();
 
     Student selectedStudent = readValidId(scanner, manager, "Enter student ID to edit: ");
-
     String newName = readValidName(scanner, manager, "Enter new student name: ");
-
     int newAge = readValidAge(scanner, manager, "Enter new student age: ");
 
     boolean success = manager.editStudentBothById(selectedStudent.getId(), newName, newAge);
@@ -187,7 +186,11 @@ class Main {
     
     manager.showStudents();
 
-    Student studentToRemove = readValidId(scanner, manager, "Enter student ID to remove: ");
+    Student studentToRemove = readValidId(scanner, manager, "Enter student ID to remove (0 to go back): ");
+
+    if (studentToRemove == null) {
+        return;
+    }
 
     Student removedStudent = manager.removeStudentById(studentToRemove.getId());
 
@@ -205,7 +208,6 @@ class Main {
     }
 
     String searchName = readValidName(scanner, manager, "Enter name: ");
-
     List<Student> result = manager.findStudentsByName(searchName);
 
     Student selectedStudent;
@@ -226,8 +228,11 @@ class Main {
                 System.out.println(result.get(i));
             }
 
-            selectedStudent = readValidIdFromList(scanner, result, "Enter student ID: ");
+            selectedStudent = readValidIdFromList(scanner, result, "Enter student ID (0 to go back): ");
 
+            if (selectedStudent == null) {
+                return;
+            }
         }
 
         boolean goBack = handleSelectedStudentMenu(scanner, manager, selectedStudent);
@@ -252,7 +257,11 @@ class Main {
 
       manager.showStudents();
 
-      Student selectedStudent = readValidId(scanner, manager, "Enter student ID: ");
+      Student selectedStudent = readValidId(scanner, manager, "Enter student ID (0 to go back): ");
+
+      if (selectedStudent == null ) {
+          return;
+      }
 
       handleSelectedStudentMenu(scanner, manager, selectedStudent);
     }
@@ -377,7 +386,6 @@ class Main {
       }
         
       System.out.println("Invalid name. Only letters allowed.");
-      
     }
   }
 
@@ -410,9 +418,13 @@ class Main {
 
           try {
               int id = Integer.parseInt(input);
+
+              if (id == 0) {
+                  return null;
+              }
               Student student = manager.findStudentById(id);
 
-              if(student != null) {
+              if (student != null) {
                   return student;
               }
               System.out.println("Student with this ID does not exist.");
@@ -430,6 +442,10 @@ class Main {
 
           try {
               int id = Integer.parseInt(input);
+
+              if (id == 0) {
+                  return null;
+              }
 
               for (Student s : result) {
                   if (s.getId() == id) {
