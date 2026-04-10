@@ -33,6 +33,7 @@ class Main {
           break;
         
         case "2":
+          manager.sortById();
           manager.showStudents();
           break;
 
