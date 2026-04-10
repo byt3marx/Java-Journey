@@ -3,6 +3,8 @@ import java.io.IOException;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.*;
+import java.text.Collator;
+import java.util.Locale;
 
 class StudentManager {
 
@@ -201,11 +203,15 @@ class StudentManager {
   }
 
   public void sortByName() {
-    Collections.sort(students);
+
+      Collator collator = Collator.getInstance(new Locale("sl", "SI"));
+      collator.setStrength(Collator.PRIMARY);
+
+      students.sort((s1, s2) -> collator.compare(s1.getName(), s2.getName()));
   }
 
   public void sortByAge() {
-    Collections.sort(students, (s1, s2) -> Integer.compare(s1.getAge(), s2.getAge()));
+      Collections.sort(students, (s1, s2) -> Integer.compare(s1.getAge(), s2.getAge()));
   }
 
   public void sortById() {
