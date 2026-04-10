@@ -381,28 +381,6 @@ class Main {
     }
   }
 
-  private static int readValidStudentNumber(Scanner scanner, StudentManager manager, String prompt) {
-
-    while (true) {
-      
-      System.out.print(prompt);
-      String input = scanner.nextLine();
-
-      try {
-        int studentNumber = Integer.parseInt(input);
-
-        if (studentNumber >= 1 && studentNumber <= manager.getStudentCount()) {
-          return studentNumber - 1;
-        }
-
-        System.out.println("Invalid student number.");
-
-      } catch (NumberFormatException e) {
-        System.out.println("Invalid number. Enter a whole number.");
-      }
-    }
-  }
-
   private static int readValidChoice(Scanner scanner, int max, String prompt) {
 
       while (true) {

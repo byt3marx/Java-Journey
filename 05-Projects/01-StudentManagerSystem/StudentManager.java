@@ -30,20 +30,9 @@ class StudentManager {
     return !students.isEmpty();
   }
 
-  /*public Student getStudent(int index) {
-      if (!isValidIndex(index)) {
-          return null;
-      }
-      return students.get(index);
-  }*/
-
   public int getStudentCount() {
     return students.size();
   }
-
-  /*public int getIndexOfStudent(Student student) {
-      return students.indexOf(student);
-  }*/
 
   public Student addStudent(String name, int age) {
     if (!isValidName(name)) {
@@ -98,21 +87,6 @@ class StudentManager {
       }
       return null;
   }
-  
-  /*public boolean editStudentName(int index, String newName) {
-    if (!isValidIndex(index)) {
-      return false;
-    }
-
-    if (!isValidName(newName)) {
-      return false;
-    }
-
-    Student student = getStudent(index);
-    student.setName(newName);
-
-    return true;
-  }*/
 
   public boolean editStudentNameById(int id, String newName) {
       Student student = findStudentById(id);
@@ -127,21 +101,6 @@ class StudentManager {
       return true;
   }
 
-  /*public boolean editStudentAge(int index, int newAge) {
-    if (!isValidIndex(index)) {
-      return false;
-    }
-
-    if (!isValidAge(newAge)) {
-      return false;
-    }
-
-    Student student = getStudent(index);
-    student.setAge(newAge);
-
-    return true;
-  }*/
-
   public boolean editStudentAgeById (int id, int newAge) {
       Student student = findStudentById(id);
 
@@ -154,30 +113,6 @@ class StudentManager {
       student.setAge(newAge);
       return true;
   }
-
-  /*public boolean editStudentBoth(int index, String newName, int newAge) {
-    if (!hasStudents()) {
-      return false;
-    }
-
-    if (!isValidIndex(index)) {
-      return false;
-    }
-
-    if (!isValidName(newName)) {
-      return false;
-    }
-
-    if (!isValidAge(newAge)) {
-      return false;
-    }
-
-    Student student = getStudent(index);
-    student.setName(newName);
-    student.setAge(newAge);
-
-    return true;
-  }*/
 
   public boolean editStudentBothById (int id, String newName, int newAge) {
       Student student = findStudentById(id);
