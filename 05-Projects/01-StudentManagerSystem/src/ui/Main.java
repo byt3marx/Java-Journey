@@ -1,7 +1,12 @@
+package ui;
+
+import service.StudentManager;
+import model.Student;
+
 import java.util.List;
 import java.util.Scanner;
 
-class Main {
+public class Main {
 
   public static void main(String[] args) {
 

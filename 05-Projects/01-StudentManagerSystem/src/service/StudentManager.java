@@ -1,3 +1,7 @@
+package service;
+
+import model.Student;
+
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.File;
@@ -6,7 +10,7 @@ import java.util.*;
 import java.text.Collator;
 import java.util.Locale;
 
-class StudentManager {
+public class StudentManager {
 
   private ArrayList<Student> students;
 
