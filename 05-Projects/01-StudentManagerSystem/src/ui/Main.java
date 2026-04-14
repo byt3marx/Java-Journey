@@ -13,7 +13,7 @@ public class Main {
     Scanner scanner = new Scanner(System.in);
     StudentManager manager = new StudentManager();
 
-    manager.loadFromFile("students.txt");
+    manager.loadFromFile("data/students.txt");
 
     boolean running = true;
 
@@ -96,7 +96,7 @@ public class Main {
           break;
 
         case "9":
-          manager.saveToFile("students.txt");
+          manager.saveToFile("data/students.txt");
           System.out.println("Data saved. Exiting program.");
           running = false;
           break;
