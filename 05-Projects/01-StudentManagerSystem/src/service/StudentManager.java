@@ -28,10 +28,6 @@ public class StudentManager {
     return !students.isEmpty();
   }
 
-  /*public int getStudentCount() {
-    return students.size();
-  }*/
-
   public Student addStudent(String name, int age) {
 
       try {
