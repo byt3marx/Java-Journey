@@ -149,26 +149,24 @@ public class StudentManager {
 
   public void saveToFile(String studentsFile) {
 
-    try {
-      FileWriter writer = new FileWriter(studentsFile);
+    try (FileWriter writer = new FileWriter(studentsFile)){
 
       for (Student student : students) {
         writer.write(student.getId() + "," + student.getName() + "," + student.getAge());
-        writer.write("\n");
+        writer.write(System.lineSeparator()); //better than \n, different systems use different line endings
       }
 
-      writer.close();
-
     } catch(IOException e) {
-      e.printStackTrace();
+        System.out.println("Error saving data to file.");
+        e.printStackTrace();
     }
   }
 
   public void loadFromFile(String studentsFile) {
 
-    try {
-      Scanner scanner = new Scanner(new File(studentsFile));
-      students.clear();
+    try (Scanner scanner = new Scanner(new File(studentsFile))){
+
+        ArrayList<Student> tempStudents = new ArrayList<>();
 
       int highestId = 0; //tracks max ID
 
@@ -178,23 +176,27 @@ public class StudentManager {
 
         if (parts.length != 3) continue;
 
-        int id = Integer.parseInt(parts[0].trim());
-        String name = parts[1].trim();
-        int age = Integer.parseInt(parts[2].trim());
+        try {
+            int id = Integer.parseInt(parts[0].trim());
+            String name = parts[1].trim();
+            int age = Integer.parseInt(parts[2].trim());
 
-        Student student = new Student(id, name, age);
-        students.add(student);
+            Student student = new Student(id, name, age);
+            tempStudents.add(student);
 
-        if (id > highestId) {
-            highestId = id;
+            if (id > highestId) {
+                highestId = id;
+            }
+
+        } catch (IllegalArgumentException e) {
+            System.out.println("Skipping invalid line: " + line);
         }
       }
-      scanner.close();
-
+      students = tempStudents;
       nextId = highestId + 1; //set next ID
 
     } catch (FileNotFoundException e) {
-      e.printStackTrace();
+      System.out.println("No existing data file found. Starting fresh.");
     }
   }
 
