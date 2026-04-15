@@ -367,7 +367,7 @@ public class Main {
       try {
         int age = Integer.parseInt(ageInput);
 
-        if (manager.isValidAge(age)) {
+        if (Student.isValidAge(age)) {
           return age;
         }
 
@@ -386,7 +386,7 @@ public class Main {
       System.out.print(prompt);
       String name = scanner.nextLine().trim();
 
-      if (manager.isValidName(name)) {
+      if (Student.isValidName(name)) {
         return name;
       }
         
