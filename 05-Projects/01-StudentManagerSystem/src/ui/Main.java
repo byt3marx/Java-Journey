@@ -55,34 +55,7 @@ public class Main {
           break;
 
         case "6":
-          System.out.println("1. Edit name");
-          System.out.println("2. Edit age");
-          System.out.println("3. Edit both");
-
-          System.out.print("Choose option (0 to go back): ");
-
-          String editChoice = scanner.nextLine();
-
-          switch (editChoice) {
-
-            case "0":
-              break;
-
-            case "1":
-              editStudentNameFlow(scanner, manager);
-              break;
-
-            case "2":
-              editStudentAgeFlow(scanner, manager);
-              break;
-
-            case "3":
-              editStudentBothFlow(scanner, manager);
-              break;
-            
-            default:
-              System.out.println("Invalid edit option.");
-          }
+          editMenu(scanner,manager);
           break;
         
         case "7":
@@ -353,6 +326,39 @@ public class Main {
 
               case 3:
                   return true;
+          }
+      }
+  }
+
+  private static void editMenu(Scanner scanner, StudentManager manager) {
+
+      while (true) {
+          System.out.println("1. Edit name");
+          System.out.println("2. Edit age");
+          System.out.println("3. Edit both");
+
+          System.out.print("Choose option (0 to go back): ");
+
+          String editChoice = scanner.nextLine();
+
+          switch (editChoice) {
+              case "0":
+                  return;
+
+              case "1":
+                  editStudentNameFlow(scanner, manager);
+                  break;
+
+              case "2":
+                  editStudentAgeFlow(scanner, manager);
+                  break;
+
+              case "3":
+                  editStudentBothFlow(scanner, manager);
+                  break;
+
+              default:
+                  System.out.println("Invalid edit option.");
           }
       }
   }
