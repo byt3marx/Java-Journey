@@ -31,7 +31,7 @@ public class Student implements Comparable<Student> {
     this.name = name.trim();
   }
 
-  private static boolean isValidName(String name) {
+  public static boolean isValidName(String name) {
       return name != null && !name.isBlank() && name.matches("[\\p{L} .'-]+");
   }
 
@@ -42,7 +42,7 @@ public class Student implements Comparable<Student> {
     this.age = age;
   }
 
-  private static boolean isValidAge(int age) {
+  public static boolean isValidAge(int age) {
       return age >= 1 && age <= 120;
   }
 

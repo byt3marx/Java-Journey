@@ -20,14 +20,6 @@ public class StudentManager {
     students = new ArrayList<>();
   }
 
-  public boolean isValidName(String name) {
-    return name != null && !name.isBlank() && name.matches("[\\p{L} .'-]+");
-  }
-
-  public boolean isValidAge(int age) {
-    return age >= 1 && age <= 120;
-  }
-
   private boolean isValidIndex(int index) {
       return index >= 0 && index < students.size();
   }
@@ -36,24 +28,21 @@ public class StudentManager {
     return !students.isEmpty();
   }
 
-  public int getStudentCount() {
+  /*public int getStudentCount() {
     return students.size();
-  }
+  }*/
 
   public Student addStudent(String name, int age) {
-    if (!isValidName(name)) {
-      return null;
-    }
 
-    if (!isValidAge(age)) {
-      return null;
-    }
-
-    Student student = new Student(nextId,name, age);
-    students.add(student);
-    nextId ++;
-
-    return student;
+      try {
+          Student student = new Student(nextId, name, age);
+          students.add(student);
+          nextId++;
+          return student;
+      } catch (IllegalArgumentException e) {
+          System.out.println(e.getMessage()); //temporary or debug-level
+          return null;
+      }
   }
 
   public void showStudents() {
@@ -100,11 +89,13 @@ public class StudentManager {
       if (student == null) {
           return false;
       }
-      if(!isValidName(newName)) {
+      try {
+          student.setName(newName);
+          return true;
+      } catch (IllegalArgumentException e) {
+          System.out.println(e.getMessage());
           return false;
       }
-      student.setName(newName);
-      return true;
   }
 
   public boolean editStudentAgeById (int id, int newAge) {
@@ -113,29 +104,34 @@ public class StudentManager {
       if (student == null) {
           return false;
       }
-      if(!isValidAge(newAge)){
+      try {
+          student.setAge(newAge);
+          return true;
+      } catch (IllegalArgumentException e) {
+          System.out.println(e.getMessage());
           return false;
       }
-      student.setAge(newAge);
-      return true;
   }
 
   public boolean editStudentBothById (int id, String newName, int newAge) {
       Student student = findStudentById(id);
 
-      if(student == null) {
-          return false;
-      }
-      if(!isValidName(newName)) {
-          return false;
-      }
-      if(!isValidAge(newAge)) {
+      if (student == null) {
           return false;
       }
 
-      student.setName(newName);
-      student.setAge(newAge);
-      return true;
+      if (!Student.isValidName(newName) || !Student.isValidAge(newAge)) {
+          return false;
+      }
+
+      try {
+          student.setName(newName);
+          student.setAge(newAge);
+          return true;
+      } catch (IllegalArgumentException e) {
+          System.out.println(e.getMessage());
+          return false;
+      }
   }
 
   public Student removeStudent(int index) {
