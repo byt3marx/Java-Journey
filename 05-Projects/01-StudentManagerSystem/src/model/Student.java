@@ -25,15 +25,25 @@ public class Student implements Comparable<Student> {
   }
 
   public void setName(String name) {
-    if (name != null && !name.isBlank() && name.matches("[\\p{L} .'-]+")) {
-      this.name = name.trim();
+    if (!isValidName(name)) {
+        throw new IllegalArgumentException("Name must not be blank and can only contain letters, spaces, and basic punctuation.");
     }
+    this.name = name.trim();
+  }
+
+  private static boolean isValidName(String name) {
+      return name != null && !name.isBlank() && name.matches("[\\p{L} .'-]+");
   }
 
   public void setAge(int age) {
-    if (age >= 0 && age <= 120) {
-      this.age = age;
+    if (!isValidAge(age)) {
+      throw new IllegalArgumentException("Invalid age: " + age + ". Age must be between 1 and 120.");
     }
+    this.age = age;
+  }
+
+  private static boolean isValidAge(int age) {
+      return age >= 1 && age <= 120;
   }
 
   public String toString() {

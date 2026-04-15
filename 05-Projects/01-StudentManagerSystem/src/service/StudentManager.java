@@ -25,7 +25,7 @@ public class StudentManager {
   }
 
   public boolean isValidAge(int age) {
-    return age >= 0 && age <= 120;
+    return age >= 1 && age <= 120;
   }
 
   private boolean isValidIndex(int index) {

@@ -371,7 +371,7 @@ public class Main {
           return age;
         }
 
-        System.out.println("Age must be between 0 and 120.");
+        System.out.println("Age must be between 1 and 120.");
 
       } catch (NumberFormatException e) {
         System.out.println("Invalid age. Enter a number.");
