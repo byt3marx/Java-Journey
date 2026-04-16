@@ -84,9 +84,11 @@ public class Main {
 
   private static void addStudentFlow(Scanner scanner, StudentManager manager) {
 
-    String name = readValidName(scanner, manager, "Enter student name: ");
-    int age = readValidAge(scanner, manager, "Enter student age: ");
-    Student addedStudent = manager.addStudent(name, age);
+    String name = readValidName(scanner, "Enter student name: ");
+    int age = readValidAge(scanner, "Enter student age: ");
+    String email = readValidEmail(scanner, "Enter student email: ");
+
+    Student addedStudent = manager.addStudent(name, age, email);
 
     if (addedStudent != null) {
       System.out.println("Student added: " + addedStudent);
@@ -104,7 +106,7 @@ public class Main {
     manager.showStudents();
 
     Student selectedStudent = readValidId(scanner, manager, "Enter student ID to edit: ");
-    String newName = readValidName(scanner, manager, "Enter new student name: ");
+    String newName = readValidName(scanner, "Enter new student name: ");
 
     boolean success = manager.editStudentNameById(selectedStudent.getId(), newName);
 
@@ -124,7 +126,7 @@ public class Main {
     manager.showStudents();
 
     Student selectedStudent = readValidId(scanner, manager, "Enter student ID to edit: ");
-    int newAge = readValidAge(scanner, manager, "Enter new student age: ");
+    int newAge = readValidAge(scanner, "Enter new student age: ");
 
     boolean success = manager.editStudentAgeById(selectedStudent.getId(), newAge);
 
@@ -144,8 +146,8 @@ public class Main {
     manager.showStudents();
 
     Student selectedStudent = readValidId(scanner, manager, "Enter student ID to edit: ");
-    String newName = readValidName(scanner, manager, "Enter new student name: ");
-    int newAge = readValidAge(scanner, manager, "Enter new student age: ");
+    String newName = readValidName(scanner, "Enter new student name: ");
+    int newAge = readValidAge(scanner, "Enter new student age: ");
 
     boolean success = manager.editStudentBothById(selectedStudent.getId(), newName, newAge);
 
@@ -185,7 +187,7 @@ public class Main {
       return;
     }
 
-    String searchName = readValidName(scanner, manager, "Enter name: ");
+    String searchName = readValidName(scanner, "Enter name: ");
     List<Student> result = manager.findStudentsByName(searchName);
 
     Student selectedStudent;
@@ -270,7 +272,7 @@ public class Main {
                   switch (editChoice) {
 
                       case 1: {
-                          String newName = readValidName(scanner, manager, "Enter new student name: ");
+                          String newName = readValidName(scanner, "Enter new student name: ");
                           boolean success = manager.editStudentNameById(selectedStudent.getId(), newName);
 
                           if (success) {
@@ -283,7 +285,7 @@ public class Main {
                       break;
 
                       case 2: {
-                          int newAge = readValidAge(scanner, manager, "Enter new student age: ");
+                          int newAge = readValidAge(scanner, "Enter new student age: ");
                           boolean success = manager.editStudentAgeById(selectedStudent.getId(), newAge);
 
                           if (success) {
@@ -296,8 +298,8 @@ public class Main {
                       break;
 
                       case 3: {
-                          String newName = readValidName(scanner, manager, "Enter new student name: ");
-                          int newAge = readValidAge(scanner, manager, "Enter new student age: ");
+                          String newName = readValidName(scanner, "Enter new student name: ");
+                          int newAge = readValidAge(scanner, "Enter new student age: ");
                           boolean success = manager.editStudentBothById(selectedStudent.getId(), newName, newAge);
 
                           if (success) {
@@ -363,7 +365,7 @@ public class Main {
       }
   }
   
-  private static int readValidAge(Scanner scanner, StudentManager manager, String prompt) {
+  private static int readValidAge(Scanner scanner, String prompt) {
 
     while (true) {
 
@@ -385,7 +387,7 @@ public class Main {
     }
   }
   
-  private static String readValidName(Scanner scanner, StudentManager manager, String prompt) {
+  private static String readValidName(Scanner scanner, String prompt) {
 
     while (true) {
       
@@ -398,6 +400,20 @@ public class Main {
         
       System.out.println("Invalid name. Only letters allowed.");
     }
+  }
+
+  private static String readValidEmail(Scanner scanner, String prompt) {
+
+      while (true) {
+          System.out.print(prompt);
+          String email = scanner.nextLine().trim();
+
+          if (Student.isValidEmail(email)) {
+              return email;
+          }
+
+          System.out.println("Invalid email. Please enter a valid format (e.g., name@example.com).");
+      }
   }
 
   private static int readValidChoice(Scanner scanner, int max, String prompt) {
