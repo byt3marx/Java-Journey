@@ -80,7 +80,7 @@ public class Student implements Comparable<Student> {
   }
 
   public String toString() {
-    return "ID: " + id + " | " + name + " (" + age + ")";
+    return "ID: " + id + " | " + name + " (" + age + ") | " + email;
   }
 
   @Override
