@@ -5,11 +5,13 @@ public class Student implements Comparable<Student> {
   private String name;
   private int age;
   private final int id;
+  private String email;
 
-  public Student(int id, String name, int age) {
+  public Student(int id, String name, int age, String email) {
     this.id = id;
     setName(name); //important to use setName instead of this.name = name, because the constructor also uses validation
     setAge(age);
+    setEmail(email);
   }
 
   public String getName() {
@@ -22,6 +24,10 @@ public class Student implements Comparable<Student> {
 
   public int getId() {
       return id;
+  }
+
+  public String getEmail() {
+      return email;
   }
 
   public void setName(String name) {
@@ -44,6 +50,33 @@ public class Student implements Comparable<Student> {
 
   public static boolean isValidAge(int age) {
       return age >= 1 && age <= 120;
+  }
+
+  public void setEmail(String email) {
+      if (!isValidEmail(email)) {
+          throw new IllegalArgumentException("Email must contain one '@' and a '.' after it.");
+      }
+      this.email = email.trim();
+  }
+
+  public static boolean isValidEmail(String email) {
+
+      if (email == null) return false;
+      email = email.trim();
+      if (email.isBlank()) return false;
+
+      int atIndex = email.indexOf("@");
+
+      if (atIndex == -1) return false; //no @
+      if (atIndex != email.lastIndexOf("@")) return false; //check for multiple @
+      if (atIndex == 0 || atIndex == email.length() -1 ) return false;
+
+      int dotIndex = email.indexOf(".", atIndex + 1);
+      if (dotIndex == -1) return false;   // no dot after @
+      if (dotIndex == atIndex + 1) return false; //nothing between @ and .
+      if (dotIndex == email.length() -1) return false; // dot at end
+
+      return true;
   }
 
   public String toString() {
