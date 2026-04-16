@@ -28,10 +28,10 @@ public class StudentManager {
     return !students.isEmpty();
   }
 
-  public Student addStudent(String name, int age) {
+  public Student addStudent(String name, int age, String email) {
 
       try {
-          Student student = new Student(nextId, name, age);
+          Student student = new Student(nextId, name, age, email);
           students.add(student);
           nextId++;
           return student;
@@ -152,7 +152,7 @@ public class StudentManager {
     try (FileWriter writer = new FileWriter(studentsFile)){
 
       for (Student student : students) {
-        writer.write(student.getId() + "," + student.getName() + "," + student.getAge());
+        writer.write(student.getId() + "," + student.getName() + "," + student.getAge() + "," + student.getEmail());
         writer.write(System.lineSeparator()); //better than \n, different systems use different line endings
       }
 
@@ -174,14 +174,15 @@ public class StudentManager {
         String line = scanner.nextLine();
         String[] parts = line.split(",");
 
-        if (parts.length != 3) continue;
+        if (parts.length != 4) continue;
 
         try {
             int id = Integer.parseInt(parts[0].trim());
             String name = parts[1].trim();
             int age = Integer.parseInt(parts[2].trim());
+            String email = parts[3].trim();
 
-            Student student = new Student(id, name, age);
+            Student student = new Student(id, name, age, email);
             tempStudents.add(student);
 
             if (id > highestId) {
