@@ -105,7 +105,10 @@ public class Main {
 
     manager.showStudents();
 
-    Student selectedStudent = readValidId(scanner, manager, "Enter student ID to edit: ");
+    Student selectedStudent = readValidId(scanner, manager, "Enter student ID to edit (0 to go back): ");
+    if (selectedStudent == null) {
+        return;
+    }
     String newName = readValidName(scanner, "Enter new student name: ");
 
     boolean success = manager.editStudentNameById(selectedStudent.getId(), newName);
@@ -125,7 +128,10 @@ public class Main {
 
     manager.showStudents();
 
-    Student selectedStudent = readValidId(scanner, manager, "Enter student ID to edit: ");
+    Student selectedStudent = readValidId(scanner, manager, "Enter student ID to edit (0 to go back): ");
+    if (selectedStudent == null) {
+        return;
+    }
     int newAge = readValidAge(scanner, "Enter new student age: ");
 
     boolean success = manager.editStudentAgeById(selectedStudent.getId(), newAge);
@@ -145,7 +151,10 @@ public class Main {
     
     manager.showStudents();
 
-    Student selectedStudent = readValidId(scanner, manager, "Enter student ID to edit: ");
+    Student selectedStudent = readValidId(scanner, manager, "Enter student ID to edit (0 to go back): ");
+    if (selectedStudent == null) {
+        return;
+    }
     String newName = readValidName(scanner, "Enter new student name: ");
     int newAge = readValidAge(scanner, "Enter new student age: ");
 
@@ -156,6 +165,29 @@ public class Main {
     } else {
       System.out.println("Student could not be updated.");
     }
+  }
+
+  private static void editStudentEmailFlow(Scanner scanner, StudentManager manager) {
+      if(!manager.hasStudents()) {
+          System.out.println("No students to edit.");
+          return;
+      }
+
+      manager.showStudents();
+
+      Student selectedStudent = readValidId(scanner, manager, "Enter student ID to edit (0 to go back): ");
+      if (selectedStudent == null) {
+          return;
+      }
+      String newEmail = readValidEmail(scanner, "Enter new student email: ");
+
+      boolean success = manager.editStudentEmailById(selectedStudent.getId(), newEmail);
+
+      if (success) {
+          System.out.println("Student email updated: " + selectedStudent);
+      } else {
+          System.out.println("Student email could not be updated.");
+      }
   }
 
   private static void removeStudentFlow(Scanner scanner, StudentManager manager) {
@@ -338,6 +370,7 @@ public class Main {
           System.out.println("1. Edit name");
           System.out.println("2. Edit age");
           System.out.println("3. Edit both");
+          System.out.println("4. Edit Email");
 
           System.out.print("Choose option (0 to go back): ");
 
@@ -357,6 +390,10 @@ public class Main {
 
               case "3":
                   editStudentBothFlow(scanner, manager);
+                  break;
+
+              case "4":
+                  editStudentEmailFlow(scanner, manager);
                   break;
 
               default:
