@@ -109,6 +109,21 @@ public class StudentManager {
       }
   }
 
+  public boolean editStudentEmailById(int id, String newEmail) {
+      Student student = findStudentById(id);
+
+      if (student == null) {
+          return false;
+      }
+      try {
+          student.setEmail(newEmail);
+          return true;
+      } catch (IllegalArgumentException e) {
+          System.out.println(e.getMessage());
+          return false;
+      }
+  }
+
   public boolean editStudentBothById (int id, String newName, int newAge) {
       Student student = findStudentById(id);
 
