@@ -16,8 +16,11 @@ public class StudentManager {
 
   private int nextId = 1;
 
+  private StudentFileService fileService;
+
   public StudentManager() {
     students = new ArrayList<>();
+    fileService = new StudentFileService();
   }
 
   private boolean isValidIndex(int index) {
@@ -163,57 +166,21 @@ public class StudentManager {
   }
 
   public void saveToFile(String studentsFile) {
-
-    try (FileWriter writer = new FileWriter(studentsFile)){
-
-      for (Student student : students) {
-        writer.write(student.getId() + "," + student.getName() + "," + student.getAge() + "," + student.getEmail());
-        writer.write(System.lineSeparator()); //better than \n, different systems use different line endings
-      }
-
-    } catch(IOException e) {
-        System.out.println("Error saving data to file.");
-        e.printStackTrace();
-    }
+      fileService.saveToFile(students, studentsFile);
   }
 
   public void loadFromFile(String studentsFile) {
+      students = new ArrayList<>(fileService.loadFromFile(studentsFile));
 
-    try (Scanner scanner = new Scanner(new File(studentsFile))){
+      int highestId = 0;
 
-        ArrayList<Student> tempStudents = new ArrayList<>();
-
-      int highestId = 0; //tracks max ID
-
-      while (scanner.hasNextLine()) {
-        String line = scanner.nextLine();
-        String[] parts = line.split(",");
-
-        if (parts.length != 4) continue;
-
-        try {
-            int id = Integer.parseInt(parts[0].trim());
-            String name = parts[1].trim();
-            int age = Integer.parseInt(parts[2].trim());
-            String email = parts[3].trim();
-
-            Student student = new Student(id, name, age, email);
-            tempStudents.add(student);
-
-            if (id > highestId) {
-                highestId = id;
-            }
-
-        } catch (IllegalArgumentException e) {
-            System.out.println("Skipping invalid line: " + line);
-        }
+      for (Student student : students) {
+          if (student.getId() > highestId) {
+              highestId = student.getId();
+          }
       }
-      students = tempStudents;
-      nextId = highestId + 1; //set next ID
 
-    } catch (FileNotFoundException e) {
-      System.out.println("No existing data file found. Starting fresh.");
-    }
+      nextId = highestId + 1;
   }
 
   public void sortByName() {
