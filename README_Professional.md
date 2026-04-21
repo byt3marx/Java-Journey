@@ -24,13 +24,29 @@ including projects, refactors, and concepts learned each week.
     │   ├── SmartCalculatorRefactor.java
     │
     ├── 03-OOP-Foundations/
-    │   ├── Student/
-    │   │   ├── Student.java
-    │   │   └──StudentApp.java
-    │   └── StudentManager/
+    │   └── 01-Student/
     │       ├── Student.java
-    │       ├── StudentManager.java
-    │       └── Main.java
+    │       ├── StudentApp.java
+    │
+    ├── 04-Collections/
+    │   └── Sorting/
+    │       ├── SortNumbers.java
+    │       ├── SortStrings.java
+    │       ├── SortStudents.java
+    │       └── StudentTest.java
+    │
+    ├── 05-Projects/
+    │   └── 01-StudentManagerSystem/
+    │       ├── data/
+    │       │   └── students.txt
+    │       └── src/
+    │           ├── model/
+    │           │   └── Student.java
+    │           ├── service/
+    │           │   ├── StudentManager.java
+    │           │   └── StudentFileService.java
+    │           └── ui/
+    │               └── Main.java
     │
     ├── README.md
     └── README_Professional.md
@@ -42,11 +58,11 @@ structured and advanced implementations.
 
 # 🎯 Goals of This Repository
 
--   Document my Java learning progress
--   Build increasingly complex Java programs
--   Refactor code into cleaner, more maintainable structures
--   Practice defensive programming and validation
--   Apply object‑oriented principles step‑by‑step
+*   Document my Java learning progress
+*   Build increasingly complex Java programs
+*   Refactor code into cleaner, more maintainable structures
+*   Practice defensive programming and validation
+*   Apply object‑oriented principles step‑by‑step
 
 ------------------------------------------------------------------------
 
@@ -58,8 +74,10 @@ The repository follows a structured learning path:
     Week 2 → Control Flow & Interactive Programs
     Week 3 → Methods, Refactoring & Enums
     Week 4 → Object-Oriented Programming
-    Week 5 → Collections & Data Structures
-    Week 6 → Larger Projects
+    Week 5 → File I/O & Persistence
+    Week 6 → Architecture & Separation of Concerns
+    Week 7 → Validation & Defensive Programming
+    Week 8 → Advanced CLI Systems & UX 
 
 ------------------------------------------------------------------------
 
@@ -67,71 +85,101 @@ The repository follows a structured learning path:
 
 ## Java Fundamentals
 
--   Java program structure
--   Compilation and execution
--   Variables and data types
--   Arithmetic operators
--   Integer vs floating‑point division
--   Scanner input
+*   Java program structure
+*   Compilation and execution
+*   Variables and data types
+*   Arithmetic operators
+*   Integer vs floating‑point division
+*   Scanner input
 
 ## Control Flow
 
--   if / else logic
--   switch statements
--   while loops
--   nested validation loops
--   defensive programming
+*   if / else logic
+*   switch statements
+*   while loops
+*   nested validation loops
+*   defensive programming
 
 ## Program Structure
 
--   modular design
--   helper methods
--   parameter passing
--   return values
--   separation of concerns
+*   modular design
+*   helper methods
+*   parameter passing
+*   return values
+*   separation of concerns
 
 ## Input Handling
 
--   parsing input with `Double.parseDouble()`
--   try / catch exception handling
--   robust validation loops
+*   parsing input with `Double.parseDouble()`
+*   try / catch exception handling
+*   robust validation loops
 
 ## Enums & Polymorphism
 
--   enums for fixed operation types
--   mapping user input to enum values
--   polymorphic method implementations
--   removing switch statements with behavior-driven enums
+*   enums for fixed operation types
+*   mapping user input to enum values
+*   polymorphic method implementations
+*   removing switch statements with behavior-driven enums
 
 ## Object-Oriented Programming (OOP)
 
--   classes and objects
--   fields and constructors
--   `this` keyword
--   encapsulation (private fields, getters, setters)
--   object references and memory model
--   default values (`null`, `0`)
--   `toString()` method
+* classes and objects
+* fields and constructors
+* `this` keyword
+* encapsulation (private fields, getters, setters)
+* object references and memory model
+*   default values (`null`, `0`)
+*   `toString()` method
 
 ## Collections
 
--   using `ArrayList` to store objects
--   managing multiple objects in a collection
--   index vs user-friendly numbering (1-based vs 0-based)
+* using `ArrayList` to store objects
+* managing multiple objects in a collection
+* index vs user-friendly numbering (1-based vs 0-based)
 
-## Input Validation & Refactoring
+## Sorting
 
--   reusable input methods
--   `readValidName(...)`
--   `readValidAge(...)`
--   `readValidStudentNumber(...)`
--   removing duplicated validation loops
--   centralized validation logic
--   input sanitization (`trim`)
--   layered validation:
-    - UI layer (Main)
-    - logic layer (StudentManager)
-    - data layer (Student)
+* implementing `Comparable`
+* using `Comparator`
+* sorting collections by different criteria
+* understanding default vs custom ordering
+
+## File I/O & Persistence
+
+* writing data using `FileWriter`
+* reading data using `Scanner`
+* structured file formats (CSV)
+* parsing text into objects
+* handling missing files safely
+* try-with-resources
+* building resilient file loading systems
+
+## Architecture & Design
+
+* package structure (`model`, `service`, `ui`)
+* layered architecture
+* separation of concerns
+* dependency composition
+* service-based design (`StudentFileService`)
+* data ownership and responsibility boundaries
+
+## Validation & Defensive Programming
+
+* model-level validation
+* centralized validation logic
+* exception-driven validation (`IllegalArgumentException`)
+* layered validation strategy (UI → Manager → Model)
+* input sanitization (`trim`)
+* preventing invalid object states
+
+## Advanced Control Flow & CLI Design
+
+* nested menu systems
+* loop-driven navigation (`while(true)`)
+* safe exit and back navigation (`0 → go back`)
+* null-safe flow handling
+* reusable input helper methods
+* improved user experience in CLI applications
 
 ------------------------------------------------------------------------
 
@@ -163,18 +211,30 @@ handling.
 Refactored version featuring: - modular helper methods - robust input
 parsing - enum-driven operations - polymorphic calculation logic
 
-### Student Manager
+### Student Manager System
 
 Console-based application for managing students.
 
-Features: - add student - show students - edit student - remove student -
-search student
+Features:
 
-Implements: - `ArrayList<Student>` storage - menu-driven CLI -
-input validation loops - reusable helper methods - clean separation of
-concerns (UI / logic / data)
+* add student
+* show students
+* edit student (name, age, email)
+* remove student
+* search student (by name and ID)
+* sort students (name, age, ID)
+* persistent storage (save/load)
+* structured CLI navigation
 
-Refactored to reduce duplication and improve code structure.
+Implements:
+
+* `ArrayList<Student>` storage
+* layered architecture (UI / service / model)
+* file persistence layer (`StudentFileService`)
+* validation at multiple levels
+* defensive programming patterns
+
+Refactored to improve maintainability, scalability, and separation of concerns.
 
 ------------------------------------------------------------------------
 
@@ -182,15 +242,12 @@ Refactored to reduce duplication and improve code structure.
 
 Planned next steps in the learning journey:
 
--   Classes and Objects
--   Constructors
--   Encapsulation
--   ArrayList collections
--   Object-based program design
--   File I/O (saving and loading data)
--   Sorting collections (by name, age)
--   Improving search functionality
--   Larger interactive systems
+* JSON parsing and data transformation
+* Tree structures and recursion
+* Building a JSON → HTML parser
+* Working with external libraries (Jackson / Gson)
+* Improving search algorithms
+* Expanding project architecture further
 
 ------------------------------------------------------------------------
 
@@ -198,10 +255,11 @@ Planned next steps in the learning journey:
 
 This repository will gradually evolve into a collection of:
 
--   Java learning projects
--   refactored code examples
--   object‑oriented systems
--   small applications demonstrating core programming concepts
+* Java learning projects
+* refactored code examples
+* object-oriented systems
+* small applications demonstrating core programming concepts
+* real-world style problem-solving projects
 
 ------------------------------------------------------------------------
 
