@@ -21,7 +21,35 @@ My-Java-Journey/
 │   ├── SmartCalculator.java
 │   ├── SmartCalculatorRefactor.java
 │
-└── README.md
+├── 03-OOP-Foundations/ 
+│   └── 01-Student/ 
+│       ├── Student.java 
+│       ├── StudentApp.java 
+│ 
+├── 04-Collections/ 
+│   └── Sorting/ 
+│       ├── SortNumbers.java 
+│       ├── SortStrings.java 
+│       ├── SortStudents.java 
+│       ├── StudentTest.java 
+│ 
+├── 05-Projects/ 
+│   └── 01-StudentManagerSystem/ 
+│       ├── data/ 
+│       │   └── students.txt 
+│       └── src/ 
+│           ├── model/ 
+│           │   └── Student.java 
+│           ├── service/ 
+│           │   ├── StudentManager.java 
+│           │   └── StudentFileService.java 
+│           └── ui/ 
+│               └── Main.java 
+│               
+├── .gitignore 
+├── README.md 
+├── README_Professional.md
+
 ```
 
 ---
@@ -35,6 +63,18 @@ My-Java-Journey/
 * **[02-Interactive-Logic](./02-Interactive-Logic)**
   Smart Calculator with loops, nested validation, defensive
   programming, and structured control flow.
+
+* **[03-OOP-Foundations](./03-OOP-Foundations)**
+  Introduction to classes, objects, constructors, encapsulation,
+  and object-oriented design principles.
+
+* **[04-Collections](./04-Collections)**
+  Working with ArrayLists, sorting data, Comparable vs Comparator,
+  and structured data handling.
+
+* **[05-Projects](./05-Projects)**
+  Full CLI-based Student Manager System with layered architecture,
+  validation, persistence, and real-world structure.
 
 ---
 
@@ -518,19 +558,303 @@ name = name.trim();
 
 ---
 
-## 🛠 Projects Completed (Week 4)
+# 🧠 Week 5 Complete -- File I/O & Data Persistence
 
-* Student  
-* StudentApp  
-* Student Manager  
+## 🔹 File Writing (Saving Data)
+
+Implemented saving application state to a file.
+
+Concepts learned:
+
+* `FileWriter`
+* Writing structured data (CSV format)
+* Handling exceptions (`IOException`)
+* `try-with-resources` for automatic resource management
+
+Example:
+
+```java
+try (FileWriter writer = new FileWriter(path)) {
+    writer.write(data);
+}
+```
+
+---
+
+## 🔹 File Reading (Loading Data)
+
+Implemented reading data from file and reconstructing objects.
+
+Concepts learned:
+
+* `Scanner` with files
+* Reading line-by-line
+* Parsing structured input
+* Handling missing or corrupted data
+
+---
+
+## 🔹 Data Format (CSV)
+
+Used a structured format:
+
+```
+id,name,age,email
+```
+
+Concept:
+
+* Convert objects → text (save)
+* Convert text → objects (load)
+
+---
+
+## 🔹 Robust File Handling
+
+Improved resilience by:
+
+* Skipping invalid lines
+* Catching parsing errors
+* Preventing crashes from corrupted data
+
+```java
+catch (IllegalArgumentException e) {
+    System.out.println("Skipping invalid line");
+}
+```
+
+---
+
+## 🔹 Temporary List Pattern
+
+Prevented data loss during loading:
+
+* Load into temporary list
+* Replace main list only after successful read
+
+Concept:
+
+```
+load → temp list → assign → safe state
+```
+
+---
+
+# 🧠 Week 6 Complete -- Architecture & Separation of Concerns
+
+## 🔹 Package Structure
+
+Refactored project into packages:
+
+```
+model → data representation  
+service → business logic  
+ui → user interaction  
+```
+
+Benefits:
+
+* Clean separation of responsibilities
+* Improved scalability
+* Avoided class naming conflicts
+
+---
+
+## 🔹 Layered Architecture
+
+Final structure:
+
+* **Model** → validation + data integrity
+* **Manager** → logic + coordination
+* **UI** → input/output
+* **FileService** → persistence
+
+---
+
+## 🔹 StudentFileService (New Layer)
+
+Extracted file logic into dedicated class:
+
+```java
+public class StudentFileService
+```
+
+Responsibilities:
+
+* Save students to file
+* Load students from file
+* Return data instead of mutating state
+
+---
+
+## 🔹 Dependency Usage
+
+StudentManager now uses:
+
+```java
+private StudentFileService fileService;
+```
+
+Concept learned:
+
+* Dependency composition
+* Separation of responsibilities
+* Cleaner method delegation
+
+---
+
+## 🔹 Data Ownership
+
+Clarified responsibilities:
+
+* StudentManager owns:
+
+    * student list
+    * nextId
+
+* FileService handles:
+
+    * file read/write
+
+---
+
+# 🧠 Week 7 Complete -- Validation & Defensive Programming
+
+## 🔹 Model-Level Validation
+
+Moved validation into the `Student` class.
+
+```java
+setName(...)
+setAge(...)
+setEmail(...)
+```
+
+Concept:
+
+* Model protects its own state
+* Invalid objects cannot be created
+
+---
+
+## 🔹 Exception-Based Validation
+
+Used:
+
+```java
+throw new IllegalArgumentException(...)
+```
+
+Benefits:
+
+* Immediate failure on invalid data
+* Cleaner logic in manager layer
+
+---
+
+## 🔹 Centralized Validation Rules
+
+Created reusable methods:
+
+```java
+isValidName(...)
+isValidAge(...)
+isValidEmail(...)
+```
+
+---
+
+## 🔹 Email Validation
+
+Implemented structured validation:
+
+* exactly one `@`
+* dot after `@`
+* no blank values
+* trimmed input
+
+---
+
+## 🔹 Layered Validation Strategy
+
+* UI → user-friendly loops
+* Manager → flow control
+* Model → final protection
+
+---
+
+# 🧠 Week 8 Complete -- Advanced Control Flow & UX
+
+## 🔹 Menu Loop Design
+
+Converted menus into loop-driven systems:
+
+```java
+while (true)
+```
+
+---
+
+## 🔹 Navigation Control
+
+Implemented:
+
+* `0 → go back`
+* nested menu systems
+* safe exit flow
+
+---
+
+## 🔹 Null-Safe Flow Handling
+
+Handled navigation signals:
+
+```java
+if (selectedStudent == null) return;
+```
+
+---
+
+## 🔹 Atomic Operations
+
+Ensured safe updates:
+
+* edit both fields → all or nothing
+* prevented partial state changes
+
+---
+
+## 🔹 Clean CLI UX
+
+Improvements:
+
+* consistent prompts
+* validation feedback
+* reusable input helpers
+
+---
+
+## 🛠 Final Project Capabilities
+
+Student Manager System now supports:
+
+* Add students
+* Edit name, age, email
+* Edit multiple fields safely
+* Remove students
+* Search students (name & ID)
+* Sort students (name, age, ID)
+* Persistent storage (save/load)
+* Structured CLI navigation
 
 ---
 
 ## 🚀 Next Focus
 
-* File I/O (saving and loading data)  
-* Sorting collections  
-* Improving search functionality  
-* Larger interactive systems  
+* JSON parsing & transformation
+* Data structure traversal (trees)
+* Recursion
+* Building a JSON → HTML parser
+* Working with external libraries (Jackson / Gson)
 
 ---
