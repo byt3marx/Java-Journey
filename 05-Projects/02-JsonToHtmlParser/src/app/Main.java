@@ -31,6 +31,22 @@ public class Main {
 
         String result = builder.buildHtml(div, 0);
 
+        Map<String, Object> strong = new HashMap<>();
+        strong.put("tag", "strong");
+        strong.put("text", "World");
+
+        List<Object> paragraphChildren = new ArrayList<>();
+        paragraphChildren.add("Hello ");
+        paragraphChildren.add(strong);
+
+        Map<String, Object> paragraph = new HashMap<>();
+        paragraph.put("tag", "p");
+        paragraph.put("children", paragraphChildren);
+
+        String result1 = builder.buildHtml(paragraph, 0);
+
         System.out.println(result);
+
+        System.out.println(result1);
     }
 }
