@@ -31,6 +31,30 @@ public class HtmlBuilder {
 
         StringBuilder html = new StringBuilder();
 
+        if (children == null) {
+            html.append(indent(depth))
+                    .append("<").append(tag).append(">")
+                    .append(text)
+                    .append("</").append(tag).append(">");
+
+            return html.toString();
+        }
+
+        html.append(indent(depth))
+                .append("<").append(tag).append(">")
+                .append("\n");
+
+        for (Object child : children) {
+            html.append(buildHtml(child, depth + 1))
+                    .append("\n");
+        }
+
+        html.append(indent(depth))
+                .append("</").append(tag).append(">");
+
+        return html.toString();
+
+        /*
         html.append("<").append(tag).append(">");
 
         html.append(text);
@@ -44,5 +68,10 @@ public class HtmlBuilder {
         html.append("</").append(tag).append(">");
 
         return html.toString();
+        */
+    }
+
+    private String indent(int depth) {
+        return "  ".repeat(depth);
     }
 }
