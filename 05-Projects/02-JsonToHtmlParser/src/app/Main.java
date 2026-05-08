@@ -1,11 +1,13 @@
 package app;
 
 import builder.HtmlBuilder;
+import parser.JsonToHtmlNodeConverter;
 
 import java.util.HashMap;
 import java.util.Map;
 import java.util.List;
 import java.util.ArrayList;
+import java.util.LinkedHashMap;
 
 public class Main {
 
@@ -120,10 +122,21 @@ public class Main {
         String result4 = builder.buildHtml(div2, 0);
 //--------------------------------------------------------------------------------------Test 6
 
+        Map<String, Object> rawDiv = new LinkedHashMap<>();
+        rawDiv.put("h1", "Title");
+        rawDiv.put("p", "Paragraph");
+
+        JsonToHtmlNodeConverter converter = new JsonToHtmlNodeConverter();
+        Map<String, Object> converted = converter.convertElement("div", rawDiv);
+
+        String result5 = builder.buildHtml(converted, 0);
+//--------------------------------------------------------------------------------------Test X
+
         System.out.println(result);
         System.out.println(result1);
         System.out.println(result2);
         System.out.println(result3);
         System.out.println(result4);
+        System.out.println(result5);
     }
 }
