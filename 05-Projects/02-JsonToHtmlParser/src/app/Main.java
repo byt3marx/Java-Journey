@@ -10,7 +10,7 @@ import java.util.ArrayList;
 public class Main {
 
     public static void main(String[] args) {
-
+//-------------------------------------------------------------------------------------Test 1
         Map<String, Object> p1 = new HashMap<>();
         p1.put("tag", "p");
         p1.put("text", "hello");
@@ -30,7 +30,7 @@ public class Main {
         HtmlBuilder builder = new HtmlBuilder();
 
         String result = builder.buildHtml(div, 0);
-
+//--------------------------------------------------------------------------------------Test 2
         Map<String, Object> strong = new HashMap<>();
         strong.put("tag", "strong");
         strong.put("text", "World");
@@ -44,7 +44,7 @@ public class Main {
         paragraph.put("children", paragraphChildren);
 
         String result1 = builder.buildHtml(paragraph, 0);
-
+//--------------------------------------------------------------------------------------Test 3
         Map<String, Object> p3 = new HashMap<>();
         p3.put("tag", "p");
         p3.put("text", "Hello");
@@ -56,7 +56,7 @@ public class Main {
         List<Object> p4Children = new ArrayList<>();
         p4Children.add("This is an ");
         p4Children.add(em);
-        p4Children.add("text.");
+        p4Children.add(" text.");
 
         Map<String, Object> p4 = new HashMap<>();
         p4.put("tag", "p");
@@ -71,11 +71,26 @@ public class Main {
         div1.put("children", divChildren);
 
         String result2 = builder.buildHtml(div1, 0);
+//--------------------------------------------------------------------------------------Test 4
+
+        Map<String, String> attributes = new HashMap<>();
+        attributes.put("href", "https://example.com");
+        attributes.put("target", "_blank");
+
+        Map<String, Object> link = new HashMap<>();
+        link.put("tag", "a");
+        link.put("text", "Visit site");
+        link.put("attributes", attributes);
+
+        String result3 = builder.buildHtml(link, 0);
+//--------------------------------------------------------------------------------------Test 5
 
         System.out.println(result);
 
         System.out.println(result1);
 
         System.out.println(result2);
+
+        System.out.println(result3);
     }
 }
