@@ -30,6 +30,9 @@ public class HtmlBuilder {
             text = "";
         }
 
+        Map<String, String> attributes = (Map<String, String>) map.get("attributes");
+        String attributesHtml = buildAttributes(attributes);
+
         List<Object> children = (List<Object>) map.get("children");
 
         StringBuilder html = new StringBuilder();
@@ -38,7 +41,10 @@ public class HtmlBuilder {
 
         if (children == null || !shouldRenderMultiline) {
             html.append(indent(depth))
-                    .append("<").append(tag).append(">");
+                    .append("<")
+                    .append(tag)
+                    .append(attributesHtml)
+                    .append(">");
 
             html.append(text);
 
@@ -54,7 +60,10 @@ public class HtmlBuilder {
         }
 
         html.append(indent(depth))
-                .append("<").append(tag).append(">")
+                .append("<")
+                .append(tag)
+                .append(attributesHtml)
+                .append(">")
                 .append("\n");
 
         for (Object child : children) {
@@ -91,5 +100,24 @@ public class HtmlBuilder {
         }
 
         return false;
+    }
+
+    private String buildAttributes(Map<String, String> attributes) {
+
+        if (attributes == null || attributes.isEmpty()) {
+            return "";
+        }
+
+        StringBuilder attributesHtml = new StringBuilder();
+
+        for (Map.Entry<String, String> entry : attributes.entrySet()) {
+            attributesHtml.append(" ")
+                    .append(entry.getKey())
+                    .append("=\"")
+                    .append(entry.getValue())
+                    .append("\"");
+        }
+        return attributesHtml.toString();
+
     }
 }
