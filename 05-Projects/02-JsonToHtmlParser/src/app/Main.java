@@ -10,6 +10,8 @@ import java.util.ArrayList;
 public class Main {
 
     public static void main(String[] args) {
+
+        HtmlBuilder builder = new HtmlBuilder();
 //-------------------------------------------------------------------------------------Test 1
         Map<String, Object> p1 = new HashMap<>();
         p1.put("tag", "p");
@@ -26,8 +28,6 @@ public class Main {
         Map<String, Object> div = new HashMap<>();
         div.put("tag", "div");
         div.put("children", children);
-
-        HtmlBuilder builder = new HtmlBuilder();
 
         String result = builder.buildHtml(div, 0);
 //--------------------------------------------------------------------------------------Test 2
@@ -85,12 +85,45 @@ public class Main {
         String result3 = builder.buildHtml(link, 0);
 //--------------------------------------------------------------------------------------Test 5
 
+        Map<String, String> divAttributes = new HashMap<>();
+        divAttributes.put("class", "container");
+
+        Map<String, Object> em1 = new HashMap<>();
+        em1.put("tag", "em");
+        em1.put("text", "website");
+
+        List<Object> paragraphChildren1 = new ArrayList<>();
+        paragraphChildren1.add("Welcome to my ");
+        paragraphChildren1.add(em1);
+
+        Map<String, Object> paragraph1 = new HashMap<>();
+        paragraph1.put("tag", "p");
+        paragraph1.put("children", paragraphChildren1);
+
+        Map<String, String> linkAttributes = new HashMap<>();
+        linkAttributes.put("href", "https://example.com");
+
+        Map<String, Object> link1 = new HashMap<>();
+        link1.put("tag", "a");
+        link1.put("text", "Visit site");
+        link1.put("attributes", linkAttributes);
+
+        List<Object> divChildren1 = new ArrayList<>();
+        divChildren1.add(paragraph1);
+        divChildren1.add(link1);
+
+        Map<String, Object> div2 = new HashMap<>();
+        div2.put("tag", "div");
+        div2.put("attributes", divAttributes);
+        div2.put("children", divChildren1);
+
+        String result4 = builder.buildHtml(div2, 0);
+//--------------------------------------------------------------------------------------Test 6
+
         System.out.println(result);
-
         System.out.println(result1);
-
         System.out.println(result2);
-
         System.out.println(result3);
+        System.out.println(result4);
     }
 }
