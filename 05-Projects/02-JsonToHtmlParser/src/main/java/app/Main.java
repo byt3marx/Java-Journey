@@ -9,11 +9,12 @@ import java.util.Map;
 import java.util.List;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
+import io.JsonLoader;
 
 public class Main {
 
     public static void main(String[] args) {
-
+/*
         HtmlBuilder builder = new HtmlBuilder();
 //-------------------------------------------------------------------------------------Test 1
         Map<String, Object> p1 = new HashMap<>();
@@ -159,5 +160,24 @@ public class Main {
         System.out.println(result4);
         System.out.println(result5);
         System.out.println(result6);
+        */
+
+        JsonLoader loader = new JsonLoader();
+        JsonParserService parser = new JsonParserService();
+        JsonToHtmlNodeConverter converter = new JsonToHtmlNodeConverter();
+        HtmlBuilder builder = new HtmlBuilder();
+
+        System.out.println(System.getProperty("user.dir"));
+
+        String json = loader.readFile("src/main/resources/input/pageNotFound.json");
+
+        Map<String, Object> rawJson = parser.parseJson(json);
+
+        Object bodyValue = rawJson.get("body");
+        Map<String, Object> converted = converter.convertElement("body", bodyValue);
+
+        String result = builder.buildHtml(converted, 0);
+
+        System.out.println(result);
     }
 }
