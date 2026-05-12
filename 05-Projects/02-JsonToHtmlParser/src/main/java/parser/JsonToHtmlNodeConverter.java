@@ -30,9 +30,14 @@ public class JsonToHtmlNodeConverter {
                 String childTag = entry.getKey();
                 Object childValue = entry.getValue();
 
-                if (childTag.equals("attributes")) {
+                if ("meta".equals(childTag)) {
+                    Map<String, Object> metaMap = (Map<String, Object>) childValue;
+                    children.addAll(convertMetaElements(metaMap));
+                }
+                else if ("attributes".equals(childTag)) {
                     element.put("attributes", childValue);
-                } else {
+                }
+                else {
                     children.add(convertElement(childTag, childValue));
                 }
             }
@@ -90,6 +95,56 @@ public class JsonToHtmlNodeConverter {
 
         return metaElement;
 
+    }
+
+    private List<Object> convertMetaElements(Map<String, Object> rawMap) {
+        List<Object> metaElements = new ArrayList<>();
+
+        for (Map.Entry<String, Object> entry : rawMap.entrySet()) {
+            String key = entry.getKey();
+            Object value = entry.getValue();
+
+            if ("charset".equals(key)) {
+                Map<String, Object> metaElement = new LinkedHashMap<>();
+                metaElement.put("tag", "meta");
+
+                Map<String, String> attributes = new LinkedHashMap<>();
+                attributes.put(key, String.valueOf(value));
+
+                metaElement.put("attributes", attributes);
+                metaElements.add(metaElement);
+            }
+
+            if ("viewport".equals(key)) {
+                Map<String, Object> viewportMap = (Map<String, Object>) value;
+                StringBuilder content = new StringBuilder();
+                int index = 0;
+
+                for (Map.Entry<String, Object> viewportEntry : viewportMap.entrySet()) {
+                    if (index > 0) {
+                        content.append(", ");
+                    }
+
+                    content.append(viewportEntry.getKey())
+                            .append("=")
+                            .append(String.valueOf(viewportEntry.getValue()));
+
+                    index++;
+                }
+
+                Map<String, Object> metaElement = new LinkedHashMap<>();
+                metaElement.put("tag", "meta");
+
+                Map<String, String> attributes = new LinkedHashMap<>();
+                attributes.put("name", "viewport");
+                attributes.put("content", content.toString());
+
+                metaElement.put("attributes", attributes);
+                metaElements.add(metaElement);
+            }
+        }
+
+        return metaElements;
     }
 
 }
