@@ -4,11 +4,7 @@ import builder.HtmlBuilder;
 import parser.JsonParserService;
 import parser.JsonToHtmlNodeConverter;
 
-import java.util.HashMap;
 import java.util.Map;
-import java.util.List;
-import java.util.ArrayList;
-import java.util.LinkedHashMap;
 import io.JsonLoader;
 
 public class Main {
@@ -167,14 +163,15 @@ public class Main {
         JsonToHtmlNodeConverter converter = new JsonToHtmlNodeConverter();
         HtmlBuilder builder = new HtmlBuilder();
 
-        System.out.println(System.getProperty("user.dir"));
-
         String json = loader.readFile("src/main/resources/input/pageNotFound.json");
 
         Map<String, Object> rawJson = parser.parseJson(json);
-
+/*
         Object bodyValue = rawJson.get("body");
         Map<String, Object> converted = converter.convertElement("body", bodyValue);
+
+ */
+        Map<String, Object> converted = converter.convertDocument(rawJson);
 
         String result = builder.buildHtml(converted, 0);
 

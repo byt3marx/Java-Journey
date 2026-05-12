@@ -41,4 +41,31 @@ public class JsonToHtmlNodeConverter {
 
     }
 
+    public Map<String, Object> convertDocument(Map<String, Object> rawJson) {
+
+        Map<String, Object> htmlElement = new LinkedHashMap<>();
+        htmlElement.put("tag", "html");
+
+        List<Object> children = new ArrayList<>();
+
+        if (rawJson.containsKey("language")) {
+            Map<String, String> attributes = new LinkedHashMap<>();
+            attributes.put("lang", (String) rawJson.get("language"));
+            htmlElement.put("attributes", attributes);
+        }
+
+        if (rawJson.containsKey("head")) {
+            children.add(convertElement("head", rawJson.get("head")));
+        }
+
+        if (rawJson.containsKey("body")) {
+            children.add(convertElement("body", rawJson.get("body")));
+        }
+
+        htmlElement.put("children", children);
+
+        return htmlElement;
+
+    }
+
 }
