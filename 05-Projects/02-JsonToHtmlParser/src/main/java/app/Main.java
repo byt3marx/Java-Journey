@@ -1,6 +1,7 @@
 package app;
 
 import builder.HtmlBuilder;
+import parser.JsonParserService;
 import parser.JsonToHtmlNodeConverter;
 
 import java.util.HashMap;
@@ -132,11 +133,31 @@ public class Main {
         String result5 = builder.buildHtml(converted, 0);
 //--------------------------------------------------------------------------------------Test X
 
+        String json = """
+                {
+                "div": {
+                "h1": "Title",
+                "p": "Paragraph"
+                 }
+                }
+                """;
+
+        JsonParserService parser = new JsonParserService();
+        Map<String, Object> rawJson = parser.parseJson(json);
+
+        JsonToHtmlNodeConverter converter1 = new JsonToHtmlNodeConverter();
+
+        Object divValue = rawJson.get("div");
+        Map<String, Object> converted1 = converter.convertElement("div", divValue);
+
+        String result6 = builder.buildHtml(converted1, 0);
+
         System.out.println(result);
         System.out.println(result1);
         System.out.println(result2);
         System.out.println(result3);
         System.out.println(result4);
         System.out.println(result5);
+        System.out.println(result6);
     }
 }
