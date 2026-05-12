@@ -18,6 +18,10 @@ public class JsonToHtmlNodeConverter {
             return element;
         }
 
+        if (tag.equals("meta")) {
+            return convertMeta(value);
+        }
+
         if (value instanceof Map) {
             Map<String, Object> rawMap = (Map<String, Object>) value;
             List<Object> children = new ArrayList<>();
@@ -65,6 +69,26 @@ public class JsonToHtmlNodeConverter {
         htmlElement.put("children", children);
 
         return htmlElement;
+
+    }
+
+    private Map<String, Object> convertMeta(Object value) {
+        Map<String, Object> metaElement = new LinkedHashMap<>();
+        metaElement.put("tag", "meta");
+
+        if (value instanceof Map) {
+            Map<String, Object> rawMap = (Map<String, Object>) value;
+
+            Map<String, String> attributes = new LinkedHashMap<>();
+
+            for (Map.Entry<String, Object> entry : rawMap.entrySet()) {
+                attributes.put(entry.getKey(), String.valueOf(entry.getValue()));
+            }
+
+            metaElement.put("attributes", attributes);
+        }
+
+        return metaElement;
 
     }
 
