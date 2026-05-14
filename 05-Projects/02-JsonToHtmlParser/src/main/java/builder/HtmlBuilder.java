@@ -8,6 +8,8 @@ public class HtmlBuilder {
 
     private static final Set<String> INLINE_TAGS = Set.of("strong", "em", "span", "a");
 
+    private static final Set<String> VOID_ELEMENTS = Set.of("meta", "link", "img", "br", "hr", "input");
+
     public String buildHtml(Object node, int depth) {
 
         if (node instanceof String) {
@@ -45,6 +47,10 @@ public class HtmlBuilder {
                     .append(tag)
                     .append(attributesHtml)
                     .append(">");
+
+            if (isVoidElement(tag)) {
+                return html.toString();
+            }
 
             html.append(text);
 
@@ -119,6 +125,10 @@ public class HtmlBuilder {
         }
         return attributesHtml.toString();
 
+    }
+
+    private boolean isVoidElement(String tag) {
+        return VOID_ELEMENTS.contains(tag.toLowerCase());
     }
 
 }
