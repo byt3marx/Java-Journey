@@ -35,7 +35,12 @@ public class JsonToHtmlNodeConverter {
                     children.addAll(convertMetaElements(metaMap));
                 }
                 else if ("attributes".equals(childTag)) {
-                    element.put("attributes", childValue);
+                    element.put("attributes", convertAttributes(childValue));
+                }
+                else if (childValue instanceof List<?> list) {
+                    for (Object item : list) {
+                        children.add(convertElement(childTag, item));
+                    }
                 }
                 else {
                     children.add(convertElement(childTag, childValue));
@@ -145,6 +150,33 @@ public class JsonToHtmlNodeConverter {
         }
 
         return metaElements;
+    }
+
+    private Map<String, String> convertAttributes(Object value) {
+        Map<String, String> attributes = new LinkedHashMap<>();
+
+        if (value instanceof Map<?, ?> rawMap) {
+            for (Map.Entry<?, ?> entry : rawMap.entrySet()) {
+                String key = String.valueOf(entry.getKey());
+                Object attributeValue = entry.getValue();
+
+                if (key.equals("style") && attributeValue instanceof Map<?, ?> styleMap) {
+                    StringBuilder css = new StringBuilder();
+
+                    for (Map.Entry<?, ?> styleEntry : styleMap.entrySet()) {
+                        css.append(styleEntry.getKey())
+                                .append(": ")
+                                .append(styleEntry.getValue())
+                                .append("; ");
+                    }
+                    attributes.put(key, css.toString().trim());
+                }
+                else {
+                    attributes.put(key, String.valueOf(attributeValue));
+                }
+            }
+        }
+        return attributes;
     }
 
 }
