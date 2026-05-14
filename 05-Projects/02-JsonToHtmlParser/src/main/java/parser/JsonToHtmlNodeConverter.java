@@ -1,12 +1,10 @@
 package parser;
 
-import java.util.Objects;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-import java.util.LinkedHashMap;
+import java.util.*;
 
 public class JsonToHtmlNodeConverter {
+
+    private static final Set<String> VOID_ELEMENTS = Set.of("meta", "link", "img", "br", "hr", "input");
 
     public Map<String, Object> convertElement(String tag, Object value) {
         Map<String, Object> element = new LinkedHashMap<>();
@@ -24,6 +22,11 @@ public class JsonToHtmlNodeConverter {
 
         if (value instanceof Map) {
             Map<String, Object> rawMap = (Map<String, Object>) value;
+
+            if (isVoidElement(tag) && containsOnlyPrimitiveValues(rawMap)) {
+                element.put("attributes", convertAttributes(rawMap));
+                return element;
+            }
             List<Object> children = new ArrayList<>();
 
             for (Map.Entry<String, Object> entry : rawMap.entrySet()) {
@@ -177,6 +180,20 @@ public class JsonToHtmlNodeConverter {
             }
         }
         return attributes;
+    }
+
+    private boolean containsOnlyPrimitiveValues(Map<String, Object> rawMap) {
+
+        for (Object value : rawMap.values()) {
+            if (value instanceof Map || value instanceof List) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    private boolean isVoidElement(String tag) {
+        return VOID_ELEMENTS.contains(tag.toLowerCase());
     }
 
 }
