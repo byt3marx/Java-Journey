@@ -175,6 +175,8 @@ public class Main {
 
         String result = builder.buildHtml(converted, 0);
 
-        System.out.println(result);
+        String doctype = "<!DOCTYPE html>\n";
+
+        System.out.println(doctype + result);
     }
 }
