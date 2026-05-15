@@ -228,7 +228,7 @@ Generated HTML can be saved directly into `.html` files.
 # 📁 Project Structure
 
 ```text
-JsonHtmlParser/
+02-JsonToHtmlParser/
 │
 ├── src/
 │   └── main/
@@ -261,7 +261,7 @@ JsonHtmlParser/
 1. Navigate to the project directory:
 
 ```bash
-cd JsonHtmlParser
+cd 02-JsonToHtmlParser
 ```
 
 2. Run the application:
