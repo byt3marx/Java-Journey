@@ -27,7 +27,7 @@ public class JsonToHtmlNodeConverter {
         if (value instanceof Map) {
             Map<String, Object> rawMap = (Map<String, Object>) value;
 
-            if (isVoidElement(tag) && containsOnlyPrimitiveValues(rawMap)) {
+            if (isVoidElement(tag) && canBeTreatedAsAttributes(rawMap)) {
                 element.put("attributes", convertAttributes(rawMap));
 
                 return element;
@@ -145,7 +145,7 @@ public class JsonToHtmlNodeConverter {
         return attributes;
     }
 
-    private boolean containsOnlyPrimitiveValues(Map<String, Object> rawMap) {
+    private boolean canBeTreatedAsAttributes(Map<String, Object> rawMap) {
 
         for (Object value : rawMap.values()) {
             if (value instanceof Map || value instanceof List) {
