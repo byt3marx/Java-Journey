@@ -110,25 +110,13 @@ public class JsonToHtmlNodeConverter {
 
             if ("viewport".equals(key)) {
                 Map<String, Object> viewportMap = (Map<String, Object>) value;
-                StringBuilder content = new StringBuilder();
-                int index = 0;
 
-                for (Map.Entry<String, Object> viewportEntry : viewportMap.entrySet()) {
-                    if (index > 0) {
-                        content.append(", ");
-                    }
-
-                    content.append(viewportEntry.getKey())
-                            .append("=")
-                            .append(String.valueOf(viewportEntry.getValue()));
-
-                    index++;
-                }
+                String content = buildViewportContent(viewportMap);
 
                 Map<String, String> attributes = new LinkedHashMap<>();
 
                 attributes.put("name", "viewport");
-                attributes.put("content", content.toString());
+                attributes.put("content", content);
 
                 metaElements.add(createElementWithAttributes("meta", attributes));
             }
@@ -208,7 +196,25 @@ public class JsonToHtmlNodeConverter {
         else {
             children.add(convertElement(childTag, childValue));
         }
+    }
 
+    private String buildViewportContent(Map<String, Object> viewportMap) {
+        StringBuilder content = new StringBuilder();
+        int index = 0;
+
+        for (Map.Entry<String, Object> viewportEntry : viewportMap.entrySet()) {
+            if (index > 0) {
+                content.append(", ");
+            }
+
+            content.append(viewportEntry.getKey())
+                    .append("=")
+                    .append(String.valueOf(viewportEntry.getValue()));
+
+            index++;
+        }
+
+        return content.toString();
     }
 
 }
