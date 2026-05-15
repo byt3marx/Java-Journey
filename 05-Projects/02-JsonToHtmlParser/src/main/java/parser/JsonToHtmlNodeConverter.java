@@ -20,7 +20,7 @@ public class JsonToHtmlNodeConverter {
             return element;
         }
 
-        if (tag.equals("meta")) {
+        if ("meta".equals(tag)) {
             return convertMeta(value);
         }
 
@@ -29,37 +29,21 @@ public class JsonToHtmlNodeConverter {
 
             if (isVoidElement(tag) && containsOnlyPrimitiveValues(rawMap)) {
                 element.put("attributes", convertAttributes(rawMap));
+
                 return element;
             }
             List<Object> children = new ArrayList<>();
 
             for (Map.Entry<String, Object> entry : rawMap.entrySet()) {
-                String childTag = entry.getKey();
-                Object childValue = entry.getValue();
-
-                if ("meta".equals(childTag)) {
-                    Map<String, Object> metaMap = (Map<String, Object>) childValue;
-                    children.addAll(convertMetaElements(metaMap));
-                }
-                else if ("attributes".equals(childTag)) {
-                    element.put("attributes", convertAttributes(childValue));
-                }
-                else if (childValue instanceof List<?> list) {
-                    for (Object item : list) {
-                        children.add(convertElement(childTag, item));
-                    }
-                }
-                else {
-                    children.add(convertElement(childTag, childValue));
-                }
+                convertChildEntry(element, children, entry.getKey(), entry.getValue());
             }
 
             element.put("children", children);
+
             return element;
         }
 
         return element;
-
     }
 
     public Map<String, Object> convertDocument(Map<String, Object> rawJson) {
@@ -201,6 +185,30 @@ public class JsonToHtmlNodeConverter {
         element.put("attributes", attributes);
 
         return element;
+    }
+
+    private void convertChildEntry(
+            Map<String, Object> element,
+            List<Object> children,
+            String childTag,
+            Object childValue
+    ) {
+        if ("meta".equals(childTag)) {
+            Map<String, Object> metaMap = (Map<String, Object>) childValue;
+            children.addAll(convertMetaElements(metaMap));
+        }
+        else if ("attributes".equals(childTag)) {
+            element.put("attributes", convertAttributes(childValue));
+        }
+        else if (childValue instanceof List<?> list) {
+            for (Object item : list) {
+                children.add(convertElement(childTag, item));
+            }
+        }
+        else {
+            children.add(convertElement(childTag, childValue));
+        }
+
     }
 
 }
