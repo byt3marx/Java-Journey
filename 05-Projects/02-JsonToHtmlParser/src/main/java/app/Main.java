@@ -12,13 +12,16 @@ public class Main {
 
     public static void main(String[] args) {
 
+        String inputPath = "src/main/resources/input/pageNotFoundV2.json";
+        String outputPath = "src/main/resources/output/pageNotFoundV2.html";
+
         JsonLoader loader = new JsonLoader();
         JsonParserService parser = new JsonParserService();
         JsonToHtmlNodeConverter converter = new JsonToHtmlNodeConverter();
         HtmlBuilder builder = new HtmlBuilder();
         HtmlFileWriter writer = new HtmlFileWriter();
 
-        String json = loader.readFile("src/main/resources/input/pageNotFoundV2.json");
+        String json = loader.readFile(inputPath);
 
         Map<String, Object> rawJson = parser.parseJson(json);
 
@@ -30,7 +33,7 @@ public class Main {
 
         String finalHtml = doctype + result;
 
-        writer.writeFile("src/main/resources/output/pageNotFoundV2.html", finalHtml);
+        writer.writeFile(outputPath, finalHtml);
 
         System.out.println("HTML file generated successfully.");
     }
