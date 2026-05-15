@@ -91,26 +91,26 @@ void elements
 Supports deeply nested HTML structures:
 
 {
-"div": {
-"h1": "Title",
-"p": "Paragraph"
-}
+  "div": {
+    "h1": "Title",
+    "p": "Paragraph"
+  }
 }
 🔁 Array Support
 
 Supports repeated HTML elements using JSON arrays:
 
 "link": [
-{ "href": "style.css" },
-{ "href": "theme.css" }
+  { "href": "style.css" },
+  { "href": "theme.css" }
 ]
 🎨 Nested Style Conversion
 
 Supports nested style objects converted into inline CSS:
 
 "style": {
-"width": "80%",
-"text-align": "center"
+  "width": "80%",
+  "text-align": "center"
 }
 
 Generated output:
@@ -121,8 +121,8 @@ style="width: 80%; text-align: center;"
 Void elements automatically interpret primitive key-value pairs as attributes:
 
 "link": {
-"href": "style.css",
-"rel": "stylesheet"
+  "href": "style.css",
+  "rel": "stylesheet"
 }
 
 Generated output:
@@ -144,7 +144,7 @@ nested content
 Generated HTML can be saved directly into .html files.
 
 📁 Project Structure
-JsonHtmlParser/
+JsonToHtmlParser/
 │
 ├── src/
 │   └── main/
@@ -176,17 +176,17 @@ mvn compile
 mvn exec:java
 🧪 Example Pipeline
 helloWorld.json
-↓
+        ↓
 JsonLoader
-↓
+        ↓
 JsonParserService
-↓
+        ↓
 JsonToHtmlNodeConverter
-↓
+        ↓
 HtmlBuilder
-↓
+        ↓
 HtmlFileWriter
-↓
+        ↓
 helloWorld.html
 📈 What This Project Demonstrates
 
