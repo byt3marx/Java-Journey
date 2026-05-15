@@ -117,14 +117,11 @@ public class JsonToHtmlNodeConverter {
             Object value = entry.getValue();
 
             if ("charset".equals(key)) {
-                Map<String, Object> metaElement = new LinkedHashMap<>();
-                metaElement.put("tag", "meta");
-
                 Map<String, String> attributes = new LinkedHashMap<>();
+
                 attributes.put(key, String.valueOf(value));
 
-                metaElement.put("attributes", attributes);
-                metaElements.add(metaElement);
+                metaElements.add(createElementWithAttributes("meta", attributes));
             }
 
             if ("viewport".equals(key)) {
@@ -144,15 +141,12 @@ public class JsonToHtmlNodeConverter {
                     index++;
                 }
 
-                Map<String, Object> metaElement = new LinkedHashMap<>();
-                metaElement.put("tag", "meta");
-
                 Map<String, String> attributes = new LinkedHashMap<>();
+
                 attributes.put("name", "viewport");
                 attributes.put("content", content.toString());
 
-                metaElement.put("attributes", attributes);
-                metaElements.add(metaElement);
+                metaElements.add(createElementWithAttributes("meta", attributes));
             }
         }
 
@@ -198,6 +192,15 @@ public class JsonToHtmlNodeConverter {
 
     private boolean isVoidElement(String tag) {
         return VOID_ELEMENTS.contains(tag.toLowerCase());
+    }
+
+    private Map<String, Object> createElementWithAttributes(String tag, Map<String, String> attributes) {
+        Map<String, Object> element = new LinkedHashMap<>();
+
+        element.put("tag", tag);
+        element.put("attributes", attributes);
+
+        return element;
     }
 
 }
