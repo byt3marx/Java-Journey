@@ -130,19 +130,12 @@ public class JsonToHtmlNodeConverter {
 
         if (value instanceof Map<?, ?> rawMap) {
             for (Map.Entry<?, ?> entry : rawMap.entrySet()) {
+
                 String key = String.valueOf(entry.getKey());
                 Object attributeValue = entry.getValue();
 
-                if (key.equals("style") && attributeValue instanceof Map<?, ?> styleMap) {
-                    StringBuilder css = new StringBuilder();
-
-                    for (Map.Entry<?, ?> styleEntry : styleMap.entrySet()) {
-                        css.append(styleEntry.getKey())
-                                .append(": ")
-                                .append(styleEntry.getValue())
-                                .append("; ");
-                    }
-                    attributes.put(key, css.toString().trim());
+                if ("style".equals(key) && attributeValue instanceof Map<?, ?> styleMap) {
+                    attributes.put(key, buildStyleAttributes(styleMap));
                 }
                 else {
                     attributes.put(key, String.valueOf(attributeValue));
@@ -215,6 +208,18 @@ public class JsonToHtmlNodeConverter {
         }
 
         return content.toString();
+    }
+
+    private String buildStyleAttributes(Map<?, ?> styleMap) {
+        StringBuilder css = new StringBuilder();
+
+        for (Map.Entry<?, ?> styleEntry : styleMap.entrySet()) {
+            css.append(styleEntry.getKey())
+                    .append(": ")
+                    .append(styleEntry.getValue())
+                    .append("; ");
+        }
+        return css.toString().trim();
     }
 
 }
