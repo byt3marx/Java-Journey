@@ -11,9 +11,7 @@ public class JsonToHtmlNodeConverter {
     private static final Set<String> VOID_ELEMENTS = Set.of("meta", "link", "img", "br", "hr", "input");
 
     public Map<String, Object> convertElement(String tag, Object value) {
-        Map<String, Object> element = new LinkedHashMap<>();
-
-        element.put("tag", tag);
+        Map<String, Object> element = createElement(tag);
 
         if (value instanceof String) {
             element.put("text", value);
@@ -220,6 +218,13 @@ public class JsonToHtmlNodeConverter {
                     .append("; ");
         }
         return css.toString().trim();
+    }
+
+    private Map<String, Object> createElement(String tag) {
+        Map<String, Object> element = new LinkedHashMap<>();
+        element.put("tag", tag);
+
+        return element;
     }
 
 }
