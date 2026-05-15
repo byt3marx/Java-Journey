@@ -93,7 +93,7 @@ public class JsonToHtmlNodeConverter {
 
     }
 
-    private List<Object> convertMetaElements(Map<String, Object> rawMap) {
+    private List<Object> convertGroupedMetaElements(Map<String, Object> rawMap) {
         List<Object> metaElements = new ArrayList<>();
 
         for (Map.Entry<String, Object> entry : rawMap.entrySet()) {
@@ -183,7 +183,7 @@ public class JsonToHtmlNodeConverter {
     ) {
         if ("meta".equals(childTag)) {
             Map<String, Object> metaMap = (Map<String, Object>) childValue;
-            children.addAll(convertMetaElements(metaMap));
+            children.addAll(convertGroupedMetaElements(metaMap));
         }
         else if ("attributes".equals(childTag)) {
             element.put("attributes", convertAttributes(childValue));
