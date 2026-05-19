@@ -42,29 +42,21 @@ public class HtmlBuilder {
         boolean shouldRenderMultiline = children != null && hasBlockChildren(children);
 
         if (children == null || !shouldRenderMultiline) {
-            return buildSingleLineElement(tag,
+            return buildSingleLineElement(
+                    tag,
                     text,
                     attributesHtml,
                     children,
-                    depth);
+                    depth
+            );
         }
 
-        html.append(indent(depth))
-                .append("<")
-                .append(tag)
-                .append(attributesHtml)
-                .append(">")
-                .append("\n");
-
-        for (Object child : children) {
-            html.append(buildHtml(child, depth + 1))
-                    .append("\n");
-        }
-
-        html.append(indent(depth))
-                .append("</").append(tag).append(">");
-
-        return html.toString();
+        return buildMultiLineElement(
+                tag,
+                attributesHtml,
+                children,
+                depth
+        );
     }
 
     private String indent(int depth) {
@@ -143,6 +135,33 @@ public class HtmlBuilder {
         }
 
         html.append("</").append(tag).append(">");
+
+        return html.toString();
+    }
+
+    private String buildMultiLineElement(
+            String tag,
+            String attributesHtml,
+            List<Object> children,
+            int depth
+    ) {
+
+        StringBuilder html = new StringBuilder();
+
+        html.append(indent(depth))
+                .append("<")
+                .append(tag)
+                .append(attributesHtml)
+                .append(">")
+                .append("\n");
+
+        for (Object child : children) {
+            html.append(buildHtml(child, depth + 1))
+                    .append("\n");
+        }
+
+        html.append(indent(depth))
+                .append("</").append(tag).append(">");
 
         return html.toString();
     }
