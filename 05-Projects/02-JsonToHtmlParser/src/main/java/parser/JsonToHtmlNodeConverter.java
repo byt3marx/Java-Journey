@@ -1,14 +1,13 @@
 package parser;
 
+import html.HtmlRules;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 
 public class JsonToHtmlNodeConverter {
 
-    private static final Set<String> VOID_ELEMENTS = Set.of("meta", "link", "img", "br", "hr", "input");
 
     public Map<String, Object> convertElement(String tag, Object value) {
         Map<String, Object> element = createElement(tag);
@@ -154,7 +153,7 @@ public class JsonToHtmlNodeConverter {
     }
 
     private boolean isVoidElement(String tag) {
-        return VOID_ELEMENTS.contains(tag.toLowerCase());
+        return HtmlRules.VOID_ELEMENTS.contains(tag.toLowerCase());
     }
 
     private Map<String, Object> createElementWithAttributes(String tag, Map<String, String> attributes) {

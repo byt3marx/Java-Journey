@@ -1,5 +1,6 @@
 package builder;
 
+import html.HtmlRules;
 import java.util.Map;
 import java.util.List;
 import java.util.Set;
@@ -7,8 +8,6 @@ import java.util.Set;
 public class HtmlBuilder {
 
     private static final Set<String> INLINE_TAGS = Set.of("strong", "em", "span", "a");
-
-    private static final Set<String> VOID_ELEMENTS = Set.of("meta", "link", "img", "br", "hr", "input");
 
     public String buildHtml(Object node, int depth) {
 
@@ -102,7 +101,7 @@ public class HtmlBuilder {
     }
 
     private boolean isVoidElement(String tag) {
-        return VOID_ELEMENTS.contains(tag.toLowerCase());
+        return HtmlRules.VOID_ELEMENTS.contains(tag.toLowerCase());
     }
 
     private String buildSingleLineElement(
