@@ -12,8 +12,8 @@ public class Main {
 
     public static void main(String[] args) {
 
-        String inputPath = "src/main/resources/input/helloWorld.json";
-        String outputPath = "src/main/resources/output/helloWorld.html";
+        String inputPath = "src/main/resources/input/pageNotFoundV2.json";
+        String outputPath = "src/main/resources/output/pageNotFoundV2.html";
 
         JsonLoader loader = new JsonLoader();
         JsonParserService parser = new JsonParserService();

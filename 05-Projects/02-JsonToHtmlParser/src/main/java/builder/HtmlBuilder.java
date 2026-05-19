@@ -42,27 +42,11 @@ public class HtmlBuilder {
         boolean shouldRenderMultiline = children != null && hasBlockChildren(children);
 
         if (children == null || !shouldRenderMultiline) {
-            html.append(indent(depth))
-                    .append("<")
-                    .append(tag)
-                    .append(attributesHtml)
-                    .append(">");
-
-            if (isVoidElement(tag)) {
-                return html.toString();
-            }
-
-            html.append(text);
-
-            if (children != null) {
-                for (Object child : children) {
-                    html.append(buildHtml(child, 0));
-                }
-            }
-
-            html.append("</").append(tag).append(">");
-
-            return html.toString();
+            return buildSingleLineElement(tag,
+                    text,
+                    attributesHtml,
+                    children,
+                    depth);
         }
 
         html.append(indent(depth))
@@ -129,6 +113,38 @@ public class HtmlBuilder {
 
     private boolean isVoidElement(String tag) {
         return VOID_ELEMENTS.contains(tag.toLowerCase());
+    }
+
+    private String buildSingleLineElement(
+            String tag,
+            String text,
+            String attributesHtml,
+            List<Object> children,
+            int depth
+    ) {
+        StringBuilder html = new StringBuilder();
+
+        html.append(indent(depth))
+                .append("<")
+                .append(tag)
+                .append(attributesHtml)
+                .append(">");
+
+        if (isVoidElement(tag)) {
+            return html.toString();
+        }
+
+        html.append(text);
+
+        if (children != null) {
+            for (Object child : children) {
+                html.append(buildHtml(child, 0));
+            }
+        }
+
+        html.append("</").append(tag).append(">");
+
+        return html.toString();
     }
 
 }
