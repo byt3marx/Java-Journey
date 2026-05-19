@@ -37,8 +37,6 @@ public class HtmlBuilder {
 
         List<Object> children = (List<Object>) map.get("children");
 
-        StringBuilder html = new StringBuilder();
-
         boolean shouldRenderMultiline = children != null && hasBlockChildren(children);
 
         if (children == null || !shouldRenderMultiline) {
