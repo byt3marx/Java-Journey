@@ -114,11 +114,7 @@ public class HtmlBuilder {
     ) {
         StringBuilder html = new StringBuilder();
 
-        html.append(indent(depth))
-                .append("<")
-                .append(tag)
-                .append(attributesHtml)
-                .append(">");
+        appendOpeningTag(html, tag, attributesHtml, depth);
 
         if (isVoidElement(tag)) {
             return html.toString();
@@ -146,12 +142,7 @@ public class HtmlBuilder {
 
         StringBuilder html = new StringBuilder();
 
-        html.append(indent(depth))
-                .append("<")
-                .append(tag)
-                .append(attributesHtml)
-                .append(">")
-                .append("\n");
+        appendOpeningTag(html, tag, attributesHtml, depth);
 
         for (Object child : children) {
             html.append(buildHtml(child, depth + 1))
@@ -162,6 +153,19 @@ public class HtmlBuilder {
                 .append("</").append(tag).append(">");
 
         return html.toString();
+    }
+
+    private void appendOpeningTag(
+            StringBuilder html,
+            String tag,
+            String attributesHtml,
+            int depth
+    ) {
+        html.append(indent(depth))
+                .append("<")
+                .append(tag)
+                .append(attributesHtml)
+                .append(">");
     }
 
 }
