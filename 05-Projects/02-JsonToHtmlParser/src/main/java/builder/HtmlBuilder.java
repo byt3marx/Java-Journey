@@ -122,11 +122,7 @@ public class HtmlBuilder {
 
         html.append(text);
 
-        if (children != null) {
-            for (Object child : children) {
-                html.append(buildHtml(child, 0));
-            }
-        }
+        appendInlineChildren(html, children);
 
         appendClosingTag(html, tag);
 
@@ -143,13 +139,12 @@ public class HtmlBuilder {
         StringBuilder html = new StringBuilder();
 
         appendOpeningTag(html, tag, attributesHtml, depth);
+        html.append("\n");
 
-        for (Object child : children) {
-            html.append(buildHtml(child, depth + 1))
-                    .append("\n");
-        }
+        appendMultiLineChildren(html, children, depth);
 
         html.append(indent(depth));
+
         appendClosingTag(html, tag);
 
         return html.toString();
@@ -170,6 +165,25 @@ public class HtmlBuilder {
 
     private void appendClosingTag(StringBuilder html, String tag) {
         html.append("</").append(tag).append(">");
+    }
+
+    private void appendInlineChildren(StringBuilder html, List<Object> children) {
+        if (children != null) {
+            for (Object child : children) {
+                html.append(buildHtml(child, 0));
+            }
+        }
+    }
+
+    private void appendMultiLineChildren(
+            StringBuilder html,
+            List<Object> children,
+            int depth
+    ) {
+        for (Object child : children) {
+            html.append(buildHtml(child, depth + 1))
+                    .append("\n");
+        }
     }
 
 }
