@@ -128,7 +128,7 @@ public class HtmlBuilder {
             }
         }
 
-        html.append("</").append(tag).append(">");
+        appendClosingTag(html, tag);
 
         return html.toString();
     }
@@ -149,8 +149,8 @@ public class HtmlBuilder {
                     .append("\n");
         }
 
-        html.append(indent(depth))
-                .append("</").append(tag).append(">");
+        html.append(indent(depth));
+        appendClosingTag(html, tag);
 
         return html.toString();
     }
@@ -166,6 +166,10 @@ public class HtmlBuilder {
                 .append(tag)
                 .append(attributesHtml)
                 .append(">");
+    }
+
+    private void appendClosingTag(StringBuilder html, String tag) {
+        html.append("</").append(tag).append(">");
     }
 
 }
