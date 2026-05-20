@@ -12,7 +12,7 @@ public class Main {
 
     public static void main(String[] args) {
 
-        String inputPath = "src/main/resources/input/";
+        String inputPath = "src/main/resources/input/helloWorld.json";
         String outputPath = "src/main/resources/output/helloWorld.html";
 
         JsonLoader loader = new JsonLoader();
