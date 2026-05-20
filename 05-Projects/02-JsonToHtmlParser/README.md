@@ -23,7 +23,7 @@ The application supports:
 The project is designed using a layered transformation pipeline:
 
 ```text
-JSON → Parsed Data → HTML Nodes → HTML Rendering → File Output
+JSON → Parsed Data → HTML Element Maps → HTML Rendering → File Output
 ```
 
 ---
@@ -41,6 +41,11 @@ This project combines multiple core Java concepts into one cohesive system:
 * Rendering pipelines
 * Dynamic structure conversion
 * Recursive HTML generation
+* Defensive validation
+* Exception wrapping and error handling
+* Utility class design
+* Rendering abstraction
+* Refactoring and code cleanup
 
 ---
 
@@ -52,6 +57,7 @@ The project follows a structured layered architecture:
 io       → file loading and file writing
 parser   → JSON parsing and structure conversion
 builder  → HTML rendering
+html     → shared HTML rules/constants
 app      → application entry point
 ```
 
@@ -84,6 +90,8 @@ HtmlFileWriter.java
 
 * Reads JSON files from disk
 * Handles file-loading logic separately from parsing
+* Validates file paths before reading
+* Provides clearer file-loading exception messages
 
 #### HtmlFileWriter
 
@@ -104,6 +112,9 @@ JsonToHtmlNodeConverter.java
 
 * Uses Gson to deserialize JSON into Java structures
 * Converts JSON into `Map<String, Object>`
+* Performs defensive validation before parsing
+* Wraps parsing failures with meaningful exceptions
+* Isolates Gson-specific implementation details
 
 #### JsonToHtmlNodeConverter
 
@@ -135,8 +146,29 @@ HtmlBuilder.java
   * attributes
   * void elements
 
----
+* Uses extracted rendering helpers for cleaner orchestration
+* Separates inline and multiline rendering behavior
+* Centralizes reusable tag rendering logic
 
+---
+### 🔹 html
+
+```text
+HtmlRules.java
+```
+
+#### HtmlRules
+
+* Centralizes shared HTML semantics
+* Stores reusable HTML rule sets such as:
+
+    * void elements
+    * inline elements
+
+* Prevents duplication across parser and renderer layers
+* Demonstrates utility-class architecture
+
+---
 # ⚙ Features
 
 ## 🌳 Recursive HTML Generation
@@ -205,6 +237,34 @@ Generated output:
 
 ---
 
+## 🛡 Defensive Validation & Error Handling
+
+The parser includes validation and exception handling for:
+
+* empty JSON input
+* invalid JSON content 
+* invalid file paths 
+* failed parsing operations 
+* failed file-loading operations
+
+This improves debugging and creates cleaner abstraction boundaries between application layers.
+
+---
+
+## 🧹 Refactored Rendering Architecture
+
+The rendering engine was refactored into smaller reusable helpers:
+
+* opening tag rendering
+* closing tag rendering
+* inline child rendering
+* multiline child rendering
+* style attribute building
+* viewport content generation
+
+This improved readability, maintainability, and separation of concerns.
+
+---
 ## 📄 Document-Level HTML Generation
 
 Supports full HTML document creation:
@@ -239,6 +299,9 @@ Generated HTML can be saved directly into `.html` files.
 │       │   ├── builder/
 │       │   │   └── HtmlBuilder.java
 │       │   │
+│       │   ├── html/
+│       │   │   └── HtmlRules.java
+│       │   │
 │       │   ├── io/
 │       │   │   ├── JsonLoader.java
 │       │   │   └── HtmlFileWriter.java
@@ -261,14 +324,14 @@ Generated HTML can be saved directly into `.html` files.
 1. Navigate to the project directory:
 
 ```bash
-cd 02-JsonToHtmlParser
+  cd 02-JsonToHtmlParser
 ```
 
 2. Run the application:
 
 ```bash
-mvn compile
-mvn exec:java
+  mvn compile
+  mvn exec:java
 ```
 
 ---
@@ -304,6 +367,11 @@ This project demonstrates the ability to:
 * work with nested collections and maps
 * build maintainable Java applications
 * apply real-world architecture patterns
+* defensive programming techniques
+* layered exception handling
+* utility class architecture
+* incremental refactoring practices
+* reusable rendering abstractions
 
 ---
 
@@ -319,6 +387,9 @@ Possible extensions:
 * template engine support
 * HTML escaping & sanitization
 * parser schema validation
+* command-line argument support (`args[]`)
+* configurable formatting rules
+* visitor pattern rendering architecture
 
 ---
 
