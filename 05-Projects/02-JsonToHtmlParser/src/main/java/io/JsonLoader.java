@@ -8,13 +8,16 @@ public class JsonLoader {
 
     public String readFile(String filePath) {
 
-        try {
+        if (filePath == null || filePath.isBlank()) {
+            throw new IllegalArgumentException("File path cannot be empty");
+        }
 
+        try {
             Path path = Path.of(filePath);
             return Files.readString(path);
 
         } catch (IOException e) {
-            throw new RuntimeException("Failed to read JSON file", e);
+            throw new RuntimeException("Failed to read JSON file: " + filePath, e);
         }
     }
 }
