@@ -3,11 +3,8 @@ package builder;
 import html.HtmlRules;
 import java.util.Map;
 import java.util.List;
-import java.util.Set;
 
 public class HtmlBuilder {
-
-    private static final Set<String> INLINE_TAGS = Set.of("strong", "em", "span", "a");
 
     public String buildHtml(Object node, int depth) {
 
@@ -61,7 +58,7 @@ public class HtmlBuilder {
     }
 
     private boolean isInlineTag(String tag) {
-        return INLINE_TAGS.contains(tag.toLowerCase());
+        return HtmlRules.INLINE_TAGS.contains(tag.toLowerCase());
     }
 
     private boolean hasBlockChildren(List<Object> children) {

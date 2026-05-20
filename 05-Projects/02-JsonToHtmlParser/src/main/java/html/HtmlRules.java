@@ -9,4 +9,6 @@ public class HtmlRules {
     private HtmlRules() {
 
     }
+
+    public static final Set<String> INLINE_TAGS = Set.of("Strong", "em", "span", "a");
 }
