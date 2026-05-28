@@ -1,5 +1,7 @@
 package parser;
 
+import model.HtmlNode;
+
 import html.HtmlRules;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
@@ -7,7 +9,6 @@ import java.util.List;
 import java.util.Map;
 
 public class JsonToHtmlNodeConverter {
-
 
     public Map<String, Object> convertElement(String tag, Object value) {
         Map<String, Object> element = createElement(tag);
@@ -38,6 +39,21 @@ public class JsonToHtmlNodeConverter {
             element.put("children", children);
 
             return element;
+        }
+
+        return element;
+    }
+
+    public HtmlNode convertElementToNode(String tag, Object value) {
+        HtmlNode element = new HtmlNode(tag);
+
+        if (value instanceof String) {
+            element.setText((String) value);
+            return element;
+        }
+
+        if ("meta".equals(tag)) {
+            return convertMetaToNode(value);
         }
 
         return element;
@@ -84,6 +100,19 @@ public class JsonToHtmlNodeConverter {
             }
 
             metaElement.put("attributes", attributes);
+        }
+
+        return metaElement;
+
+    }
+
+    private HtmlNode convertMetaToNode(Object value) {
+        HtmlNode metaElement = new HtmlNode("meta");
+
+        Map<String, String> attributes = convertAttributes(value);
+
+        for (Map.Entry<String, String> entry : attributes.entrySet()) {
+            metaElement.addAttribute(entry.getKey(), entry.getValue());
         }
 
         return metaElement;
