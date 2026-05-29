@@ -56,6 +56,31 @@ public class JsonToHtmlNodeConverter {
             return convertMetaToNode(value);
         }
 
+        if (value instanceof Map<?, ?> rawMap) {
+
+            for (Map.Entry<?, ?> entry : rawMap.entrySet()) {
+
+                String childTag = String.valueOf(entry.getKey());
+                Object childValue = entry.getValue();
+
+                if ("attributes".equals(childTag)) {
+                    Map<String, String> attributes = convertAttributes(childValue);
+
+                    for (Map.Entry<String, String> attribute : attributes.entrySet()) {
+                        element.addAttribute(attribute.getKey(), attribute.getValue());
+                    }
+                }
+                else if (childValue instanceof List<?> list) {
+                    for (Object item : list) {
+                        element.addChild(convertElementToNode(childTag, item));
+                    }
+                }
+                else {
+                    element.addChild(convertElementToNode(childTag, childValue));
+                }
+            }
+        }
+
         return element;
     }
 
