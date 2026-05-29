@@ -70,6 +70,11 @@ public class JsonToHtmlNodeConverter {
                         element.addAttribute(attribute.getKey(), attribute.getValue());
                     }
                 }
+                else if ("meta".equals(childTag) && childValue instanceof Map<?, ?> metaMap) {
+                    for (HtmlNode metaNode : expandMetaElementsToNode(metaMap)) {
+                        element.addChild(metaNode);
+                    }
+                }
                 else if (childValue instanceof List<?> list) {
                     for (Object item : list) {
                         element.addChild(convertElementToNode(childTag, item));
@@ -196,7 +201,6 @@ public class JsonToHtmlNodeConverter {
                 metaNode.addAttribute("content", buildViewportContent(viewportMap));
                 metaElements.add(metaNode);
             }
-
         }
 
         return metaElements;
