@@ -176,6 +176,32 @@ public class JsonToHtmlNodeConverter {
         return metaElements;
     }
 
+    private List<HtmlNode> expandMetaElementsToNode(Map<?, ?> rawMap) {
+        List<HtmlNode> metaElements = new ArrayList<>();
+
+        for (Map.Entry<?, ?> entry : rawMap.entrySet()) {
+
+            String key = String.valueOf(entry.getKey());
+            Object value = entry.getValue();
+
+            if ("charset".equals(key)) {
+                HtmlNode metaNode = new HtmlNode("meta");
+                metaNode.addAttribute("charset", String.valueOf(value));
+                metaElements.add(metaNode);
+            }
+
+            else if ("viewport".equals(key) && value instanceof Map<?, ?> viewportMap) {
+                HtmlNode metaNode = new HtmlNode("meta");
+                metaNode.addAttribute("name", "viewport");
+                metaNode.addAttribute("content", buildViewportContent(viewportMap));
+                metaElements.add(metaNode);
+            }
+
+        }
+
+        return metaElements;
+    }
+
     private Map<String, String> convertAttributes(Object value) {
         Map<String, String> attributes = new LinkedHashMap<>();
 
@@ -242,11 +268,11 @@ public class JsonToHtmlNodeConverter {
         }
     }
 
-    private String buildViewportContent(Map<String, Object> viewportMap) {
+    private String buildViewportContent(Map<?, ?> viewportMap) {
         StringBuilder content = new StringBuilder();
         int index = 0;
 
-        for (Map.Entry<String, Object> viewportEntry : viewportMap.entrySet()) {
+        for (Map.Entry<?, ?> viewportEntry : viewportMap.entrySet()) {
             if (index > 0) {
                 content.append(", ");
             }
