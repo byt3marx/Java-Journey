@@ -116,6 +116,24 @@ public class JsonToHtmlNodeConverter {
 
     }
 
+    public HtmlNode convertDocumentToNode(Map<String, Object> rawJson) {
+        HtmlNode htmlElement = new HtmlNode("html");
+
+        if (rawJson.containsKey("language")) {
+            htmlElement.addAttribute("lang", String.valueOf(rawJson.get("language")));
+        }
+
+        if (rawJson.containsKey("head")) {
+            htmlElement.addChild(convertElementToNode("head", rawJson.get("head")));
+        }
+
+        if (rawJson.containsKey("body")) {
+            htmlElement.addChild(convertElementToNode("body", rawJson.get("body")));
+        }
+
+        return htmlElement;
+    }
+
     private Map<String, Object> convertMeta(Object value) {
         Map<String, Object> metaElement = new LinkedHashMap<>();
         metaElement.put("tag", "meta");
