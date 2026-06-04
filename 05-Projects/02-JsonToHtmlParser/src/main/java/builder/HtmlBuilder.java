@@ -17,10 +17,10 @@ public class HtmlBuilder {
 
         String attributesHtml = buildAttributes(attributes);
 
-        boolean shouldRenderMultiline = node.hasChildren() && hasNodeBlockChildren(children);
+        boolean shouldRenderMultiline = node.hasChildren() && hasBlockChildren(children);
 
         if (!shouldRenderMultiline) {
-            return buildSingleLineNodeElement(
+            return buildSingleLineElement(
                     tag,
                     text,
                     attributesHtml,
@@ -29,7 +29,7 @@ public class HtmlBuilder {
             );
         }
 
-        return buildMultiLineNodeElement(
+        return buildMultiLineElement(
                 tag,
                 attributesHtml,
                 children,
@@ -45,7 +45,7 @@ public class HtmlBuilder {
         return HtmlRules.INLINE_TAGS.contains(tag.toLowerCase());
     }
 
-    private boolean hasNodeBlockChildren(List<HtmlNode> children) {
+    private boolean hasBlockChildren(List<HtmlNode> children) {
 
         for (HtmlNode child : children) {
             String childTag = child.getTag();
@@ -81,7 +81,7 @@ public class HtmlBuilder {
         return HtmlRules.VOID_ELEMENTS.contains(tag.toLowerCase());
     }
 
-    private String buildSingleLineNodeElement(
+    private String buildSingleLineElement(
             String tag,
             String text,
             String attributesHtml,
@@ -97,14 +97,14 @@ public class HtmlBuilder {
         }
 
         html.append(text);
-        appendInlineNodeChildren(html, children);
+        appendInlineChildren(html, children);
         appendClosingTag(html, tag);
 
         return html.toString();
 
     }
 
-    private String buildMultiLineNodeElement(
+    private String buildMultiLineElement(
             String tag,
             String attributesHtml,
             List<HtmlNode> children,
@@ -114,7 +114,7 @@ public class HtmlBuilder {
 
         appendOpeningTag(html, tag, attributesHtml, depth);
         html.append("\n");
-        appendMultiLineNodeChildren(html, children, depth);
+        appendMultiLineChildren(html, children, depth);
         html.append(indent(depth));
         appendClosingTag(html, tag);
 
@@ -138,13 +138,13 @@ public class HtmlBuilder {
         html.append("</").append(tag).append(">");
     }
 
-    private void appendInlineNodeChildren(StringBuilder html, List<HtmlNode> children) {
+    private void appendInlineChildren(StringBuilder html, List<HtmlNode> children) {
         for (HtmlNode child : children) {
             html.append(buildHtml(child, 0));
         }
     }
 
-    private void appendMultiLineNodeChildren(
+    private void appendMultiLineChildren(
             StringBuilder html,
             List<HtmlNode> children,
             int depth

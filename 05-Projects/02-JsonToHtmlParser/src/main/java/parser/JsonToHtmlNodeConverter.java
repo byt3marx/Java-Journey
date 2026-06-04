@@ -10,7 +10,7 @@ import java.util.Map;
 
 public class JsonToHtmlNodeConverter {
 
-    public HtmlNode convertElementToNode(String tag, Object value) {
+    public HtmlNode convertElement(String tag, Object value) {
         HtmlNode element = new HtmlNode(tag);
 
         if (value instanceof String) {
@@ -19,7 +19,7 @@ public class JsonToHtmlNodeConverter {
         }
 
         if ("meta".equals(tag)) {
-            return convertMetaToNode(value);
+            return convertMeta(value);
         }
 
         if (value instanceof Map<?, ?> rawMap) {
@@ -50,17 +50,17 @@ public class JsonToHtmlNodeConverter {
                     }
                 }
                 else if ("meta".equals(childTag) && childValue instanceof Map<?, ?> metaMap) {
-                    for (HtmlNode metaNode : expandMetaElementsToNode(metaMap)) {
+                    for (HtmlNode metaNode : expandMetaElements(metaMap)) {
                         element.addChild(metaNode);
                     }
                 }
                 else if (childValue instanceof List<?> list) {
                     for (Object item : list) {
-                        element.addChild(convertElementToNode(childTag, item));
+                        element.addChild(convertElement(childTag, item));
                     }
                 }
                 else {
-                    element.addChild(convertElementToNode(childTag, childValue));
+                    element.addChild(convertElement(childTag, childValue));
                 }
             }
         }
@@ -68,7 +68,7 @@ public class JsonToHtmlNodeConverter {
         return element;
     }
 
-    public HtmlNode convertDocumentToNode(Map<String, Object> rawJson) {
+    public HtmlNode convertDocument(Map<String, Object> rawJson) {
         HtmlNode htmlElement = new HtmlNode("html");
 
         if (rawJson.containsKey("language")) {
@@ -76,17 +76,17 @@ public class JsonToHtmlNodeConverter {
         }
 
         if (rawJson.containsKey("head")) {
-            htmlElement.addChild(convertElementToNode("head", rawJson.get("head")));
+            htmlElement.addChild(convertElement("head", rawJson.get("head")));
         }
 
         if (rawJson.containsKey("body")) {
-            htmlElement.addChild(convertElementToNode("body", rawJson.get("body")));
+            htmlElement.addChild(convertElement("body", rawJson.get("body")));
         }
 
         return htmlElement;
     }
 
-    private HtmlNode convertMetaToNode(Object value) {
+    private HtmlNode convertMeta(Object value) {
         HtmlNode metaElement = new HtmlNode("meta");
 
         Map<String, String> attributes = convertAttributes(value);
@@ -99,7 +99,7 @@ public class JsonToHtmlNodeConverter {
 
     }
 
-    private List<HtmlNode> expandMetaElementsToNode(Map<?, ?> rawMap) {
+    private List<HtmlNode> expandMetaElements(Map<?, ?> rawMap) {
         List<HtmlNode> metaElements = new ArrayList<>();
 
         for (Map.Entry<?, ?> entry : rawMap.entrySet()) {

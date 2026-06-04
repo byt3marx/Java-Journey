@@ -27,7 +27,7 @@ public class Main {
 
         Map<String, Object> rawJson = parser.parseJson(json);
 
-        HtmlNode converted = converter.convertDocumentToNode(rawJson);
+        HtmlNode converted = converter.convertDocument(rawJson);
 
         String result = builder.buildHtml(converted, 0);
 
