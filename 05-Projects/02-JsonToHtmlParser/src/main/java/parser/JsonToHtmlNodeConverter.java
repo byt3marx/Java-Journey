@@ -58,15 +58,6 @@ public class JsonToHtmlNodeConverter {
 
         if (value instanceof Map<?, ?> rawMap) {
 
-            if (isVoidElement(tag) && canBeTreatedAsAttributes(rawMap)) {
-                Map<String, String> attributes = convertAttributes(rawMap);
-
-                for (Map.Entry<String, String> attribute : attributes.entrySet()) {
-                    element.addAttribute(attribute.getKey(), attribute.getValue());
-                }
-                return element;
-            }
-
             for (Map.Entry<?, ?> entry : rawMap.entrySet()) {
 
                 String childTag = String.valueOf(entry.getKey());
@@ -76,9 +67,7 @@ public class JsonToHtmlNodeConverter {
                     Map<String, String> attributes = convertAttributes(childValue);
 
                     for (Map.Entry<String, String> attribute : attributes.entrySet()) {
-                        element.addAttribute(
-                                attribute.getKey(),
-                                attribute.getValue());
+                        element.addAttribute(attribute.getKey(), attribute.getValue());
                     }
                 }
                 else if ("meta".equals(childTag) && childValue instanceof Map<?, ?> metaMap) {
@@ -255,7 +244,7 @@ public class JsonToHtmlNodeConverter {
         return attributes;
     }
 
-    private boolean canBeTreatedAsAttributes(Map<?, ?> rawMap) {
+    private boolean canBeTreatedAsAttributes(Map<String, Object> rawMap) {
 
         for (Object value : rawMap.values()) {
             if (value instanceof Map || value instanceof List) {
