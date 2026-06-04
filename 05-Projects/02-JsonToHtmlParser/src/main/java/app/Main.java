@@ -1,5 +1,7 @@
 package app;
 
+import model.HtmlNode;
+
 import builder.HtmlBuilder;
 import parser.JsonParserService;
 import parser.JsonToHtmlNodeConverter;
@@ -25,7 +27,9 @@ public class Main {
 
         Map<String, Object> rawJson = parser.parseJson(json);
 
-        Map<String, Object> converted = converter.convertDocument(rawJson);
+        //Map<String, Object> converted = converter.convertDocument(rawJson);
+
+        HtmlNode converted = converter.convertDocumentToNode(rawJson);
 
         String result = builder.buildHtml(converted, 0);
 
