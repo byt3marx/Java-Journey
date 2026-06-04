@@ -2,7 +2,7 @@ package html;
 
 import java.util.Set;
 
-public class HtmlRules {
+public final class HtmlRules {
 
     public static final Set<String> VOID_ELEMENTS = Set.of("meta", "link", "img", "br", "hr", "input");
 
@@ -10,5 +10,5 @@ public class HtmlRules {
 
     }
 
-    public static final Set<String> INLINE_TAGS = Set.of("Strong", "em", "span", "a");
+    public static final Set<String> INLINE_TAGS = Set.of("strong", "em", "span", "a");
 }

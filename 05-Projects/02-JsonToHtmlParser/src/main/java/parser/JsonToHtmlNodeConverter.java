@@ -10,40 +10,6 @@ import java.util.Map;
 
 public class JsonToHtmlNodeConverter {
 
-    public Map<String, Object> convertElement(String tag, Object value) {
-        Map<String, Object> element = createElement(tag);
-
-        if (value instanceof String) {
-            element.put("text", value);
-            return element;
-        }
-
-        if ("meta".equals(tag)) {
-            return convertMeta(value);
-        }
-
-        if (value instanceof Map) {
-            Map<String, Object> rawMap = (Map<String, Object>) value;
-
-            if (isVoidElement(tag) && canBeTreatedAsAttributes(rawMap)) {
-                element.put("attributes", convertAttributes(rawMap));
-
-                return element;
-            }
-            List<Object> children = new ArrayList<>();
-
-            for (Map.Entry<String, Object> entry : rawMap.entrySet()) {
-                convertChildEntry(element, children, entry.getKey(), entry.getValue());
-            }
-
-            element.put("children", children);
-
-            return element;
-        }
-
-        return element;
-    }
-
     public HtmlNode convertElementToNode(String tag, Object value) {
         HtmlNode element = new HtmlNode(tag);
 
@@ -102,33 +68,6 @@ public class JsonToHtmlNodeConverter {
         return element;
     }
 
-    public Map<String, Object> convertDocument(Map<String, Object> rawJson) {
-
-        Map<String, Object> htmlElement = new LinkedHashMap<>();
-        htmlElement.put("tag", "html");
-
-        List<Object> children = new ArrayList<>();
-
-        if (rawJson.containsKey("language")) {
-            Map<String, String> attributes = new LinkedHashMap<>();
-            attributes.put("lang", (String) rawJson.get("language"));
-            htmlElement.put("attributes", attributes);
-        }
-
-        if (rawJson.containsKey("head")) {
-            children.add(convertElement("head", rawJson.get("head")));
-        }
-
-        if (rawJson.containsKey("body")) {
-            children.add(convertElement("body", rawJson.get("body")));
-        }
-
-        htmlElement.put("children", children);
-
-        return htmlElement;
-
-    }
-
     public HtmlNode convertDocumentToNode(Map<String, Object> rawJson) {
         HtmlNode htmlElement = new HtmlNode("html");
 
@@ -147,26 +86,6 @@ public class JsonToHtmlNodeConverter {
         return htmlElement;
     }
 
-    private Map<String, Object> convertMeta(Object value) {
-        Map<String, Object> metaElement = new LinkedHashMap<>();
-        metaElement.put("tag", "meta");
-
-        if (value instanceof Map) {
-            Map<String, Object> rawMap = (Map<String, Object>) value;
-
-            Map<String, String> attributes = new LinkedHashMap<>();
-
-            for (Map.Entry<String, Object> entry : rawMap.entrySet()) {
-                attributes.put(entry.getKey(), String.valueOf(entry.getValue()));
-            }
-
-            metaElement.put("attributes", attributes);
-        }
-
-        return metaElement;
-
-    }
-
     private HtmlNode convertMetaToNode(Object value) {
         HtmlNode metaElement = new HtmlNode("meta");
 
@@ -178,38 +97,6 @@ public class JsonToHtmlNodeConverter {
 
         return metaElement;
 
-    }
-
-    private List<Object> convertGroupedMetaElements(Map<String, Object> rawMap) {
-        List<Object> metaElements = new ArrayList<>();
-
-        for (Map.Entry<String, Object> entry : rawMap.entrySet()) {
-            String key = entry.getKey();
-            Object value = entry.getValue();
-
-            if ("charset".equals(key)) {
-                Map<String, String> attributes = new LinkedHashMap<>();
-
-                attributes.put(key, String.valueOf(value));
-
-                metaElements.add(createElementWithAttributes("meta", attributes));
-            }
-
-            if ("viewport".equals(key)) {
-                Map<String, Object> viewportMap = (Map<String, Object>) value;
-
-                String content = buildViewportContent(viewportMap);
-
-                Map<String, String> attributes = new LinkedHashMap<>();
-
-                attributes.put("name", "viewport");
-                attributes.put("content", content);
-
-                metaElements.add(createElementWithAttributes("meta", attributes));
-            }
-        }
-
-        return metaElements;
     }
 
     private List<HtmlNode> expandMetaElementsToNode(Map<?, ?> rawMap) {
@@ -271,38 +158,6 @@ public class JsonToHtmlNodeConverter {
         return HtmlRules.VOID_ELEMENTS.contains(tag.toLowerCase());
     }
 
-    private Map<String, Object> createElementWithAttributes(String tag, Map<String, String> attributes) {
-        Map<String, Object> element = new LinkedHashMap<>();
-
-        element.put("tag", tag);
-        element.put("attributes", attributes);
-
-        return element;
-    }
-
-    private void convertChildEntry(
-            Map<String, Object> element,
-            List<Object> children,
-            String childTag,
-            Object childValue
-    ) {
-        if ("meta".equals(childTag)) {
-            Map<String, Object> metaMap = (Map<String, Object>) childValue;
-            children.addAll(convertGroupedMetaElements(metaMap));
-        }
-        else if ("attributes".equals(childTag)) {
-            element.put("attributes", convertAttributes(childValue));
-        }
-        else if (childValue instanceof List<?> list) {
-            for (Object item : list) {
-                children.add(convertElement(childTag, item));
-            }
-        }
-        else {
-            children.add(convertElement(childTag, childValue));
-        }
-    }
-
     private String buildViewportContent(Map<?, ?> viewportMap) {
         StringBuilder content = new StringBuilder();
         int index = 0;
@@ -332,13 +187,6 @@ public class JsonToHtmlNodeConverter {
                     .append("; ");
         }
         return css.toString().trim();
-    }
-
-    private Map<String, Object> createElement(String tag) {
-        Map<String, Object> element = new LinkedHashMap<>();
-        element.put("tag", tag);
-
-        return element;
     }
 
 }

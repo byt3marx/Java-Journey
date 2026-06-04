@@ -14,8 +14,8 @@ public class Main {
 
     public static void main(String[] args) {
 
-        String inputPath = "src/main/resources/input/helloWorld.json";
-        String outputPath = "src/main/resources/output/helloWorld.html";
+        String inputPath = "src/main/resources/input/pageNotFoundV2.json";
+        String outputPath = "src/main/resources/output/pageNotFoundV2.html";
 
         JsonLoader loader = new JsonLoader();
         JsonParserService parser = new JsonParserService();
@@ -26,8 +26,6 @@ public class Main {
         String json = loader.readFile(inputPath);
 
         Map<String, Object> rawJson = parser.parseJson(json);
-
-        //Map<String, Object> converted = converter.convertDocument(rawJson);
 
         HtmlNode converted = converter.convertDocumentToNode(rawJson);
 
