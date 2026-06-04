@@ -1,5 +1,7 @@
 package builder;
 
+import model.HtmlNode;
+
 import html.HtmlRules;
 import java.util.Map;
 import java.util.List;
@@ -53,6 +55,35 @@ public class HtmlBuilder {
         );
     }
 
+    public String buildHtml(HtmlNode node, int depth) {
+
+        String tag = node.getTag();
+        String text = node.getText();
+        Map<String, String> attributes = node.getAttributes();
+        List<HtmlNode> children = node.getChildren();
+
+        String attributesHtml = buildAttributes(attributes);
+
+        boolean shouldRenderMultiline = node.hasChildren() && hasNodeBlockChildren(children);
+
+        if (!shouldRenderMultiline) {
+            return buildSingleLineNodeElement(
+                    tag,
+                    text,
+                    attributesHtml,
+                    children,
+                    depth
+            );
+        }
+
+        return buildMultiLineNodeElement(
+                tag,
+                attributesHtml,
+                children,
+                depth
+        );
+    }
+
     private String indent(int depth) {
         return "  ".repeat(depth);
     }
@@ -72,6 +103,19 @@ public class HtmlBuilder {
                 if (childTag != null && !isInlineTag(childTag)) {
                     return true;
                 }
+            }
+        }
+
+        return false;
+    }
+
+    private boolean hasNodeBlockChildren(List<HtmlNode> children) {
+
+        for (HtmlNode child : children) {
+            String childTag = child.getTag();
+
+            if (!isInlineTag(childTag)) {
+                return true;
             }
         }
 
@@ -125,6 +169,29 @@ public class HtmlBuilder {
         return html.toString();
     }
 
+    private String buildSingleLineNodeElement(
+            String tag,
+            String text,
+            String attributesHtml,
+            List<HtmlNode> children,
+            int depth) {
+
+        StringBuilder html = new StringBuilder();
+
+        appendOpeningTag(html, tag, attributesHtml, depth);
+
+        if (isVoidElement(tag)) {
+            return html.toString();
+        }
+
+        html.append(text);
+        appendInlineNodeChildren(html, children);
+        appendClosingTag(html, tag);
+
+        return html.toString();
+
+    }
+
     private String buildMultiLineElement(
             String tag,
             String attributesHtml,
@@ -141,6 +208,23 @@ public class HtmlBuilder {
 
         html.append(indent(depth));
 
+        appendClosingTag(html, tag);
+
+        return html.toString();
+    }
+
+    private String buildMultiLineNodeElement(
+            String tag,
+            String attributesHtml,
+            List<HtmlNode> children,
+            int depth
+    ) {
+        StringBuilder html = new StringBuilder();
+
+        appendOpeningTag(html, tag, attributesHtml, depth);
+        html.append("\n");
+        appendMultiLineNodeChildren(html, children, depth);
+        html.append(indent(depth));
         appendClosingTag(html, tag);
 
         return html.toString();
@@ -171,6 +255,12 @@ public class HtmlBuilder {
         }
     }
 
+    private void appendInlineNodeChildren(StringBuilder html, List<HtmlNode> children) {
+        for (HtmlNode child : children) {
+            html.append(buildHtml(child, 0));
+        }
+    }
+
     private void appendMultiLineChildren(
             StringBuilder html,
             List<Object> children,
@@ -181,5 +271,17 @@ public class HtmlBuilder {
                     .append("\n");
         }
     }
+
+    private void appendMultiLineNodeChildren (
+            StringBuilder html,
+            List<HtmlNode> children,
+            int depth) {
+        for (HtmlNode child : children) {
+            html.append(buildHtml(child, depth + 1))
+                    .append("\n");
+        }
+
+    }
+
 
 }
