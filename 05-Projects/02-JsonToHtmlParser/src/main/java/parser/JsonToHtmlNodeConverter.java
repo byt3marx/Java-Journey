@@ -169,7 +169,7 @@ public class JsonToHtmlNodeConverter {
 
             content.append(viewportEntry.getKey())
                     .append("=")
-                    .append(String.valueOf(viewportEntry.getValue()));
+                    .append(viewportEntry.getValue());
 
             index++;
         }
