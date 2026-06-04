@@ -68,4 +68,16 @@ public class HtmlNode {
         this.children.add(child);
     }
 
+    public boolean hasChildren() {
+        return !children.isEmpty();
+    }
+
+    public boolean hasText() {
+        return !text.isBlank();
+    }
+
+    public boolean hasAttributes() {
+        return !attributes.isEmpty();
+    }
+
 }
