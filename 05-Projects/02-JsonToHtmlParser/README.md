@@ -13,17 +13,19 @@ The JSON to HTML Parser converts structured JSON documents into fully generated 
 The application supports:
 
 * recursive nested HTML structures
+* HtmlNode Tree generation and traversal
 * attributes and inline styling
 * arrays/lists for repeated elements
 * document-level HTML generation
 * void HTML elements
 * formatted multiline rendering
 * HTML file generation and persistence
+* type-safe HTML document modeling
 
 The project is designed using a layered transformation pipeline:
 
 ```text
-JSON → Parsed Data → HTML Element Maps → HTML Rendering → File Output
+JSON → Parsed Data → HtmlNode Tree → HTML Rendering → File Output
 ```
 
 ---
@@ -35,7 +37,9 @@ This project combines multiple core Java concepts into one cohesive system:
 * Object-Oriented Programming (OOP)
 * Recursive tree traversal
 * Collections (`Map`, `List`, `Set`)
+* Java Generics
 * JSON deserialization with Gson
+* TypeToken and generic type handling
 * File I/O
 * Separation of concerns
 * Rendering pipelines
@@ -45,7 +49,12 @@ This project combines multiple core Java concepts into one cohesive system:
 * Exception wrapping and error handling
 * Utility class design
 * Rendering abstraction
+* Domain modeling
+* Tree-based data structures
+* Unmodifiable collections
+* Encapsulation and state protection
 * Refactoring and code cleanup
+* Type-safe architecture design
 
 ---
 
@@ -54,12 +63,32 @@ This project combines multiple core Java concepts into one cohesive system:
 The project follows a structured layered architecture:
 
 ```text
+app      → application entry point
 io       → file loading and file writing
-parser   → JSON parsing and structure conversion
+parser   → JSON parsing and HtmlNode conversion
+model    → HtmlNode document representation
 builder  → HTML rendering
 html     → shared HTML rules/constants
-app      → application entry point
+
 ```
+
+The application transforms JSON into a recursive HtmlNode tree before rendering the final HTML output.
+
+```text
+JSON
+  ↓
+Map<String, Object>
+  ↓
+HtmlNode Tree
+  ↓
+HTML Renderer
+  ↓
+HTML File
+```
+
+This intermediate tree representation improves type safety, reduces casting, and creates a cleaner separation
+between parsing and rendering responsibilities. 
+
 
 ---
 
@@ -118,7 +147,7 @@ JsonToHtmlNodeConverter.java
 
 #### JsonToHtmlNodeConverter
 
-* Converts parsed JSON into normalized HTML node structures
+* Converts parsed JSON into a recursive HtmlNode tree representation
 * Handles:
 
   * recursive conversion
@@ -149,6 +178,29 @@ HtmlBuilder.java
 * Uses extracted rendering helpers for cleaner orchestration
 * Separates inline and multiline rendering behavior
 * Centralizes reusable tag rendering logic
+
+---
+
+### 🔹 model
+
+```text
+HtmlNode.java
+```
+
+#### HtmlNode
+
+* Represents a single HTML element in the document tree
+* Stores:
+
+    * tag name
+    * text content
+    * attributes
+    * child elements
+
+* Uses defensive validation
+* Exposes unmodifiable collections
+* Provides helper methods for querying node state
+* Acts as the domain model used by the rendering pipeline
 
 ---
 ### 🔹 html
@@ -306,6 +358,9 @@ Generated HTML can be saved directly into `.html` files.
 │       │   │   ├── JsonLoader.java
 │       │   │   └── HtmlFileWriter.java
 │       │   │
+│       │   ├── model/
+│       │   │   └── HtmlNode.java
+│       │   │
 │       │   └── parser/
 │       │       ├── JsonParserService.java
 │       │       └── JsonToHtmlNodeConverter.java
@@ -347,6 +402,8 @@ JsonParserService
         ↓
 JsonToHtmlNodeConverter
         ↓
+HtmlNode Tree
+        ↓
 HtmlBuilder
         ↓
 HtmlFileWriter
@@ -373,13 +430,23 @@ This project demonstrates the ability to:
 * incremental refactoring practices
 * reusable rendering abstractions
 
+* domain modeling with HtmlNode
+* recursive tree-based document representation
+* type-safe architecture design
+* encapsulation through dedicated domain objects
+* use of unmodifiable collections
+* migration from generic Map structures to object-oriented models
+* safe large-scale refactoring of an existing codebase
+* recursive rendering of object hierarchies
+* practical use of Java generics and TypeToken
+
 ---
 
 # 🚀 Future Improvements
 
 Possible extensions:
 
-* Typed `HtmlNode` classes instead of raw `Map<String, Object>`
+* JUnit test suite
 * HTML validation
 * configurable formatting options
 * XHTML/self-closing mode
@@ -390,6 +457,8 @@ Possible extensions:
 * command-line argument support (`args[]`)
 * configurable formatting rules
 * visitor pattern rendering architecture
+* support for additional HTML document features
+* configurable indentation and output styles
 
 ---
 
