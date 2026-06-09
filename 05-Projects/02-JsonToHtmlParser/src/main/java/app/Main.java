@@ -14,8 +14,13 @@ public class Main {
 
     public static void main(String[] args) {
 
-        String inputPath = "src/main/resources/input/helloWorld.json";
-        String outputPath = "src/main/resources/output/helloWorld.html";
+        if (args.length != 2) {
+            System.out.println("Usage: java Main <input.json> <output.html>");
+            return;
+        }
+
+        String inputPath = args[0];
+        String outputPath = args[1];
 
         JsonLoader loader = new JsonLoader();
         JsonParserService parser = new JsonParserService();
