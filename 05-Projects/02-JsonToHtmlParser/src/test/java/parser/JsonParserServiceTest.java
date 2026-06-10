@@ -1,33 +1,49 @@
 package parser;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 import java.util.Map;
 
 public class JsonParserServiceTest {
 
+    private JsonParserService parser;
+
+    @BeforeEach
+    void setUp() {
+        parser = new JsonParserService();
+    }
+
     @Test
     void validJsonIsParsedSuccessfully() {
 
-        JsonParserService parser = new JsonParserService();
+        // Arrange
         String json = "{\"name\":\"Marx\"}";
+
+        // Act
         Map<String, Object> result = parser.parseJson(json);
 
+        // Assert
         assertEquals("Marx", result.get("name"));
     }
 
     @Test
-    void bankJsonIsRejected () {
-        JsonParserService parser = new JsonParserService();
+    void blankJsonIsRejected () {
 
+        // Arrange
+        String json = "  ";
+
+        // Act & Assert
         assertThrows(IllegalArgumentException.class, () -> parser.parseJson("  "));
     }
 
     @Test
     void invalidJsonIsRejected() {
-        JsonParserService parser = new JsonParserService();
+
+        // Arrange
         String json = "{ invalid json }";
 
-    assertThrows(IllegalArgumentException.class, () -> parser.parseJson(json));
+        // Act & Assert
+        assertThrows(IllegalArgumentException.class, () -> parser.parseJson(json));
     }
 }
