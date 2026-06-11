@@ -347,33 +347,46 @@ Generated HTML can be saved directly into `.html` files.
 02-JsonToHtmlParser/
 │
 ├── src/
-│   └── main/
-│       ├── java/
-│       │   ├── app/
-│       │   │   └── Main.java
-│       │   │
-│       │   ├── builder/
-│       │   │   └── HtmlBuilder.java
-│       │   │
-│       │   ├── html/
-│       │   │   └── HtmlRules.java
-│       │   │
-│       │   ├── io/
-│       │   │   ├── JsonLoader.java
-│       │   │   └── HtmlFileWriter.java
-│       │   │
-│       │   ├── model/
-│       │   │   └── HtmlNode.java
-│       │   │
-│       │   └── parser/
-│       │       ├── JsonParserService.java
-│       │       └── JsonToHtmlNodeConverter.java
-│       │
-│       └── resources/
-│           ├── input/
-│           └── output/
+│   ├── main/
+│   │    ├── java/
+│   │    │   ├── app/
+│   │    │   │   └── Main.java
+│   │    │   │
+│   │    │   ├── builder/
+│   │    │   │   └── HtmlBuilder.java
+│   │    │   │
+│   │    │   ├── html/
+│   │    │   │   └── HtmlRules.java
+│   │    │   │
+│   │    │   ├── io/
+│   │    │   │   ├── JsonLoader.java
+│   │    │   │   └── HtmlFileWriter.java
+│   │    │   │
+│   │    │   ├── model/
+│   │    │   │   └── HtmlNode.java
+│   │    │   │
+│   │    │   └── parser/
+│   │    │       ├── JsonParserService.java
+│   │    │       └── JsonToHtmlNodeConverter.java
+│   │    │
+│   │    └── resources/
+│   │        ├── input/
+│   │        └── output/
+│   │
+│   └── test/
+│       └── java/
+│           ├── builder
+│           │   └── HtmlBuilderTest.java
+│           │
+│           ├── model
+│           │   └── HtmlNodeTest.java
+│           │
+│           └── parser
+│               └── JsonParserServiceTest.java
 │
-└── pom.xml
+├── pom.xml
+│
+└── README.md
 ```
 
 ---
