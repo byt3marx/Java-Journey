@@ -4,9 +4,19 @@ A structured **Java-based JSON → HTML generation engine** built as part of my 
 
 This project focuses on applying **recursive parsing, tree traversal, rendering pipelines, separation of concerns, and file generation** using real-world style architecture.
 
+> Status: Complete
+>
+> Version: 1.0
+>
+> Features:
+> - JSON → HtmlNode conversion
+> - HTML rendering engine
+> - Command-line argument support
+> - JUnit 5 test suite (18 tests passing) 
+
 ---
 
-# 🚀 Overview
+## 🚀 Overview
 
 The JSON to HTML Parser converts structured JSON documents into fully generated HTML pages.
 
@@ -22,15 +32,9 @@ The application supports:
 * HTML file generation and persistence
 * type-safe HTML document modeling
 
-The project is designed using a layered transformation pipeline:
-
-```text
-JSON → Parsed Data → HtmlNode Tree → HTML Rendering → File Output
-```
-
 ---
 
-# 🧠 Key Concepts Applied
+## 🧠 Key Concepts Applied
 
 This project combines multiple core Java concepts into one cohesive system:
 
@@ -58,7 +62,7 @@ This project combines multiple core Java concepts into one cohesive system:
 
 ---
 
-# 🏗 Architecture
+## 🏗 Architecture
 
 The project follows a structured layered architecture:
 
@@ -221,7 +225,7 @@ HtmlRules.java
 * Demonstrates utility-class architecture
 
 ---
-# ⚙ Features
+## ⚙ Features
 
 ## 🌳 Recursive HTML Generation
 
@@ -337,7 +341,7 @@ Generated HTML can be saved directly into `.html` files.
 
 ---
 
-# 📁 Project Structure
+## 📁 Project Structure
 
 ```text
 02-JsonToHtmlParser/
@@ -374,7 +378,7 @@ Generated HTML can be saved directly into `.html` files.
 
 ---
 
-# ▶ How to Run
+## ▶ How to Run
 
 1. Navigate to the project directory:
 
@@ -388,10 +392,54 @@ Generated HTML can be saved directly into `.html` files.
   mvn compile
   mvn exec:java
 ```
+3. The application supports command-line arguments for custom input and output files.
+
+   Example:
+```bash
+java -jar JsonToHtmlParser.jar input.json output.html
+```
 
 ---
 
-# 🧪 Example Pipeline
+## 🧪 Testing
+
+The project includes JUnit 5 unit tests covering the core components:
+
+### HtmlNodeTest
+
+* Node Creation
+* Attribute management
+* Child management
+* Text content
+* Validation
+
+### JsonParserServiceTest
+
+* Valid JSON parsing
+* Blank JSON rejection
+* Invalid JSON rejection
+
+### HtmlBuilderTest
+
+* Text rendering
+* Attribute rendering
+* Attribute + text rendering
+* Parent/child rendering
+* Multiple children
+* Nested elements
+* Inline elements
+* Void elements
+
+### Current Results:
+
+* Tests: 18
+* Failures: 0
+* Errors: 0
+* Skipped: 0
+
+---
+
+## 🧪 Example Pipeline
 
 ```text
 helloWorld.json
@@ -413,7 +461,7 @@ helloWorld.html
 
 ---
 
-# 📈 What This Project Demonstrates
+## 📈 What This Project Demonstrates
 
 This project demonstrates the ability to:
 
@@ -429,7 +477,6 @@ This project demonstrates the ability to:
 * utility class architecture
 * incremental refactoring practices
 * reusable rendering abstractions
-
 * domain modeling with HtmlNode
 * recursive tree-based document representation
 * type-safe architecture design
@@ -439,22 +486,22 @@ This project demonstrates the ability to:
 * safe large-scale refactoring of an existing codebase
 * recursive rendering of object hierarchies
 * practical use of Java generics and TypeToken
+* unit testing with JUnit 5
+* test-driven validation of rendering behavior
+* verification of recursive tree rendering
 
 ---
 
-# 🚀 Future Improvements
+## 🚀 Future Improvements
 
 Possible extensions:
 
-* JUnit test suite
 * HTML validation
-* configurable formatting options
 * XHTML/self-closing mode
 * CSS file generation
 * template engine support
 * HTML escaping & sanitization
 * parser schema validation
-* command-line argument support (`args[]`)
 * configurable formatting rules
 * visitor pattern rendering architecture
 * support for additional HTML document features
@@ -462,6 +509,6 @@ Possible extensions:
 
 ---
 
-# 👨‍💻 Author
+## 👨‍💻 Author
 
 Part of my ongoing journey to become a confident Java developer by building structured, real-world style applications and learning how parsing, rendering, and transformation systems work internally.
