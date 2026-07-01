@@ -93,7 +93,7 @@ Working with groups of objects:
 
 Larger applications that combine multiple concepts into complete systems.
 
-#### [Student Manager System](./05-Projects/01-StudentManagerSystem) //FIIIIIIIXX
+#### [Student Manager System](./05-Projects/01-StudentManagerSystem)
 
 A console-based student management application featuring:
 
