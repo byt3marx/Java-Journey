@@ -1,269 +1,151 @@
-# My Java Journey ☕
-
-A structured collection of my Java exercises and projects as I progress
-from beginner to confident programmer.
-
-This repository documents my **step‑by‑step Java learning journey**,
-including projects, refactors, and concepts learned each week.
-
-------------------------------------------------------------------------
-
-# 📁 Project Structure
-
-    My-Java-Journey/
-    │
-    ├── 01-Basics/
-    │   ├── welcome.java
-    │   ├── human.java
-    │   ├── simpleCalculator.java
-    │   ├── calculator.java
-    │   ├── smartCalculator.java
-    │
-    ├── 02-Interactive-Logic/
-    │   ├── SmartCalculator.java
-    │   ├── SmartCalculatorRefactor.java
-    │
-    ├── 03-OOP-Foundations/
-    │   └── 01-Student/
-    │       ├── Student.java
-    │       ├── StudentApp.java
-    │
-    ├── 04-Collections/
-    │   └── Sorting/
-    │       ├── SortNumbers.java
-    │       ├── SortStrings.java
-    │       ├── SortStudents.java
-    │       └── StudentTest.java
-    │
-    ├── 05-Projects/
-    │   └── 01-StudentManagerSystem/
-    │       ├── data/
-    │       │   └── students.txt
-    │       └── src/
-    │           ├── model/
-    │           │   └── Student.java
-    │           ├── service/
-    │           │   ├── StudentManager.java
-    │           │   └── StudentFileService.java
-    │           └── ui/
-    │               └── Main.java
-    │
-    ├── README.md
-    └── README_Professional.md
-
-Each folder represents a **stage of learning**, with increasingly
-structured and advanced implementations.
-
-------------------------------------------------------------------------
-
-# 🎯 Goals of This Repository
-
-*   Document my Java learning progress
-*   Build increasingly complex Java programs
-*   Refactor code into cleaner, more maintainable structures
-*   Practice defensive programming and validation
-*   Apply object‑oriented principles step‑by‑step
-
-------------------------------------------------------------------------
-
-# 📚 Learning Roadmap
-
-The repository follows a structured learning path:
-
-    Week 1 → Java Fundamentals
-    Week 2 → Control Flow & Interactive Programs
-    Week 3 → Methods, Refactoring & Enums
-    Week 4 → Object-Oriented Programming
-    Week 5 → File I/O & Persistence
-    Week 6 → Architecture & Separation of Concerns
-    Week 7 → Validation & Defensive Programming
-    Week 8 → Advanced CLI Systems & UX 
-
-------------------------------------------------------------------------
-
-# 🧠 Concepts Covered So Far
-
-## Java Fundamentals
-
-*   Java program structure
-*   Compilation and execution
-*   Variables and data types
-*   Arithmetic operators
-*   Integer vs floating‑point division
-*   Scanner input
-
-## Control Flow
-
-*   if / else logic
-*   switch statements
-*   while loops
-*   nested validation loops
-*   defensive programming
+# 💼 Java Portfolio
 
-## Program Structure
+This repository documents my progression from learning Java fundamentals to designing structured, object-oriented applications with increasing architectural complexity.
 
-*   modular design
-*   helper methods
-*   parameter passing
-*   return values
-*   separation of concerns
+The projects in this repository were built to strengthen practical software engineering skills rather than simply complete programming exercises. Each project introduces new concepts while building upon previous knowledge.
 
-## Input Handling
+---
 
-*   parsing input with `Double.parseDouble()`
-*   try / catch exception handling
-*   robust validation loops
+## 👨‍💻 Developer Profile
 
-## Enums & Polymorphism
+Currently focused on developing strong backend Java fundamentals through hands-on projects.
 
-*   enums for fixed operation types
-*   mapping user input to enum values
-*   polymorphic method implementations
-*   removing switch statements with behavior-driven enums
+Areas of practice include:
 
-## Object-Oriented Programming (OOP)
+* Object-Oriented Programming
+* Clean Architecture
+* Separation of Concerns
+* Defensive Programming
+* Data Structures
+* File I/O
+* Recursion
+* Unit Testing
+* Refactoring
+* Software Design Principles
 
-* classes and objects
-* fields and constructors
-* `this` keyword
-* encapsulation (private fields, getters, setters)
-* object references and memory model
-*   default values (`null`, `0`)
-*   `toString()` method
+---
 
-## Collections
+## 📁 Featured Projects
 
-* using `ArrayList` to store objects
-* managing multiple objects in a collection
-* index vs user-friendly numbering (1-based vs 0-based)
+### 📚 Student Manager System
 
-## Sorting
+A console-based application for managing student records.
 
-* implementing `Comparable`
-* using `Comparator`
-* sorting collections by different criteria
-* understanding default vs custom ordering
+**Highlights**
 
-## File I/O & Persistence
+* Layered architecture
+* CRUD operations
+* Input validation
+* File persistence
+* Search and sorting
+* Encapsulation
+* Separation of responsibilities
 
-* writing data using `FileWriter`
-* reading data using `Scanner`
-* structured file formats (CSV)
-* parsing text into objects
-* handling missing files safely
-* try-with-resources
-* building resilient file loading systems
+**Technologies**
 
-## Architecture & Design
+* Java
+* Collections
+* File I/O
 
-* package structure (`model`, `service`, `ui`)
-* layered architecture
-* separation of concerns
-* dependency composition
-* service-based design (`StudentFileService`)
-* data ownership and responsibility boundaries
+➡️ [Student Manager System](./05-Projects/01-StudentManagerSystem)
 
-## Validation & Defensive Programming
+---
 
-* model-level validation
-* centralized validation logic
-* exception-driven validation (`IllegalArgumentException`)
-* layered validation strategy (UI → Manager → Model)
-* input sanitization (`trim`)
-* preventing invalid object states
+### 🎨 JSON → HTML Parser
 
-## Advanced Control Flow & CLI Design
+A Maven-based application that converts structured JSON documents into HTML using a recursive object model and rendering pipeline.
 
-* nested menu systems
-* loop-driven navigation (`while(true)`)
-* safe exit and back navigation (`0 → go back`)
-* null-safe flow handling
-* reusable input helper methods
-* improved user experience in CLI applications
+**Highlights**
 
-------------------------------------------------------------------------
+* Recursive tree traversal
+* JSON deserialization with Gson
+* HtmlNode domain model
+* Rendering engine
+* Command-line support
+* JUnit 5 test suite
 
-# 🛠 Projects
+**Technologies**
 
-### Hello World
+* Java
+* Maven
+* Gson
+* JUnit 5
 
-Basic Java program demonstrating compilation and execution.
+➡️ [JSON to HTML Parser](./05-Projects/02-JsonToHtmlParser)
 
-### Personal Info App
+---
 
-Simple program using variables and output formatting.
+## 🛠 Technologies
 
-### Even/Odd Checker
+### Languages
 
-Uses modulo operator and conditional logic.
+* Java
 
-### Basic Calculator
+### Build Tools
 
-Performs arithmetic operations using user input.
+* Maven
 
-### Smart Calculator
+### Libraries
 
-Interactive calculator with validation loops and defensive input
-handling.
+* Gson
+* JUnit 5
 
-### Smart Calculator Refactor
+### Development Tools
 
-Refactored version featuring: - modular helper methods - robust input
-parsing - enum-driven operations - polymorphic calculation logic
+* IntelliJ IDEA
+* Git
+* GitHub
 
-### Student Manager System
+---
 
-Console-based application for managing students.
+## 🧠 Concepts Practiced
 
-Features:
+* Object-Oriented Programming
+* Encapsulation
+* Collections
+* Generics
+* File I/O
+* Exception Handling
+* Recursive Algorithms
+* Tree Data Structures
+* Data Transformation Pipelines
+* Separation of Concerns
+* Layered Architecture
+* Defensive Programming
+* Refactoring
+* Unit Testing
 
-* add student
-* show students
-* edit student (name, age, email)
-* remove student
-* search student (by name and ID)
-* sort students (name, age, ID)
-* persistent storage (save/load)
-* structured CLI navigation
+---
 
-Implements:
+## 🎯 Current Learning Focus
 
-* `ArrayList<Student>` storage
-* layered architecture (UI / service / model)
-* file persistence layer (`StudentFileService`)
-* validation at multiple levels
-* defensive programming patterns
+The next stage of my learning journey focuses on expanding beyond standalone Java applications into backend development.
 
-Refactored to improve maintainability, scalability, and separation of concerns.
+Topics planned include:
 
-------------------------------------------------------------------------
+* Interfaces & Polymorphism
+* Streams API
+* Lambda Expressions
+* HTTP & REST APIs
+* Databases (SQL)
+* Spring Boot
 
-# 🚀 Upcoming Topics
+---
 
-Planned next steps in the learning journey:
+## 📈 Development Philosophy
 
-* JSON parsing and data transformation
-* Tree structures and recursion
-* Building a JSON → HTML parser
-* Working with external libraries (Jackson / Gson)
-* Improving search algorithms
-* Expanding project architecture further
+I believe that writing maintainable software is just as important as writing software that works.
 
-------------------------------------------------------------------------
+Throughout these projects I focus on:
 
-# 📈 Long-Term Vision
+* understanding the reasoning behind design decisions
+* building maintainable architectures
+* refactoring instead of rewriting
+* separating responsibilities clearly
+* continuously improving code quality
 
-This repository will gradually evolve into a collection of:
+---
 
-* Java learning projects
-* refactored code examples
-* object-oriented systems
-* small applications demonstrating core programming concepts
-* real-world style problem-solving projects
+## 📬 Repository
 
-------------------------------------------------------------------------
-
-# 👨‍💻 Author
-
-Personal Java learning repository documenting the journey from beginner
-to confident Java developer.
+For a complete overview of the learning journey and repository structure, see the main **README.md**.
