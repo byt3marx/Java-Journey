@@ -45,12 +45,12 @@ GitHubUser
 
 ## Package Responsibilities
 
-app      - Application entry point
-ui       - Console input and output
-service  - Application logic and use cases
-client   - HTTP communication with GitHub API
-parser   - JSON parsing and mapping
-model    - Data objects
+- app      - Application entry point
+- ui       - Console input and output
+- service  - Application logic and use cases
+- client   - HTTP communication with GitHub API
+- parser   - JSON parsing and mapping
+- model    - Data objects
 
 ```text
 Version:
