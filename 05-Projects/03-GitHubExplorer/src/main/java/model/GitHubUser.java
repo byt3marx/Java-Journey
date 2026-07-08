@@ -1,13 +1,20 @@
 package model;
 
+import com.google.gson.annotations.SerializedName;
+
 public class GitHubUser {
 
     private final String login;
     private final String name;
     private final String bio;
+
+    @SerializedName("public_repos")
     private final int publicRepos;
+
     private final int followers;
     private final int following;
+
+    @SerializedName("html_url")
     private final String htmlUrl;
 
     public GitHubUser(String login,
