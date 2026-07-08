@@ -1,10 +1,18 @@
 package ui;
 
 import java.util.Scanner;
+import service.GitHubService;
+import model.GitHubUser;
+import java.util.Optional;
 
 public class ConsoleUI {
 
     private final Scanner scanner = new Scanner(System.in);
+    private final GitHubService gitHubService;
+
+    public ConsoleUI(GitHubService gitHubService) {
+        this.gitHubService = gitHubService;
+    }
 
     public void start() {
 
@@ -53,7 +61,12 @@ public class ConsoleUI {
             }
         }
 
+        Optional<GitHubUser> user = gitHubService.findUserByUsername(username);
 
-        System.out.println("You searche for: " + username);
+        if (user.isPresent()) {
+            System.out.println("User found: " + user.get().getLogin());
+        } else {
+            System.out.println("GitHub user not found.");
+        }
     }
 }
