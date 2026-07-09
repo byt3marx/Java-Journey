@@ -10,12 +10,14 @@ import java.util.Optional;
 
 public class GitHubHttpClient {
 
+    private static final String GITHUB_USERS_API_URL = "https://api.github.com/users/";
+
     private final HttpClient httpClient = HttpClient.newHttpClient();
 
     public Optional<String> fetchUserJson(String username) {
 
 
-        String url = "https://api.github.com/users/" + username;
+        String url = GITHUB_USERS_API_URL + username;
 
         HttpRequest request = HttpRequest.newBuilder()
                 .uri(URI.create(url))
@@ -37,7 +39,11 @@ public class GitHubHttpClient {
             }
 
             throw new RuntimeException("GitHub API request failed with status code: " + response.statusCode());
-        } catch (IOException | InterruptedException e) {
+
+        } catch (InterruptedException e) {
+            Thread.currentThread().interrupt();
+            throw new RuntimeException("GitHub API request was interrupted", e);
+        } catch (IOException e) {
             throw new RuntimeException("Failed to fetch GitHub user data", e);
         }
     }
