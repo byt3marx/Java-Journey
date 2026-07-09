@@ -64,9 +64,29 @@ public class ConsoleUI {
         Optional<GitHubUser> user = gitHubService.findUserByUsername(username);
 
         if (user.isPresent()) {
-            System.out.println("User found: " + user.get().getLogin());
+            displayUserProfile(user.get());
         } else {
             System.out.println("GitHub user not found.");
         }
+    }
+
+    private void displayUserProfile(GitHubUser user) {
+        System.out.println();
+        System.out.println("GitHub User Profile");
+        System.out.println("-------------------");
+        System.out.println("Username: " + user.getLogin());
+        System.out.println("Name: " + formatNullable(user.getName()));
+        System.out.println("Bio: " + formatNullable(user.getBio()));
+        System.out.println("Public repos: " + user.getPublicRepos());
+        System.out.println("Followers: " + user.getFollowers());
+        System.out.println("Following: " + user.getFollowing());
+        System.out.println("Profile: " + user.getHtmlUrl());
+    }
+
+    private String formatNullable(String value) {
+        if (value == null || value.isBlank()) {
+            return "Not provided";
+        }
+        return value;
     }
 }
