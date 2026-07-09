@@ -61,12 +61,16 @@ public class ConsoleUI {
             }
         }
 
-        Optional<GitHubUser> user = gitHubService.findUserByUsername(username);
+        try {
+            Optional<GitHubUser> user = gitHubService.findUserByUsername(username);
 
-        if (user.isPresent()) {
-            displayUserProfile(user.get());
-        } else {
-            System.out.println("GitHub user not found.");
+            if (user.isPresent()) {
+                displayUserProfile(user.get());
+            } else {
+                System.out.println("GitHub user not found.");
+            }
+        } catch (RuntimeException e) {
+            System.out.println("Something went wrong while contacting GitHub. Please try again later.");
         }
     }
 
