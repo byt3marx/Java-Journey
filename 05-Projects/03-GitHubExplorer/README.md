@@ -241,7 +241,7 @@ GitHubApiServiceTest
 * Sort repositories by stars, forks, or update date
 * Show repository languages
 * Add GitHub API rate limit handling
-* Add unit tests
+* Add more unit tests
 * Add custom exceptions
 * Improve CLI formatting
 * Add support for command-line arguments

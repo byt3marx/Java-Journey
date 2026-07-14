@@ -12,14 +12,23 @@ public class GitHubHttpClient implements GitHubClient {
 
     private static final String GITHUB_USERS_API_URL = "https://api.github.com/users/";
 
+    private static final String REPOS_PATH = "/repos";
+
     private final HttpClient httpClient = HttpClient.newHttpClient();
 
     @Override
+    public Optional<String> fetchUserRepositoriesJson(String username) {
+        String url = GITHUB_USERS_API_URL + username + REPOS_PATH;
+        return fetchJson(url);
+    }
+
+    @Override
     public Optional<String> fetchUserJson(String username) {
-
-
         String url = GITHUB_USERS_API_URL + username;
+        return fetchJson(url);
+    }
 
+    private Optional<String> fetchJson(String url) {
         HttpRequest request = HttpRequest.newBuilder()
                 .uri(URI.create(url))
                 .GET()
@@ -45,7 +54,7 @@ public class GitHubHttpClient implements GitHubClient {
             Thread.currentThread().interrupt();
             throw new RuntimeException("GitHub API request was interrupted", e);
         } catch (IOException e) {
-            throw new RuntimeException("Failed to fetch GitHub user data", e);
+            throw new RuntimeException("Failed to fetch GitHub data", e);
         }
     }
 }
