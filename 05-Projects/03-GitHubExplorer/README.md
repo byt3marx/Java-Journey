@@ -213,6 +213,27 @@ Completed:
 * Profile display
 * Missing user handling
 * API error handling
+* Basic unit testing
+
+## Tests
+
+The project currently has 6 passing JUnit tests.
+
+Test coverage includes:
+
+* Mapping valid GitHub user JSON into a `GitHubUser`
+* Preserving `null` optional fields from GitHub JSON
+* Returning a user when the client provides valid JSON
+* Returning `Optional.empty()` when the client returns no JSON
+* Throwing `IllegalArgumentException` for blank usernames
+* Throwing `IllegalArgumentException` for null usernames
+
+Current test classes:
+
+```text
+JsonMapperTest
+GitHubApiServiceTest
+```
 
 ## Possible Future Improvements
 
