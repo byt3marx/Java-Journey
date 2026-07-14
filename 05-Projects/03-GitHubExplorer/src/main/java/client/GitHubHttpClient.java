@@ -8,12 +8,13 @@ import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 import java.util.Optional;
 
-public class GitHubHttpClient {
+public class GitHubHttpClient implements GitHubClient {
 
     private static final String GITHUB_USERS_API_URL = "https://api.github.com/users/";
 
     private final HttpClient httpClient = HttpClient.newHttpClient();
 
+    @Override
     public Optional<String> fetchUserJson(String username) {
 
 

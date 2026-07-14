@@ -1,10 +1,12 @@
 package service;
 
+import client.GitHubClient;
 import model.GitHubUser;
 import java.util.Optional;
 import client.GitHubHttpClient;
 import parser.JsonMapper;
 import java.util.Optional;
+import client.GitHubClient;
 
 public class GitHubApiService implements GitHubService {
 
@@ -14,7 +16,7 @@ public class GitHubApiService implements GitHubService {
             throw new IllegalArgumentException("Username cannot be blank.");
         }
 
-        Optional<String> json = gitHubHttpClient.fetchUserJson(username);
+        Optional<String> json = gitHubClient.fetchUserJson(username);
 
         if (json.isEmpty()) {
             return Optional.empty();
@@ -24,11 +26,12 @@ public class GitHubApiService implements GitHubService {
         return Optional.of(user);
     }
 
-    private final GitHubHttpClient gitHubHttpClient;
+    private final GitHubClient gitHubClient;
+
     private final JsonMapper jsonMapper;
 
-    public GitHubApiService(GitHubHttpClient gitHubHttpClient, JsonMapper jsonMapper) {
-        this.gitHubHttpClient = gitHubHttpClient;
+    public GitHubApiService(GitHubClient gitHubClient, JsonMapper jsonMapper) {
+        this.gitHubClient = gitHubClient;
         this.jsonMapper = jsonMapper;
     }
 }
