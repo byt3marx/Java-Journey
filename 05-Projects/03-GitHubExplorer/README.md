@@ -217,16 +217,20 @@ Completed:
 
 ## Tests
 
-The project currently has 6 passing JUnit tests.
+The project currently has 10 passing JUnit tests.
 
 Test coverage includes:
 
 * Mapping valid GitHub user JSON into a `GitHubUser`
-* Preserving `null` optional fields from GitHub JSON
-* Returning a user when the client provides valid JSON
-* Returning `Optional.empty()` when the client returns no JSON
+* Preserving `null` optional fields from GitHub user JSON
+* Mapping GitHub repository JSON arrays into `List<GitHubRepository>`
+* Returning a user when the client provides valid user JSON
+* Returning `Optional.empty()` when a user is not found
 * Throwing `IllegalArgumentException` for blank usernames
 * Throwing `IllegalArgumentException` for null usernames
+* Returning repositories when the client provides valid repository JSON
+* Returning `Optional.empty()` when repository search finds no user
+* Throwing `IllegalArgumentException` for blank repository search usernames
 
 Current test classes:
 
