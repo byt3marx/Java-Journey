@@ -11,9 +11,10 @@ import java.util.List;
 
 public class JsonMapperTest {
 
+    private final JsonMapper mapper = new JsonMapper();
+
     @Test
     void mapToGitHubUserMapsValidJsonCorrectly() {
-        JsonMapper mapper = new JsonMapper();
 
         String json = """
                 {
@@ -40,7 +41,6 @@ public class JsonMapperTest {
 
     @Test
     void MapToGitHubUserAllowsNullOptionalFields() {
-        JsonMapper mapper = new JsonMapper();
 
         String json = """
                 {
@@ -66,7 +66,6 @@ public class JsonMapperTest {
 
     @Test
     void mapToGitHubRepositoriesMapsValidJsonArrayCorrectly() {
-        JsonMapper mapper = new JsonMapper();
 
         String json = """
                 [

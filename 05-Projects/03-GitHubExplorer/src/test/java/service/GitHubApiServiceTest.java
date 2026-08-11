@@ -11,6 +11,12 @@ import java.util.List;
 
 public class GitHubApiServiceTest {
 
+    private final JsonMapper jsonMapper = new JsonMapper();
+
+    private GitHubService createService(GitHubClient fakeClient) {
+        return new GitHubApiService(fakeClient, jsonMapper);
+    }
+
     @Test
     void findUserByUsernameReturnsUserWhenClientReturnsJson() {
         GitHubClient fakeClient = new GitHubClient() {
@@ -35,8 +41,7 @@ public class GitHubApiServiceTest {
             }
         };
 
-        JsonMapper jsonMapper = new JsonMapper();
-        GitHubService service = new GitHubApiService(fakeClient, jsonMapper);
+        GitHubService service = createService(fakeClient);
 
         Optional<GitHubUser> result = service.findUserByUsername("marx");
 
@@ -61,8 +66,7 @@ public class GitHubApiServiceTest {
             }
         };
 
-        JsonMapper jsonMapper = new JsonMapper();
-        GitHubService service = new GitHubApiService(fakeClient, jsonMapper);
+        GitHubService service = createService(fakeClient);
 
         Optional<GitHubUser> result = service.findUserByUsername("unknown-user");
 
@@ -83,8 +87,7 @@ public class GitHubApiServiceTest {
             }
         };
 
-        JsonMapper jsonMapper = new JsonMapper();
-        GitHubService service = new GitHubApiService(fakeClient, jsonMapper);
+        GitHubService service = createService(fakeClient);
 
         assertThrows(
                 IllegalArgumentException.class,
@@ -106,8 +109,7 @@ public class GitHubApiServiceTest {
             }
         };
 
-        JsonMapper jsonMapper = new JsonMapper();
-        GitHubService service = new GitHubApiService(fakeClient, jsonMapper);
+        GitHubService service = createService(fakeClient);
 
         assertThrows(
                 IllegalArgumentException.class,
@@ -148,8 +150,7 @@ public class GitHubApiServiceTest {
             }
         };
 
-        JsonMapper jsonMapper = new JsonMapper();
-        GitHubService service = new GitHubApiService(fakeClient, jsonMapper);
+        GitHubService service = createService(fakeClient);
 
         Optional<List<GitHubRepository>> result =
                 service.findRepositoriesByUsername("marx");
@@ -180,8 +181,7 @@ public class GitHubApiServiceTest {
             }
         };
 
-        JsonMapper jsonMapper = new JsonMapper();
-        GitHubService service = new GitHubApiService(fakeClient, jsonMapper);
+        GitHubService service = createService(fakeClient);
 
         Optional<List<GitHubRepository>> result =
                 service.findRepositoriesByUsername("unknown-user");
@@ -203,8 +203,7 @@ public class GitHubApiServiceTest {
             }
         };
 
-        JsonMapper jsonMapper = new JsonMapper();
-        GitHubService service = new GitHubApiService(fakeClient, jsonMapper);
+        GitHubService service = createService(fakeClient);
 
         assertThrows(
                 IllegalArgumentException.class,
