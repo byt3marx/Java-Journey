@@ -17,12 +17,52 @@ public class GitHubApiServiceTest {
         return new GitHubApiService(fakeClient, jsonMapper);
     }
 
-    @Test
-    void findUserByUsernameReturnsUserWhenClientReturnsJson() {
-        GitHubClient fakeClient = new GitHubClient() {
+    private GitHubClient fakeClientReturningEmpty() {
+        return new GitHubClient() {
             @Override
             public Optional<String> fetchUserJson(String username) {
-                return Optional.of("""
+                return Optional.empty();
+            }
+
+            @Override
+            public Optional<String> fetchUserRepositoriesJson(String username) {
+                return Optional.empty();
+            }
+        };
+    }
+
+    private GitHubClient fakeClientReturningUserJson(String json) {
+        return new GitHubClient() {
+            @Override
+            public Optional<String> fetchUserJson(String username) {
+                return Optional.of(json);
+            }
+
+            @Override
+            public Optional<String> fetchUserRepositoriesJson(String username) {
+                return Optional.empty();
+            }
+        };
+    }
+
+    private GitHubClient fakeClientReturningRepositoryJson(String json) {
+        return new GitHubClient() {
+            @Override
+            public Optional<String> fetchUserJson(String username) {
+                return Optional.empty();
+            }
+
+            @Override
+            public Optional<String> fetchUserRepositoriesJson(String username) {
+                return Optional.of(json);
+            }
+        };
+    }
+
+    @Test
+    void findUserByUsernameReturnsUserWhenClientReturnsJson() {
+        GitHubClient fakeClient = fakeClientReturningUserJson(
+                        """
                         {
                           "login": "marx",
                           "name": "Marx User",
@@ -33,13 +73,6 @@ public class GitHubApiServiceTest {
                           "html_url": "https://github.com/marx"
                         }
                         """);
-            }
-
-            @Override
-            public Optional<String> fetchUserRepositoriesJson(String username) {
-                return Optional.empty();
-            }
-        };
 
         GitHubService service = createService(fakeClient);
 
@@ -54,17 +87,7 @@ public class GitHubApiServiceTest {
 
     @Test
     void findUserByUsernameReturnsEmptyWhenClientReturnsEmpty() {
-        GitHubClient fakeClient = new GitHubClient() {
-            @Override
-            public Optional<String> fetchUserJson(String username) {
-                return Optional.empty();
-            }
-
-            @Override
-            public Optional<String> fetchUserRepositoriesJson(String username) {
-                return Optional.empty();
-            }
-        };
+        GitHubClient fakeClient = fakeClientReturningEmpty();
 
         GitHubService service = createService(fakeClient);
 
@@ -75,17 +98,7 @@ public class GitHubApiServiceTest {
 
     @Test
     void findUserByUsernameThrowsExceptionForBlankUsername() {
-        GitHubClient fakeClient = new GitHubClient() {
-            @Override
-            public Optional<String> fetchUserJson(String username) {
-                return Optional.empty();
-            }
-
-            @Override
-            public Optional<String> fetchUserRepositoriesJson(String username) {
-                return Optional.empty();
-            }
-        };
+        GitHubClient fakeClient = fakeClientReturningEmpty();
 
         GitHubService service = createService(fakeClient);
 
@@ -97,17 +110,7 @@ public class GitHubApiServiceTest {
 
     @Test
     void findUserByUsernameThrowsExceptionForNullUsername() {
-        GitHubClient fakeClient = new GitHubClient() {
-            @Override
-            public Optional<String> fetchUserJson(String username) {
-                return Optional.empty();
-            }
-
-            @Override
-            public Optional<String> fetchUserRepositoriesJson(String username) {
-                return Optional.empty();
-            }
-        };
+        GitHubClient fakeClient = fakeClientReturningEmpty();
 
         GitHubService service = createService(fakeClient);
 
@@ -119,15 +122,8 @@ public class GitHubApiServiceTest {
 
     @Test
     void findRepositoriesByUsernameReturnsRepositoriesWhenClientReturnsJson() {
-        GitHubClient fakeClient = new GitHubClient() {
-            @Override
-            public Optional<String> fetchUserJson(String username) {
-                return Optional.empty();
-            }
-
-            @Override
-            public Optional<String> fetchUserRepositoriesJson(String username) {
-                return Optional.of("""
+        GitHubClient fakeClient = fakeClientReturningRepositoryJson(
+                        """
                         [
                           {
                             "name": "repo-one",
@@ -135,7 +131,7 @@ public class GitHubApiServiceTest {
                             "language": "Java",
                             "stargazers_count": 12,
                             "forks": 3,
-                            "html_url": "https://gitHub.com/marx/repo-one"
+                            "html_url": "https://github.com/marx/repo-one"
                           },
                           {
                             "name": "repo-two",
@@ -143,12 +139,10 @@ public class GitHubApiServiceTest {
                             "language": null,
                             "stargazers_count": 5,
                             "forks": 1,
-                            "html_url": "https://gitHub.com/marx/repo-two"
+                            "html_url": "https://github.com/marx/repo-two"
                           }
-                        ]    
+                        ]
                         """);
-            }
-        };
 
         GitHubService service = createService(fakeClient);
 
@@ -164,22 +158,12 @@ public class GitHubApiServiceTest {
         assertEquals("Java", first.getLanguage());
         assertEquals(12, first.getStars());
         assertEquals(3, first.getForks());
-        assertEquals("https://gitHub.com/marx/repo-one", first.getHtmlUrl());
+        assertEquals("https://github.com/marx/repo-one", first.getHtmlUrl());
     }
 
     @Test
     void findRepositoriesByUsernameReturnsEmptyWhenClientReturnsEmpty() {
-        GitHubClient fakeClient = new GitHubClient() {
-            @Override
-            public Optional<String> fetchUserJson(String username) {
-                return Optional.empty();
-            }
-
-            @Override
-            public Optional<String> fetchUserRepositoriesJson(String username) {
-                return Optional.empty();
-            }
-        };
+        GitHubClient fakeClient = fakeClientReturningEmpty();
 
         GitHubService service = createService(fakeClient);
 
@@ -191,23 +175,13 @@ public class GitHubApiServiceTest {
 
     @Test
     void findRepositoriesByUsernameThrowsExceptionForBlankUsername() {
-        GitHubClient fakeClient = new GitHubClient() {
-            @Override
-            public Optional<String> fetchUserJson(String username) {
-                return Optional.empty();
-            }
-
-            @Override
-            public Optional<String> fetchUserRepositoriesJson(String username) {
-                return Optional.empty();
-            }
-        };
+        GitHubClient fakeClient = fakeClientReturningEmpty();
 
         GitHubService service = createService(fakeClient);
 
         assertThrows(
                 IllegalArgumentException.class,
-                () -> service.findUserByUsername("  ")
+                () -> service.findRepositoriesByUsername("  ")
         );
     }
 }
