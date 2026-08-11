@@ -57,16 +57,7 @@ public class ConsoleUI {
     }
 
     private void searchUser() {
-        String username = "";
-
-        while (username.isBlank()) {
-            System.out.println("Enter GitHub username: ");
-            username = scanner.nextLine();
-
-            if (username.isBlank()) {
-                System.out.println("Username cannot be blank. Please try again.");
-            }
-        }
+        String username = readUsername();
 
         try {
             Optional<GitHubUser> user = gitHubService.findUserByUsername(username);
@@ -82,16 +73,7 @@ public class ConsoleUI {
     }
 
     private void searchRepositories() {
-        String username = "";
-
-        while (username.isBlank()) {
-            System.out.print("Enter GitHub username: ");
-            username = scanner.nextLine();
-
-            if (username.isBlank()) {
-                System.out.println("Username cannot be blank. Please try again.");
-            }
-        }
+        String username = readUsername();
 
         try {
             Optional<List<GitHubRepository>> repositories =
@@ -136,6 +118,21 @@ public class ConsoleUI {
             System.out.println("URL: " + repository.getHtmlUrl());
             System.out.println();
         }
+    }
+
+    private String readUsername() {
+        String username = "";
+
+        while (username.isBlank()) {
+            System.out.println("Enter GitHub username: ");
+            username = scanner.nextLine();
+
+            if (username.isBlank()) {
+                System.out.println("Username cannot be blank. Please try again.");
+            }
+        }
+
+        return username;
     }
 
     private String formatNullable(String value) {
