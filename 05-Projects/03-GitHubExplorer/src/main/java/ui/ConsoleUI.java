@@ -1,12 +1,12 @@
 package ui;
 
-import java.util.Scanner;
-
 import model.GitHubRepository;
-import service.GitHubService;
 import model.GitHubUser;
-import java.util.Optional;
+import service.GitHubService;
+
 import java.util.List;
+import java.util.Optional;
+import java.util.Scanner;
 
 public class ConsoleUI {
 
@@ -40,21 +40,27 @@ public class ConsoleUI {
         System.out.println("1. Search GitHub user");
         System.out.println("2. Search user repositories");
         System.out.println("3. Exit");
-        System.out.println("Choose option: ");
+        System.out.print("Choose option: ");
     }
 
     private boolean handleMenuChoice(String choice) {
-        if (choice.equals("1")) {
-            searchUser();
-            return true;
-        } else if (choice.equals("2")) {
-            searchRepositories();
-            return true;
-        } else if (choice.equals("3")) {
-            return false;
-        } else {
-            System.out.println("Invalid option. Please choose 1, 2 or 3.");
-            return true;
+
+        switch (choice) {
+            case "1" -> {
+                searchUser();
+                return true;
+            }
+            case "2" -> {
+                searchRepositories();
+                return true;
+            }
+            case "3" -> {
+                return false;
+            }
+            default -> {
+                System.out.println("Invalid option. Please choose 1, 2 or 3.");
+                return true;
+            }
         }
     }
 
@@ -114,7 +120,7 @@ public class ConsoleUI {
         int limit = Math.min(repositories.size(), MAX_REPOSITORIES_DISPLAYED);
 
         for (int i = 0; i < limit; i++) {
-        GitHubRepository repository = repositories.get(i);
+            GitHubRepository repository = repositories.get(i);
 
             System.out.println("Name: " + repository.getName());
             System.out.println("Description: " + formatNullable(repository.getDescription()));
@@ -127,7 +133,7 @@ public class ConsoleUI {
 
         if (repositories.size() > MAX_REPOSITORIES_DISPLAYED) {
             System.out.println("Showing first " + MAX_REPOSITORIES_DISPLAYED
-            + " of " + repositories.size() + " public repositories.");
+                    + " of " + repositories.size() + " public repositories.");
         }
     }
 
@@ -135,7 +141,7 @@ public class ConsoleUI {
         String username = "";
 
         while (username.isBlank()) {
-            System.out.println("Enter GitHub username: ");
+            System.out.print("Enter GitHub username: ");
             username = scanner.nextLine();
 
             if (username.isBlank()) {

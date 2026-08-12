@@ -1,23 +1,26 @@
 package service;
 
 import client.GitHubClient;
-import model.GitHubUser;
-import java.util.Optional;
-import client.GitHubHttpClient;
-import parser.JsonMapper;
-import java.util.Optional;
-import client.GitHubClient;
-
 import model.GitHubRepository;
+import model.GitHubUser;
+import parser.JsonMapper;
+
+import java.util.Optional;
 import java.util.List;
 
 public class GitHubApiService implements GitHubService {
 
+    private final GitHubClient gitHubClient;
+    private final JsonMapper jsonMapper;
+
+    public GitHubApiService(GitHubClient gitHubClient, JsonMapper jsonMapper) {
+        this.gitHubClient = gitHubClient;
+        this.jsonMapper = jsonMapper;
+    }
+
     @Override
     public Optional<GitHubUser> findUserByUsername(String username) {
-        if (username == null || username.isBlank()) {
-            throw new IllegalArgumentException("Username cannot be blank.");
-        }
+        validateUsername(username);
 
         Optional<String> json = gitHubClient.fetchUserJson(username);
 
@@ -31,9 +34,7 @@ public class GitHubApiService implements GitHubService {
 
     @Override
     public Optional<List<GitHubRepository>> findRepositoriesByUsername(String username) {
-        if (username == null || username.isBlank()) {
-            throw new IllegalArgumentException("Username cannot be blank");
-        }
+        validateUsername(username);
 
         Optional<String> json = gitHubClient.fetchUserRepositoriesJson(username);
 
@@ -46,12 +47,9 @@ public class GitHubApiService implements GitHubService {
         return Optional.of(repositories);
     }
 
-    private final GitHubClient gitHubClient;
-
-    private final JsonMapper jsonMapper;
-
-    public GitHubApiService(GitHubClient gitHubClient, JsonMapper jsonMapper) {
-        this.gitHubClient = gitHubClient;
-        this.jsonMapper = jsonMapper;
+    private void validateUsername(String username) {
+        if (username == null || username.isBlank()) {
+            throw new IllegalArgumentException("Username cannot be blank");
+        }
     }
 }
