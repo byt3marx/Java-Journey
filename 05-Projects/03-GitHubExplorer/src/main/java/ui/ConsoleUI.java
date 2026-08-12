@@ -10,6 +10,8 @@ import java.util.List;
 
 public class ConsoleUI {
 
+    private static final int MAX_REPOSITORIES_DISPLAYED = 10;
+
     private final Scanner scanner = new Scanner(System.in);
     private final GitHubService gitHubService;
 
@@ -109,7 +111,11 @@ public class ConsoleUI {
         System.out.println("GitHub Repositories");
         System.out.println("-------------------");
 
-        for (GitHubRepository repository : repositories) {
+        int limit = Math.min(repositories.size(), MAX_REPOSITORIES_DISPLAYED);
+
+        for (int i = 0; i < limit; i++) {
+        GitHubRepository repository = repositories.get(i);
+
             System.out.println("Name: " + repository.getName());
             System.out.println("Description: " + formatNullable(repository.getDescription()));
             System.out.println("Language: " + formatNullable(repository.getLanguage()));
@@ -117,6 +123,11 @@ public class ConsoleUI {
             System.out.println("Forks: " + repository.getForks());
             System.out.println("URL: " + repository.getHtmlUrl());
             System.out.println();
+        }
+
+        if (repositories.size() > MAX_REPOSITORIES_DISPLAYED) {
+            System.out.println("Showing first " + MAX_REPOSITORIES_DISPLAYED
+            + " of " + repositories.size() + " public repositories.");
         }
     }
 
