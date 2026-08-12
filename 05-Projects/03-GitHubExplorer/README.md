@@ -20,9 +20,12 @@ This project focuses on:
 ## Current Features
 
 * Search for a GitHub user by username
+* Search for a GitHub user's public repositories
 * Fetch live user data from the GitHub REST API
 * Parse JSON response into a Java object
 * Display formatted GitHub profile details
+* Display repository name, description, language, stars, forks and URL
+* Limit repository output to the first 10 repositories for readability
 * Keep the application running until the user exits
 * Validate blank username input
 * Handle missing GitHub users gracefully
@@ -45,6 +48,26 @@ If optional profile fields such as name or bio are missing, the application disp
 ```text
 Not provided
 ```
+
+## Displayed Repository Data
+
+The application currently displays up to 10 public repositories for a searched GitHub user.
+
+For each repository, it displays:
+
+* Repository name
+* Description
+* Main language
+* Star count
+* Fork count
+* Respository URL
+
+If optional repository fields such as description or language are missing, the application displays:
+
+```text
+Not provided
+```
+
 
 ## Architecture
 
@@ -200,7 +223,7 @@ Profile: https://github.com/torvalds
 
 ## Version Status
 
-Current status: Version 1.0 core functionality working.
+Current status: Version 1.1 core functionality working.
 
 Completed:
 
@@ -214,6 +237,10 @@ Completed:
 * Missing user handling
 * API error handling
 * Basic unit testing
+* Public repository search
+* Repository JSON mapping
+* Repository display formatting
+* Repository output limiting
 
 ## Tests
 
