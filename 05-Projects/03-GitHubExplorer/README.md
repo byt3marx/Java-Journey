@@ -26,6 +26,7 @@ This project focuses on:
 * Display formatted GitHub profile details
 * Display repository name, description, language, stars, forks and URL
 * Limit repository output to the first 10 repositories for readability
+* Sort public repositories by star count, highest first
 * Keep the application running until the user exits
 * Validate blank username input
 * Handle missing GitHub users gracefully
@@ -51,7 +52,7 @@ Not provided
 
 ## Displayed Repository Data
 
-The application currently displays up to 10 public repositories for a searched GitHub user.
+The application currently displays up to 10 public repositories for a searched GitHub user, sorted by star count from highest to lowest.
 
 For each repository, it displays:
 
@@ -60,7 +61,7 @@ For each repository, it displays:
 * Main language
 * Star count
 * Fork count
-* Respository URL
+* Repository URL
 
 If optional repository fields such as description or language are missing, the application displays:
 
@@ -244,7 +245,7 @@ Completed:
 
 ## Tests
 
-The project currently has 10 passing JUnit tests.
+The project currently has 11 passing JUnit tests.
 
 Test coverage includes:
 
@@ -256,6 +257,7 @@ Test coverage includes:
 * Throwing `IllegalArgumentException` for blank usernames
 * Throwing `IllegalArgumentException` for null usernames
 * Returning repositories when the client provides valid repository JSON
+* Sorting repositories by star count in descending order
 * Returning `Optional.empty()` when repository search finds no user
 * Throwing `IllegalArgumentException` for blank repository search usernames
 
