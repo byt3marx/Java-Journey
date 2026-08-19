@@ -184,4 +184,49 @@ public class GitHubApiServiceTest {
                 () -> service.findRepositoriesByUsername("  ")
         );
     }
+
+    @Test
+    void findRepositoriesByUsernameReturnsRepositoriesSortedByStarsDescending() {
+        GitHubClient fakeClient = fakeClientReturningRepositoryJson("""
+                [
+                  {
+                    "name": "low-stars",
+                    "description": "Small repo",
+                    "language": "Java",
+                    "stargazers_count": 2,
+                    "forks": 0,
+                    "html_url": "https://github.com/marx/low-stars"
+                  },
+                  {
+                    "name": "high-stars",
+                    "description": "Popular repo",
+                    "language": "Java",
+                    "stargazers_count": 50,
+                    "forks": 10,
+                    "html_url": "https://github.com/marx/high-stars"
+                  },
+                  {
+                    "name": "middle-stars",
+                    "description": "Medium repo",
+                    "language": "Java",
+                    "stargazers_count": 15,
+                    "forks": 3,
+                    "html_url": "https://github.com/marx/middle-stars"
+                  }
+                ]
+                """);
+
+        GitHubService service = createService(fakeClient);
+
+        Optional<List<GitHubRepository>> result =
+                service.findRepositoriesByUsername("marx");
+
+        assertTrue(result.isPresent());
+
+        List<GitHubRepository> repositories = result.get();
+
+        assertEquals("high-stars", repositories.get(0).getName());
+        assertEquals("middle-stars", repositories.get(1).getName());
+        assertEquals("low-stars", repositories.get(2).getName());
+    }
 }

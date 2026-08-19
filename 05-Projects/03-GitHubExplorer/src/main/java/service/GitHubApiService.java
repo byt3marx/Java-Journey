@@ -44,6 +44,10 @@ public class GitHubApiService implements GitHubService {
 
         List<GitHubRepository> repositories = jsonMapper.mapToGitHubRepositories(json.get());
 
+        repositories.sort((first, second) ->
+                        Integer.compare(second.getStars(), first.getStars())
+                );
+
         return Optional.of(repositories);
     }
 
