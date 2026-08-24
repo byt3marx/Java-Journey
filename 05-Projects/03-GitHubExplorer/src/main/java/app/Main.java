@@ -5,7 +5,6 @@ import parser.JsonMapper;
 import ui.ConsoleUI;
 import service.GitHubApiService;
 import service.GitHubService;
-import ui.ConsoleUI;
 
 public class Main {
 
