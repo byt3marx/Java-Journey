@@ -52,7 +52,6 @@ public class Member {
     }
 
     private void validateEmail(String email) {
-
         if (email == null || email.isBlank()) {
             throw new IllegalArgumentException("Email cannot be blank.");
         }
