@@ -5,7 +5,10 @@ import model.Member;
 import service.LibraryService;
 import model.Book;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
 import java.util.List;
+import java.util.Optional;
 import java.util.Scanner;
 
 public class ConsoleUI {
@@ -146,11 +149,44 @@ public class ConsoleUI {
     }
 
     private void borrowBook() {
+        viewBooks();
+        Book book = readExistingBook("Enter book ID:");
 
+        viewMembers();
+        Member member = readExistingMember("Enter member ID:");
+
+        LocalDate borrowedDate = readValidDate("Enter borrowed date (yyyy-MM-dd):");
+        LocalDate dueDate = readValidDate("Enter due date (yyyy-MM-dd):");
+
+        try {
+            Loan loan = service.borrowBook(
+                    book.getId(),
+                    member.getId(),
+                    borrowedDate,
+                    dueDate
+            );
+
+            System.out.println("Loan created successfully. Loan ID: " + loan.getId());
+        } catch (IllegalArgumentException e) {
+            System.out.println(e.getMessage());
+        }
     }
 
     private void returnBook() {
+        viewLoans();
+        Loan loan = readExistingLoan("Enter loan ID:");
+        LocalDate returnedDate = readValidDate("Enter returned date (yyyy-MM-dd):");
 
+        try {
+            service.returnBook(
+                    loan.getId(),
+                    returnedDate
+            );
+
+            System.out.println("Book returned successfully.");
+        } catch (IllegalArgumentException e) {
+            System.out.println(e.getMessage());
+        }
     }
 
     private void viewLoans() {
@@ -168,7 +204,26 @@ public class ConsoleUI {
                             + " | Due date: " + l.getDueDate()
             );
         }
+    }
+//------------------------------------------------------------------------------------------------
+    private int readValidId(String prompt) {
+        while (true) {
+            System.out.println(prompt);
+            String input = scanner.nextLine();
 
+            try {
+                int id = Integer.parseInt(input);
+
+                if (id > 0) {
+                    return id;
+                }
+
+                System.out.println("ID must be greater than 0.");
+
+            } catch (NumberFormatException e) {
+                System.out.println("Please enter a valid ID.");
+            }
+        }
     }
 
     private int readValidNumberOfPages() {
@@ -265,5 +320,69 @@ public class ConsoleUI {
         }
     }
 
+    private Book readExistingBook(String prompt) {
+        while (true) {
+            int bookId = readValidId(prompt);
+
+            Optional<Book> result = service.findBookById(bookId);
+
+            if (result.isPresent()) {
+                Book book = result.get();
+                System.out.println("Selected: " + book.getTitle());
+                return book;
+            }
+
+            System.out.println("Book not found");
+        }
+    }
+
+    private Member readExistingMember(String prompt) {
+        while (true) {
+            int memberId = readValidId(prompt);
+
+            Optional<Member> result = service.findMemberById(memberId);
+
+            if (result.isPresent()) {
+                Member member = result.get();
+                System.out.println("Selected: " + member.getName());
+                return member;
+            }
+
+            System.out.println("Member not found.");
+        }
+    }
+
+    private Loan readExistingLoan(String prompt) {
+        while (true) {
+            int loanId = readValidId(prompt);
+
+            Optional<Loan> result = service.findLoanById(loanId);
+
+            if (result.isPresent()) {
+                Loan loan = result.get();
+                System.out.println(
+                        "Selected: " + loan.getId()
+                                + " | Book: " + loan.getBook().getTitle()
+                                + " | Member: " + loan.getMember().getName());
+                return loan;
+            }
+
+            System.out.println("Loan not found.");
+        }
+    }
+
+    private LocalDate readValidDate(String prompt) {
+        while (true) {
+            System.out.println(prompt);
+            String input = scanner.nextLine();
+
+            try {
+                return LocalDate.parse(input);
+            } catch (DateTimeParseException e) {
+                System.out.println("Please enter a valid date in (yyyy:MM-dd) format.");
+            }
+        }
+
+    }
 
 }
