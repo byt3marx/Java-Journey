@@ -1,9 +1,11 @@
 package ui;
 
+import model.Loan;
 import model.Member;
 import service.LibraryService;
 import model.Book;
 
+import java.util.List;
 import java.util.Scanner;
 
 public class ConsoleUI {
@@ -108,11 +110,39 @@ public class ConsoleUI {
     }
 
     private void viewBooks() {
-        // call service.getBooks()
+        List<Book> books = service.getBooks();
+
+        if (books.isEmpty()) {
+            System.out.println("No books available.");
+            return;
+        }
+
+        for (Book b : books) {
+            System.out.println(
+                    "ID: " + b.getId()
+                            + " | Title: " + b.getTitle()
+                            + " | Author: " + b.getAuthor()
+                            + " | Pages: " + b.getNumberOfPages()
+            );
+        }
     }
 
     private void viewMembers() {
-        // call service.getMembers()
+        List<Member> members = service.getMembers();
+
+        if (members.isEmpty()) {
+            System.out.println("No members in the system.");
+            return;
+        }
+
+        for (Member m : members) {
+            System.out.println(
+                    "ID: " + m.getId()
+                            + " | Name: " + m.getName()
+                            + " | Email: " + m.getEmail()
+                            + " | Phone number: " + m.getPhoneNumber()
+            );
+        }
     }
 
     private void borrowBook() {
@@ -124,6 +154,20 @@ public class ConsoleUI {
     }
 
     private void viewLoans() {
+        List<Loan> loans = service.getLoans();
+
+        if (loans.isEmpty()) {
+            System.out.println("No active loans in the system.");
+            return;
+        }
+
+        for (Loan l : loans) {
+            System.out.println(
+                    "ID: " + l.getId()
+                            + " | Borrowed date: " + l.getBorrowedDate()
+                            + " | Due date: " + l.getDueDate()
+            );
+        }
 
     }
 
