@@ -91,7 +91,7 @@ public class ConsoleUI {
 
     private void addBook() {
 
-        String title = readRequiredText("Title:");
+        String title = readRequiredText("Title");
 
         String author = readRequiredText("Author");
 
@@ -109,7 +109,7 @@ public class ConsoleUI {
         String phoneNumber = readValidPhoneNumber();
 
         Member member = service.addMember(name, email, phoneNumber);
-        System.out.println("Member added successfully. ID: " + member.getId());
+        System.out.println("Member " + member.getName() + " added successfully. ID: " + member.getId());
     }
 
     private void viewBooks() {
