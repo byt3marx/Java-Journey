@@ -53,6 +53,12 @@ public class LibraryService {
         return List.copyOf(loans);
     }
 
+    public List<Loan> getActiveLoans() {
+        return loans.stream()
+                .filter(loan -> loan.getReturnedDate() == null)
+                .toList();
+    }
+
     public Optional<Book> findBookById(int id) {
         return books.stream()
                     .filter(book -> book.getId() == id)

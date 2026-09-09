@@ -49,8 +49,9 @@ public class ConsoleUI {
         System.out.println("4. View members");
         System.out.println("5. Borrow book");
         System.out.println("6. Return book");
-        System.out.println("7. View loans");
-        System.out.println("8. Exit");
+        System.out.println("7. View active loans");
+        System.out.println("8. Loan history");
+        System.out.println("9. Exit");
     }
 
     private boolean handleMenuChoice(String choice) {
@@ -81,10 +82,14 @@ public class ConsoleUI {
                 yield true;
             }
             case "7" -> {
-                viewLoans();
+                viewActiveLoans();
                 yield true;
             }
-            case "8" -> false;
+            case "8" -> {
+                viewLoanHistory();
+                yield true;
+            }
+            case "9" -> false;
             default -> {
                 System.out.println("Invalid choice.");
                 yield true;
@@ -176,15 +181,20 @@ public class ConsoleUI {
 
             System.out.println("Loan created successfully. \n"
                     + loan.getMember().getName() + " borrowed: " + loan.getBook().getTitle()
-                    + "\n. Loan ID: " + loan.getId());
+                    + "\n Loan ID: " + loan.getId());
         } catch (IllegalArgumentException e) {
             System.out.println(e.getMessage());
         }
     }
 
     private void returnBook() {
-        viewLoans();
-        Loan loan = readExistingLoan("Enter loan ID:");
+        if (service.getActiveLoans().isEmpty()) {
+            System.out.println("No active loans in the system.");
+            return;
+        }
+
+        viewActiveLoans();
+        Loan loan = readExistingActiveLoan("Enter loan ID:");
         LocalDate returnedDate = readValidDate("Enter returned date (dd-MM-yyyy):");
 
         try {
@@ -199,8 +209,8 @@ public class ConsoleUI {
         }
     }
 
-    private void viewLoans() {
-        List<Loan> loans = service.getLoans();
+    private void viewActiveLoans() {
+        List<Loan> loans = service.getActiveLoans();
 
         if (loans.isEmpty()) {
             System.out.println("No active loans in the system.");
@@ -210,10 +220,34 @@ public class ConsoleUI {
         for (Loan l : loans) {
             System.out.println(
                     "ID: " + l.getId()
+                    + " | Book: " + l.getBook().getTitle()
+                    + " | Member: " + l.getMember().getName()
+                    + " | Borrowed date: " + l.getBorrowedDate().format(DATE_FORMATTER)
+                    + " | Due date: " + l.getDueDate().format(DATE_FORMATTER)
+            );
+        }
+    }
+
+    private void viewLoanHistory() {
+        List<Loan> loans = service.getLoans();
+
+        if (loans.isEmpty()) {
+            System.out.println("No loans in the system.");
+            return;
+        }
+
+        for (Loan l : loans) {
+            String returned = l.getReturnedDate() == null
+                    ? "Active"
+                    : l.getReturnedDate().format(DATE_FORMATTER);
+
+            System.out.println(
+                    "ID: " + l.getId()
                             + " | Book: " + l.getBook().getTitle()
                             + " | Member: " + l.getMember().getName()
-                            + " | Borrowed date: " + l.getBorrowedDate()
-                            + " | Due date: " + l.getDueDate()
+                            + " | Borrowed date: " + l.getBorrowedDate().format(DATE_FORMATTER)
+                            + " | Due date: " + l.getDueDate().format(DATE_FORMATTER)
+                            + " | Returned: " + returned
             );
         }
     }
@@ -376,6 +410,33 @@ public class ConsoleUI {
                         "Selected: " + loan.getId()
                                 + " | Book: " + loan.getBook().getTitle()
                                 + " | Member: " + loan.getMember().getName());
+                return loan;
+            }
+
+            System.out.println("Loan not found.");
+        }
+    }
+
+    private Loan readExistingActiveLoan(String prompt) {
+        while (true) {
+            int loanId = readValidId(prompt);
+
+            Optional<Loan> result = service.findLoanById(loanId);
+
+            if (result.isPresent()) {
+                Loan loan = result.get();
+
+                if (loan.getReturnedDate() != null) {
+                    System.out.println("That loan has already been returned.");
+                    continue;
+                }
+
+                System.out.println(
+                        "Selected: " + loan.getId()
+                        + " | Book: " + loan.getBook().getTitle()
+                        + " | Member: " + loan.getMember().getName()
+                );
+
                 return loan;
             }
 
