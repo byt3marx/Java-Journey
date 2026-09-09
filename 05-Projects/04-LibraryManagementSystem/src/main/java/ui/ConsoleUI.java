@@ -6,6 +6,7 @@ import service.LibraryService;
 import model.Book;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.List;
 import java.util.Optional;
@@ -15,6 +16,8 @@ public class ConsoleUI {
 
     private final LibraryService service;
     private final Scanner scanner;
+
+    private static final DateTimeFormatter DATE_FORMATTER = DateTimeFormatter.ofPattern("dd-MM-yyyy");
 
     public ConsoleUI(LibraryService service) {
         this.service = service;
@@ -377,7 +380,7 @@ public class ConsoleUI {
             String input = scanner.nextLine();
 
             try {
-                return LocalDate.parse(input);
+                return LocalDate.parse(input, DATE_FORMATTER);
             } catch (DateTimeParseException e) {
                 System.out.println("Please enter a valid date in (yyyy:MM-dd) format.");
             }
