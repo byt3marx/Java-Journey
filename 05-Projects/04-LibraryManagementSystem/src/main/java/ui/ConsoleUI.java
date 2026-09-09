@@ -158,8 +158,8 @@ public class ConsoleUI {
         viewMembers();
         Member member = readExistingMember("Enter member ID:");
 
-        LocalDate borrowedDate = readValidDate("Enter borrowed date (yyyy-MM-dd):");
-        LocalDate dueDate = readValidDate("Enter due date (yyyy-MM-dd):");
+        LocalDate borrowedDate = readValidDate("Enter borrowed date (dd-MM-yyyy):");
+        LocalDate dueDate = readValidDate("Enter due date (dd-MM-yyyy):");
 
         try {
             Loan loan = service.borrowBook(
@@ -178,7 +178,7 @@ public class ConsoleUI {
     private void returnBook() {
         viewLoans();
         Loan loan = readExistingLoan("Enter loan ID:");
-        LocalDate returnedDate = readValidDate("Enter returned date (yyyy-MM-dd):");
+        LocalDate returnedDate = readValidDate("Enter returned date (dd-MM-yyyy):");
 
         try {
             service.returnBook(
@@ -186,7 +186,7 @@ public class ConsoleUI {
                     returnedDate
             );
 
-            System.out.println("Book returned successfully.");
+            System.out.println("Book: " + loan.getBook().getTitle() +  " returned successfully.");
         } catch (IllegalArgumentException e) {
             System.out.println(e.getMessage());
         }
@@ -203,6 +203,8 @@ public class ConsoleUI {
         for (Loan l : loans) {
             System.out.println(
                     "ID: " + l.getId()
+                            + " | Book: " + l.getBook().getTitle()
+                            + " | Member: " + l.getMember().getName()
                             + " | Borrowed date: " + l.getBorrowedDate()
                             + " | Due date: " + l.getDueDate()
             );
@@ -382,7 +384,7 @@ public class ConsoleUI {
             try {
                 return LocalDate.parse(input, DATE_FORMATTER);
             } catch (DateTimeParseException e) {
-                System.out.println("Please enter a valid date in (yyyy:MM-dd) format.");
+                System.out.println("Please enter a valid date in (dd-MM-yyyy) format.");
             }
         }
 
