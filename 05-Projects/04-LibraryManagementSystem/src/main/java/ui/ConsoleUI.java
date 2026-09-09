@@ -102,7 +102,7 @@ public class ConsoleUI {
         int numberOfPages = readValidNumberOfPages();
 
         Book book = service.addBook(title, author, numberOfPages);
-        System.out.println("Book added successfully. ID: " + book.getId());
+        System.out.println("Book - " + book.getTitle() + " added successfully. ID: " + book.getId());
     }
 
     private void addMember() {
@@ -174,7 +174,9 @@ public class ConsoleUI {
                     dueDate
             );
 
-            System.out.println("Loan created successfully. Loan ID: " + loan.getId());
+            System.out.println("Loan created successfully. \n"
+                    + loan.getMember().getName() + " borrowed: " + loan.getBook().getTitle()
+                    + "\n. Loan ID: " + loan.getId());
         } catch (IllegalArgumentException e) {
             System.out.println(e.getMessage());
         }
