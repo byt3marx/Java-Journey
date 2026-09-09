@@ -128,6 +128,9 @@ public class ConsoleUI {
             return;
         }
 
+        System.out.println();
+        System.out.println("Books in the system:");
+
         for (Book b : books) {
             System.out.println(
                     "ID: " + b.getId()
@@ -145,6 +148,9 @@ public class ConsoleUI {
             System.out.println("No members in the system.");
             return;
         }
+
+        System.out.println();
+        System.out.println("Members in the system:");
 
         for (Member m : members) {
             System.out.println(
@@ -181,7 +187,7 @@ public class ConsoleUI {
 
             System.out.println("Loan created successfully. \n"
                     + loan.getMember().getName() + " borrowed: " + loan.getBook().getTitle()
-                    + "\n Loan ID: " + loan.getId());
+                    + "\nLoan ID: " + loan.getId());
         } catch (IllegalArgumentException e) {
             System.out.println(e.getMessage());
         }
@@ -217,6 +223,9 @@ public class ConsoleUI {
             return;
         }
 
+        System.out.println();
+        System.out.println("Active loans:");
+
         for (Loan l : loans) {
             System.out.println(
                     "ID: " + l.getId()
@@ -235,6 +244,9 @@ public class ConsoleUI {
             System.out.println("No loans in the system.");
             return;
         }
+
+        System.out.println();
+        System.out.println("Loan history:");
 
         for (Loan l : loans) {
             String returned = l.getReturnedDate() == null
