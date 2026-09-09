@@ -155,6 +155,11 @@ public class ConsoleUI {
         viewBooks();
         Book book = readExistingBook("Enter book ID:");
 
+        if (service.isBookBorrowed(book.getId())) {
+            System.out.println("Book is already borrowed.");
+            return;
+        }
+
         viewMembers();
         Member member = readExistingMember("Enter member ID:");
 

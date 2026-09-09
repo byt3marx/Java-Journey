@@ -100,7 +100,7 @@ public class LibraryService {
         return loan;
     }
 
-    private boolean isBookBorrowed(int bookId) {
+    public boolean isBookBorrowed(int bookId) {
         return loans.stream()
                 .anyMatch(loan ->
                         loan.getBook().getId() == bookId
