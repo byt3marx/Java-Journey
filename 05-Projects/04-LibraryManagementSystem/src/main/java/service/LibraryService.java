@@ -123,6 +123,35 @@ public class LibraryService {
         return loan;
     }
 
+    public void loadData(List<Book> books,
+                         List<Member> members,
+                         List<Loan> loans) {
+
+        this.books.clear();
+        this.members.clear();
+        this.loans.clear();
+
+        this.books.addAll(books);
+        this.members.addAll(members);
+        this.loans.addAll(loans);
+
+        nextBookId = books.stream()
+                .mapToInt(Book::getId)
+                .max()
+                .orElse(0) + 1;
+
+        nextMemberId = members.stream()
+                .mapToInt(Member::getId)
+                .max()
+                .orElse(0) + 1;
+
+        nextLoanId = loans.stream()
+                .mapToInt(Loan::getId)
+                .max()
+                .orElse(0) + 1;
+
+    }
+
 }
 
 
