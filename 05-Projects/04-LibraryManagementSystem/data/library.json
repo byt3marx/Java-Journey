@@ -1,0 +1,126 @@
+{
+  "books": [
+    {
+      "id": 1,
+      "title": "Think like a Monk",
+      "author": "Jay Shetty",
+      "numberOfPages": 328
+    },
+    {
+      "id": 2,
+      "title": "Emotional Intelligence",
+      "author": "Daniel Goleman",
+      "numberOfPages": 357
+    },
+    {
+      "id": 3,
+      "title": "Healing the soul of America",
+      "author": "Marianne Williamson",
+      "numberOfPages": 272
+    },
+    {
+      "id": 4,
+      "title": "The Magic",
+      "author": "Rhonda Byrne",
+      "numberOfPages": 254
+    },
+    {
+      "id": 5,
+      "title": "Reworking success",
+      "author": "Robert Theobald",
+      "numberOfPages": 119
+    },
+    {
+      "id": 6,
+      "title": "The future of Love",
+      "author": "Daphne Rose Kingma",
+      "numberOfPages": 221
+    },
+    {
+      "id": 7,
+      "title": "Conscious Evolution",
+      "author": "Barbara Marx Hubbard",
+      "numberOfPages": 270
+    },
+    {
+      "id": 8,
+      "title": "The Last Hours of Ancient Sunlight",
+      "author": "Neal Donald Walsch",
+      "numberOfPages": 314
+    },
+    {
+      "id": 9,
+      "title": "100 Things to see in the Night Sky",
+      "author": "Dean Regas",
+      "numberOfPages": 222
+    },
+    {
+      "id": 10,
+      "title": "Meditation within eternity",
+      "author": "Erip Pepin",
+      "numberOfPages": 157
+    },
+    {
+      "id": 11,
+      "title": "Diet fo a new America",
+      "author": "John Robbins",
+      "numberOfPages": 423
+    }
+  ],
+  "members": [
+    {
+      "id": 1,
+      "name": "Saša",
+      "email": "sasa@gmail.com",
+      "phoneNumber": "031-233-322"
+    },
+    {
+      "id": 2,
+      "name": "Sara",
+      "email": "sara@gmail.com",
+      "phoneNumber": "031-244-422"
+    },
+    {
+      "id": 3,
+      "name": "Rok",
+      "email": "rok@gmail.com",
+      "phoneNumber": "031-266-622"
+    },
+    {
+      "id": 4,
+      "name": "Miha",
+      "email": "miha@gmail.com",
+      "phoneNumber": "031-222-223"
+    },
+    {
+      "id": 5,
+      "name": "Sonja",
+      "email": "sonja@gmail.com",
+      "phoneNumber": "041-221-122"
+    }
+  ],
+  "loans": [
+    {
+      "id": 1,
+      "bookId": 1,
+      "memberId": 1,
+      "borrowedDate": "2026-09-10",
+      "dueDate": "2026-10-15"
+    },
+    {
+      "id": 2,
+      "bookId": 4,
+      "memberId": 3,
+      "borrowedDate": "2026-09-11",
+      "dueDate": "2026-10-24",
+      "returnedDate": "2026-09-12"
+    },
+    {
+      "id": 3,
+      "bookId": 6,
+      "memberId": 5,
+      "borrowedDate": "2026-09-11",
+      "dueDate": "2026-10-16"
+    }
+  ]
+}
