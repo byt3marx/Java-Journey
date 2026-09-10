@@ -149,7 +149,6 @@ public class LibraryService {
                 .mapToInt(Loan::getId)
                 .max()
                 .orElse(0) + 1;
-
     }
 
 }

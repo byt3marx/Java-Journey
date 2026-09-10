@@ -45,6 +45,12 @@ public class LibraryFileService {
         String json = gson.toJson(data);
 
         try {
+            Path parent = filePath.getParent();
+
+            if (parent != null) {
+                Files.createDirectories(parent);
+            }
+
             Files.writeString(filePath, json);
         } catch (IOException e) {
             throw new RuntimeException("Failed to save library data.", e);
@@ -94,5 +100,17 @@ public class LibraryFileService {
         }
 
         return loans;
+    }
+
+    public LibraryState loadState(Path filePath) {
+        LibraryData data = load(filePath);
+
+        List<Loan> loans = rebuildLoans(data);
+
+        return new LibraryState(
+                data.getBooks(),
+                data.getMembers(),
+                loans
+        );
     }
 }
