@@ -65,6 +65,12 @@
       "title": "Diet fo a new America",
       "author": "John Robbins",
       "numberOfPages": 423
+    },
+    {
+      "id": 12,
+      "title": "Bodi na jebiga",
+      "author": "Monica Sweeney",
+      "numberOfPages": 128
     }
   ],
   "members": [
@@ -105,7 +111,8 @@
       "bookId": 1,
       "memberId": 1,
       "borrowedDate": "2026-09-10",
-      "dueDate": "2026-10-15"
+      "dueDate": "2026-10-15",
+      "returnedDate": "2026-09-11"
     },
     {
       "id": 2,
@@ -121,6 +128,13 @@
       "memberId": 5,
       "borrowedDate": "2026-09-11",
       "dueDate": "2026-10-16"
+    },
+    {
+      "id": 4,
+      "bookId": 12,
+      "memberId": 1,
+      "borrowedDate": "2026-09-11",
+      "dueDate": "2026-09-12"
     }
   ]
 }

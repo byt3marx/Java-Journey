@@ -6,6 +6,7 @@ import model.Loan;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.util.List;
 import java.util.Optional;
 import java.time.LocalDate;
 
@@ -326,6 +327,65 @@ public class LibraryServiceTest {
                         returnedDate
                 )
         );
+    }
+
+    @Test
+    void loadDataRestoresNextIds() {
+
+        Book book = new Book(
+                5,
+                "The Science of Interstellar",
+                "Kip Thorne",
+                350
+        );
+
+        Member member = new Member(
+                6,
+                "Ragnar",
+                "ragnar@gmail.com",
+                "060-666-777"
+        );
+
+        LocalDate borrowedDate = LocalDate.of(2026, 9, 15);
+        LocalDate dueDate = LocalDate.of(2026, 9, 16);
+
+        Loan loan = new Loan(
+                3,
+                book,
+                member,
+                borrowedDate,
+                dueDate,
+                null
+        );
+
+        List<Book> books = List.of(book);
+        List<Member> members = List.of(member);
+        List<Loan> loans = List.of(loan);
+
+        service.loadData(books, members, loans);
+
+        Book newBook = service.addBook(
+                "The Dark Forest",
+                "Mother Nature",
+                456
+        );
+
+        Member newMember = service.addMember(
+                "Kekec",
+                "kekec@gmail.com",
+                "02-582 534"
+        );
+
+        Loan newLoan = service.borrowBook(
+                newBook.getId(),
+                newMember.getId(),
+                borrowedDate,
+                dueDate
+        );
+
+        assertEquals(6, newBook.getId());
+        assertEquals(7, newMember.getId());
+        assertEquals(4, newLoan.getId());
     }
 
 }
