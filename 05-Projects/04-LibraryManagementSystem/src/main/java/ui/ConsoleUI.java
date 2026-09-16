@@ -151,7 +151,6 @@ public class ConsoleUI {
                 default -> System.out.println("Invalid choice.");
             }
         }
-
     }
 
     private void handleLoansMenu() {
@@ -171,7 +170,6 @@ public class ConsoleUI {
                 default -> System.out.println("Invalid choice.");
             }
         }
-
     }
 
     private void addBook() {
@@ -219,6 +217,19 @@ public class ConsoleUI {
                 }
                 default -> System.out.println("Invalid choice");
             }
+        }
+    }
+
+    private void removeBook() {
+        viewBooks();
+
+        Book book = readExistingBook("Enter book ID:");
+
+        try {
+            service.removeBook(book.getId());
+            System.out.println("Book \"" + book.getTitle() + "\" removed successfully.");
+        } catch (IllegalArgumentException e) {
+            System.out.println(e.getMessage());
         }
     }
 

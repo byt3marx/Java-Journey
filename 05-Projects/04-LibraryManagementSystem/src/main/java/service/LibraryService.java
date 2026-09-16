@@ -48,6 +48,17 @@ public class LibraryService {
         return book;
     }
 
+    public Book removeBook(int id) {
+        Book book = getBookOrThrow(id);
+
+        if (isBookBorrowed(id)) {
+            throw new IllegalArgumentException("Cannot remove a book with an active loan.");
+        }
+
+        books.remove(book);
+        return book;
+    }
+
     private Book getBookOrThrow(int id) {
         return findBookById(id)
                 .orElseThrow(() -> new IllegalArgumentException("Book not found."));
