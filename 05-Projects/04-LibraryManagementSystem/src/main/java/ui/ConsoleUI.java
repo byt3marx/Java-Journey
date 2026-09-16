@@ -43,58 +43,119 @@ public class ConsoleUI {
 
     private void showMainMenu() {
         System.out.println();
+        System.out.println("1. Books");
+        System.out.println("2. Members");
+        System.out.println("3. Loans");
+        System.out.println("4. Exit");
+    }
+
+    private void showBooksMenu() {
+        System.out.println();
         System.out.println("1. Add book");
-        System.out.println("2. Add member");
-        System.out.println("3. View books");
+        System.out.println("2. Edit book");
+        System.out.println("3. Remove book");
+        System.out.println("4. View books");
+        System.out.println("5. Back");
+    }
+
+    private void showMembersMenu() {
+        System.out.println();
+        System.out.println("1. Add member");
+        System.out.println("2. Edit member");
+        System.out.println("3. Remove member");
         System.out.println("4. View members");
-        System.out.println("5. Borrow book");
-        System.out.println("6. Return book");
-        System.out.println("7. View active loans");
-        System.out.println("8. Loan history");
-        System.out.println("9. Exit");
+        System.out.println("5. Back");
+    }
+
+    private void showLoansMenu() {
+        System.out.println();
+        System.out.println("1. Borrow book");
+        System.out.println("2. Return book");
+        System.out.println("3. View active loans");
+        System.out.println("4. Loan history");
+        System.out.println("5. Back");
     }
 
     private boolean handleMenuChoice(String choice) {
 
         return switch (choice) {
             case "1" -> {
-                addBook();
+                handleBooksMenu();
                 yield true;
             }
             case "2" -> {
-                addMember();
+                handleMembersMenu();
                 yield true;
             }
             case "3" -> {
-                viewBooks();
+                handleLoansMenu();
                 yield true;
             }
-            case "4" -> {
-                viewMembers();
-                yield true;
-            }
-            case "5" -> {
-                borrowBook();
-                yield true;
-            }
-            case "6" -> {
-                returnBook();
-                yield true;
-            }
-            case "7" -> {
-                viewActiveLoans();
-                yield true;
-            }
-            case "8" -> {
-                viewLoanHistory();
-                yield true;
-            }
-            case "9" -> false;
+            case "4" -> false;
             default -> {
                 System.out.println("Invalid choice.");
                 yield true;
             }
         };
+    }
+
+    private void handleBooksMenu() {
+        while (true) {
+            showBooksMenu();
+
+            String choice = scanner.nextLine();
+
+            switch (choice) {
+                case "1" -> addBook();
+                case "2" -> editBook();
+                case "3" -> removeBook();
+                case "4" -> viewBooks();
+                case "5" -> {
+                    return;
+                }
+                default -> System.out.println("Invalid choice.");
+            }
+        }
+    }
+
+    private void handleMembersMenu() {
+        while (true) {
+            showMembersMenu();
+
+            String choice = scanner.nextLine();
+
+            switch (choice) {
+                case "1" -> addMember();
+                case "2" -> editMember();
+                case "3" -> removeMember();
+                case "4" -> viewMembers();
+                case "5" -> {
+                    return;
+                }
+                default -> System.out.println("Invalid choice.");
+            }
+        }
+
+    }
+
+    private void handleLoansMenu() {
+        while (true) {
+            showLoansMenu();
+
+            String choice = scanner.nextLine();
+
+            switch (choice) {
+                case "1" -> borrowBook();
+                case "2" -> returnBook();
+                case "3" -> viewActiveLoans();
+                case "4" -> viewLoanHistory();
+                case "5" -> {
+                    return;
+                }
+                default -> System.out.println("Invalid choice.");
+            }
+        }
+
     }
 
     private void addBook() {
@@ -467,7 +528,6 @@ public class ConsoleUI {
                 System.out.println("Please enter a valid date in (dd-MM-yyyy) format.");
             }
         }
-
     }
 
 }
