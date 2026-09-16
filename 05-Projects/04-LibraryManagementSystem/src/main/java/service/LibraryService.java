@@ -75,6 +75,29 @@ public class LibraryService {
         return member;
     }
 
+    public Member editMemberName(int id, String name) {
+        Member member =getMemberOrThrow(id);
+        member.updateName(name);
+        return member;
+    }
+
+    public Member editMemberEmail(int id, String email) {
+        Member member = getMemberOrThrow(id);
+        member.updateEmail(email);
+        return member;
+    }
+
+    public Member editMemberPhoneNumber(int id, String phoneNumber) {
+        Member member = getMemberOrThrow(id);
+        member.updatePhoneNumber(phoneNumber);
+        return member;
+    }
+
+    private Member getMemberOrThrow(int id) {
+        return findMemberById(id)
+                .orElseThrow(() -> new IllegalArgumentException("Member not found."));
+    }
+
     public List<Book> getBooks() {
         return List.copyOf(books);
     }

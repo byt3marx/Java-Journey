@@ -142,7 +142,7 @@ public class ConsoleUI {
 
             switch (choice) {
                 case "1" -> addMember();
-                //case "2" -> editMember();
+                case "2" -> editMember();
                 //case "3" -> removeMember();
                 case "4" -> viewMembers();
                 case "5" -> {
@@ -151,6 +151,23 @@ public class ConsoleUI {
                 default -> System.out.println("Invalid choice.");
             }
         }
+    }
+
+    private void showEditMemberMenu(Member member) {
+        System.out.println();
+        System.out.println(
+                "Editing member:"
+                        + "\nID: " + member.getId()
+                        + "\nName: " + member.getName()
+                        + "\nEmail: " + member.getEmail()
+                        + "\nPhone number: " + member.getPhoneNumber()
+        );
+
+        System.out.println();
+        System.out.println("1. Edit name");
+        System.out.println("2. Edit email");
+        System.out.println("3. Edit phone number");
+        System.out.println("4. Back");
     }
 
     private void handleLoansMenu() {
@@ -241,6 +258,40 @@ public class ConsoleUI {
 
         Member member = service.addMember(name, email, phoneNumber);
         System.out.println("Member " + member.getName() + " added successfully. ID: " + member.getId());
+    }
+
+    private void editMember() {
+        viewMembers();
+
+        Member member = readExistingMember("Enter member ID:");
+
+        while (true) {
+            showEditMemberMenu(member);
+
+            String choice = scanner.nextLine();
+
+            switch (choice) {
+                case "1" -> {
+                    String name = readRequiredText("New name");
+                    service.editMemberName(member.getId(), name);
+                    System.out.println("Name updated successfully.");
+                }
+                case "2" -> {
+                    String email = readValidEmail();
+                    service.editMemberEmail(member.getId(), email);
+                    System.out.println("Email updated successfully.");
+                }
+                case "3" -> {
+                    String phoneNumber = readValidPhoneNumber();
+                    service.editMemberPhoneNumber(member.getId(), phoneNumber);
+                    System.out.println("Phone number updated successfully.");
+                }
+                case "4" -> {
+                    return;
+                }
+                default -> System.out.println("Invalid choice");
+            }
+        }
     }
 
     private void viewBooks() {

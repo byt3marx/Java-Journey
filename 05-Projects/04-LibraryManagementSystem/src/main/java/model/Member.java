@@ -3,9 +3,9 @@ package model;
 public class Member {
 
     private final int id;
-    private final String name;
-    private final String email;
-    private final String phoneNumber;
+    private String name;
+    private String email;
+    private String phoneNumber;
 
     public Member(int id,
                   String name,
@@ -31,12 +31,27 @@ public class Member {
         return name;
     }
 
+    public void updateName(String name) {
+        validateName(name);
+        this.name = name;
+    }
+
     public String getEmail() {
         return email;
     }
 
+    public void updateEmail(String email) {
+        validateEmail(email);
+        this.email = email;
+    }
+
     public String getPhoneNumber() {
         return phoneNumber;
+    }
+
+    public void updatePhoneNumber(String phoneNumber) {
+        validatePhoneNumber(phoneNumber);
+        this.phoneNumber = phoneNumber;
     }
 
     private void validateId(int id) {
