@@ -42,38 +42,42 @@ public class ConsoleUI {
     }
 
     private void showMainMenu() {
-        System.out.println();
+        System.out.println("---Main menu---");
         System.out.println("1. Books");
         System.out.println("2. Members");
         System.out.println("3. Loans");
         System.out.println("4. Exit");
+        System.out.print("Choose option: ");
     }
 
     private void showBooksMenu() {
-        System.out.println();
+        System.out.println("---Books---");
         System.out.println("1. Add book");
         System.out.println("2. Edit book");
         System.out.println("3. Remove book");
         System.out.println("4. View books");
         System.out.println("5. Back");
+        System.out.print("Choose option: ");
     }
 
     private void showMembersMenu() {
-        System.out.println();
+        System.out.println("---Members---");
         System.out.println("1. Add member");
         System.out.println("2. Edit member");
         System.out.println("3. Remove member");
         System.out.println("4. View members");
         System.out.println("5. Back");
+        System.out.print("Choose option: ");
     }
 
     private void showLoansMenu() {
-        System.out.println();
+        System.out.println("---Loans---");
         System.out.println("1. Borrow book");
         System.out.println("2. Return book");
         System.out.println("3. View active loans");
         System.out.println("4. Loan history");
         System.out.println("5. Back");
+        System.out.print("Choose option: ");
     }
 
     private boolean handleMenuChoice(String choice) {
@@ -132,6 +136,7 @@ public class ConsoleUI {
         System.out.println("2. Edit author");
         System.out.println("3. Edit number of pages");
         System.out.println("4. Back");
+        System.out.print("Choose option: ");
     }
 
     private void handleMembersMenu() {
@@ -168,6 +173,7 @@ public class ConsoleUI {
         System.out.println("2. Edit email");
         System.out.println("3. Edit phone number");
         System.out.println("4. Back");
+        System.out.print("Choose option: ");
     }
 
     private void handleLoansMenu() {
@@ -575,7 +581,7 @@ public class ConsoleUI {
 
             if (result.isPresent()) {
                 Book book = result.get();
-                System.out.println("Selected: " + book.getTitle());
+                //System.out.println("Selected: " + book.getTitle());
                 return book;
             }
 
@@ -591,7 +597,7 @@ public class ConsoleUI {
 
             if (result.isPresent()) {
                 Member member = result.get();
-                System.out.println("Selected: " + member.getName());
+                //System.out.println("Selected: " + member.getName());
                 return member;
             }
 
