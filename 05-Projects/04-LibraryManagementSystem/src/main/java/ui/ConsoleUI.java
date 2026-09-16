@@ -142,8 +142,8 @@ public class ConsoleUI {
 
             switch (choice) {
                 case "1" -> addMember();
-                case "2" -> editMember();
-                case "3" -> removeMember();
+                //case "2" -> editMember();
+                //case "3" -> removeMember();
                 case "4" -> viewMembers();
                 case "5" -> {
                     return;

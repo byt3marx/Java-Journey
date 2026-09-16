@@ -388,4 +388,55 @@ public class LibraryServiceTest {
         assertEquals(4, newLoan.getId());
     }
 
+    @Test
+    void removeBookRemovesExistingBook() {
+        Book book = service.addBook(
+                "Peace on earth",
+                "Humanity",
+                999
+        );
+
+        Book removedBook = service.removeBook(book.getId());
+
+        assertEquals(book.getId(), removedBook.getId());
+        assertTrue(service.getBooks().isEmpty());
+    }
+
+    @Test
+    void removeBookFailsWhenBookNotFound() {
+        assertThrows(
+                IllegalArgumentException.class,
+                () -> service.removeBook(999)
+        );
+    }
+
+    @Test
+    void removeBookFailsWhenBookHasActiveLoan() {
+        Book book = service.addBook(
+                "Peace on earth",
+                "Humanity",
+                999
+        );
+
+        Member member = service.addMember(
+                "Superman",
+                "super.man@gmail.com",
+                "010-000-111"
+        );
+
+        LocalDate borrowedDate = LocalDate.of(2026, 9, 16);
+        LocalDate dueDate = LocalDate.of(2026, 10, 20);
+
+        Loan loan = service.borrowBook(
+                book.getId(),
+                member.getId(),
+                borrowedDate,
+                dueDate
+        );
+
+        assertThrows(
+                IllegalArgumentException.class,
+                () -> service.removeBook(book.getId()));
+    }
+
 }
