@@ -30,6 +30,29 @@ public class LibraryService {
         return book;
     }
 
+    public Book editBookTitle(int id, String title) {
+        Book book = getBookOrThrow(id);
+        book.updateTitle(title);
+        return book;
+    }
+
+    public Book editBookAuthor(int id, String author) {
+        Book book = getBookOrThrow(id);
+        book.updateAuthor(author);
+        return book;
+    }
+
+    public Book editBookNumberOfPages(int id, int numberOfPages) {
+        Book book = getBookOrThrow(id);
+        book.updateNumberOfPages(numberOfPages);
+        return book;
+    }
+
+    private Book getBookOrThrow(int id) {
+        return findBookById(id)
+                .orElseThrow(() -> new IllegalArgumentException("Book not found."));
+    }
+
     public Member addMember(String name,
                          String email,
                          String phoneNumber) {

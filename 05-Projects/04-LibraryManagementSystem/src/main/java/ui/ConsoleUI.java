@@ -118,6 +118,22 @@ public class ConsoleUI {
         }
     }
 
+    private void showEditBookMenu(Book book) {
+        System.out.println();
+        System.out.println(
+                "Editing book:"
+                        + "\nID: " + book.getId()
+                        + "\nTitle: " + book.getTitle()
+                        + "\nAuthor: " + book.getAuthor()
+                        + "\nPages: " + book.getNumberOfPages()
+        );
+        System.out.println();
+        System.out.println("1. Edit title");
+        System.out.println("2. Edit author");
+        System.out.println("3. Edit number of pages");
+        System.out.println("4. Back");
+    }
+
     private void handleMembersMenu() {
         while (true) {
             showMembersMenu();
@@ -169,6 +185,41 @@ public class ConsoleUI {
 
         Book book = service.addBook(title, author, numberOfPages);
         System.out.println("Book - " + book.getTitle() + " added successfully. ID: " + book.getId());
+    }
+
+    private void editBook() {
+        viewBooks();
+
+        Book book = readExistingBook("Enter book ID:");
+
+        while (true) {
+            showEditBookMenu(book);
+
+            String choice = scanner.nextLine();
+
+            switch (choice) {
+                case "1" -> {
+                    String title = readRequiredText("New title");
+                    service.editBookTitle(book.getId(), title);
+                    System.out.println("Title updated successfully.");
+                }
+                case "2" -> {
+                    String author = readRequiredText("New author");
+                    service.editBookAuthor(book.getId(), author);
+                    System.out.println("Author updated successfully.");
+                }
+                case "3" -> {
+                    System.out.println("New number of pages:");
+                    int pages = readValidNumberOfPages();
+                    service.editBookNumberOfPages(book.getId(), pages);
+                    System.out.println("Number of pages updated successfully.");
+                }
+                case "4" -> {
+                    return;
+                }
+                default -> System.out.println("Invalid choice");
+            }
+        }
     }
 
     private void addMember() {

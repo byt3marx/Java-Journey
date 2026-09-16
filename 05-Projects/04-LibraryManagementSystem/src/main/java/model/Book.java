@@ -3,9 +3,9 @@ package model;
 public class Book {
 
     private final int id;
-    private final String title;
-    private final String author;
-    private final int numberOfPages;
+    private String title;
+    private String author;
+    private int numberOfPages;
 
     public Book(int id,
                 String title,
@@ -31,12 +31,27 @@ public class Book {
         return title;
     }
 
+    public void updateTitle(String title) {
+        validateTitle(title);
+        this.title = title;
+    }
+
     public String getAuthor() {
         return author;
     }
 
+    public void updateAuthor(String author) {
+        validateAuthor(author);
+        this.author = author;
+    }
+
     public int getNumberOfPages() {
         return numberOfPages;
+    }
+
+    public void updateNumberOfPages(int numberOfPages) {
+        validateNumberOfPages(numberOfPages);
+        this.numberOfPages = numberOfPages;
     }
 
     private void validateId(int id) {
