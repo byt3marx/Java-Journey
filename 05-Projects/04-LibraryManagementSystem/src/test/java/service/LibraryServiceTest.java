@@ -427,7 +427,7 @@ public class LibraryServiceTest {
         LocalDate borrowedDate = LocalDate.of(2026, 9, 16);
         LocalDate dueDate = LocalDate.of(2026, 10, 20);
 
-        Loan loan = service.borrowBook(
+        service.borrowBook(
                 book.getId(),
                 member.getId(),
                 borrowedDate,
@@ -436,7 +436,60 @@ public class LibraryServiceTest {
 
         assertThrows(
                 IllegalArgumentException.class,
-                () -> service.removeBook(book.getId()));
+                () -> service.removeBook(book.getId())
+        );
+    }
+
+    @Test
+    void removeMemberRemovesExistingMember() {
+        Member member = service.addMember(
+                "Dark Lord",
+                "dark.lord@gmail.com",
+                "999-999-999"
+        );
+
+        Member removedMember = service.removeMember(member.getId());
+
+        assertEquals(member.getId(), removedMember.getId());
+        assertTrue(service.getMembers().isEmpty());
+    }
+
+    @Test
+    void removeMemberFailsWhenMemberNotFound() {
+        assertThrows(
+                IllegalArgumentException.class,
+                () -> service.removeMember(12)
+        );
+    }
+
+    @Test
+    void removeMemberFailsWhenMemberHasActiveLoan() {
+        Book book = service.addBook(
+                "Dark side of the moon",
+                "Mr. Moon",
+                123
+        );
+
+        Member member = service.addMember(
+                "Dark Lord",
+                "dark.lord@gmail.com",
+                "999-999-999"
+        );
+
+        LocalDate borrowedDate = LocalDate.of(2026, 9, 15);
+        LocalDate dueDate = LocalDate.of(2026, 10, 20);
+
+        service.borrowBook(
+                book.getId(),
+                member.getId(),
+                borrowedDate,
+                dueDate
+        );
+
+        assertThrows(
+                IllegalArgumentException.class,
+                () -> service.removeMember(member.getId())
+        );
     }
 
 }

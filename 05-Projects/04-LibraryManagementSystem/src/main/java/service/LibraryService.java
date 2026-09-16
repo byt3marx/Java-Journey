@@ -93,6 +93,26 @@ public class LibraryService {
         return member;
     }
 
+    public Member removeMember(int id) {
+        Member member = getMemberOrThrow(id);
+
+        if (hasActiveLoan(id)) {
+            throw new IllegalArgumentException(
+                    "Cannot remove a member with an active loan.");
+        }
+
+        members.remove(member);
+        return member;
+    }
+
+    private boolean hasActiveLoan(int memberId) {
+        return loans.stream()
+                .anyMatch(loan ->
+                        loan.getMember().getId() == memberId
+                                && loan.getReturnedDate() == null
+                );
+    }
+
     private Member getMemberOrThrow(int id) {
         return findMemberById(id)
                 .orElseThrow(() -> new IllegalArgumentException("Member not found."));

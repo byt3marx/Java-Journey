@@ -143,7 +143,7 @@ public class ConsoleUI {
             switch (choice) {
                 case "1" -> addMember();
                 case "2" -> editMember();
-                //case "3" -> removeMember();
+                case "3" -> removeMember();
                 case "4" -> viewMembers();
                 case "5" -> {
                     return;
@@ -291,6 +291,21 @@ public class ConsoleUI {
                 }
                 default -> System.out.println("Invalid choice");
             }
+        }
+    }
+
+    private void removeMember() {
+        viewMembers();
+
+        Member member = readExistingMember("Enter member ID:");
+
+        try {
+            service.removeMember(member.getId());
+            System.out.println(
+                    "Member \"" + member.getName() + "\" removed successfully."
+            );
+        } catch (IllegalArgumentException e) {
+            System.out.println(e.getMessage());
         }
     }
 
