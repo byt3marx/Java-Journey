@@ -28,7 +28,7 @@ public class ConsoleUI {
 
         boolean running = true;
 
-        System.out.println("Welcome to our Library");
+        System.out.println(ConsoleColors.YELLOW + "Welcome to our Library" + ConsoleColors.RESET);
 
         while (running) {
             showMainMenu();
@@ -42,7 +42,7 @@ public class ConsoleUI {
     }
 
     private void showMainMenu() {
-        System.out.println("---Main menu---");
+        System.out.println(ConsoleColors.LIGHT_BLUE + "---Main menu---" + ConsoleColors.RESET);
         System.out.println("1. Books");
         System.out.println("2. Members");
         System.out.println("3. Loans");
@@ -51,7 +51,7 @@ public class ConsoleUI {
     }
 
     private void showBooksMenu() {
-        System.out.println("---Books---");
+        System.out.println(ConsoleColors.LIGHT_BLUE + "---Books---" + ConsoleColors.RESET);
         System.out.println("1. Add book");
         System.out.println("2. Edit book");
         System.out.println("3. Remove book");
@@ -61,7 +61,7 @@ public class ConsoleUI {
     }
 
     private void showMembersMenu() {
-        System.out.println("---Members---");
+        System.out.println(ConsoleColors.LIGHT_BLUE + "---Members---" + ConsoleColors.RESET);
         System.out.println("1. Add member");
         System.out.println("2. Edit member");
         System.out.println("3. Remove member");
@@ -71,7 +71,7 @@ public class ConsoleUI {
     }
 
     private void showLoansMenu() {
-        System.out.println("---Loans---");
+        System.out.println(ConsoleColors.LIGHT_BLUE + "---Loans---" + ConsoleColors.RESET);
         System.out.println("1. Borrow book");
         System.out.println("2. Return book");
         System.out.println("3. View active loans");
@@ -97,7 +97,7 @@ public class ConsoleUI {
             }
             case "4" -> false;
             default -> {
-                System.out.println("Invalid choice.");
+                System.out.println(ConsoleColors.RED + "Invalid choice." + ConsoleColors.RESET);
                 yield true;
             }
         };
@@ -117,7 +117,7 @@ public class ConsoleUI {
                 case "5" -> {
                     return;
                 }
-                default -> System.out.println("Invalid choice.");
+                default -> System.out.println(ConsoleColors.RED + "Invalid choice." + ConsoleColors.RESET);
             }
         }
     }
@@ -153,7 +153,7 @@ public class ConsoleUI {
                 case "5" -> {
                     return;
                 }
-                default -> System.out.println("Invalid choice.");
+                default -> System.out.println(ConsoleColors.RED + "Invalid choice." + ConsoleColors.RESET);
             }
         }
     }
@@ -190,7 +190,7 @@ public class ConsoleUI {
                 case "5" -> {
                     return;
                 }
-                default -> System.out.println("Invalid choice.");
+                default -> System.out.println(ConsoleColors.RED + "Invalid choice." + ConsoleColors.RESET);
             }
         }
     }
@@ -222,18 +222,18 @@ public class ConsoleUI {
                 case "1" -> {
                     String title = readRequiredText("New title");
                     service.editBookTitle(book.getId(), title);
-                    System.out.println("Title updated successfully.");
+                    System.out.println(ConsoleColors.GREEN + "Title updated successfully." + ConsoleColors.RESET);
                 }
                 case "2" -> {
                     String author = readRequiredText("New author");
                     service.editBookAuthor(book.getId(), author);
-                    System.out.println("Author updated successfully.");
+                    System.out.println(ConsoleColors.GREEN + "Author updated successfully." + ConsoleColors.RESET);
                 }
                 case "3" -> {
                     System.out.println("New number of pages:");
                     int pages = readValidNumberOfPages();
                     service.editBookNumberOfPages(book.getId(), pages);
-                    System.out.println("Number of pages updated successfully.");
+                    System.out.println(ConsoleColors.GREEN + "Number of pages updated successfully." + ConsoleColors.RESET);
                 }
                 case "4" -> {
                     return;
@@ -250,7 +250,8 @@ public class ConsoleUI {
 
         try {
             service.removeBook(book.getId());
-            System.out.println("Book \"" + book.getTitle() + "\" removed successfully.");
+            System.out.println(
+                    ConsoleColors.GREEN + "Book \"" + book.getTitle() + "\" removed successfully." + ConsoleColors.RESET);
         } catch (IllegalArgumentException e) {
             System.out.println(e.getMessage());
         }
@@ -308,7 +309,7 @@ public class ConsoleUI {
         try {
             service.removeMember(member.getId());
             System.out.println(
-                    "Member \"" + member.getName() + "\" removed successfully."
+                    ConsoleColors.GREEN + "Member \"" + member.getName() + "\" removed successfully." + ConsoleColors.RESET
             );
         } catch (IllegalArgumentException e) {
             System.out.println(e.getMessage());
