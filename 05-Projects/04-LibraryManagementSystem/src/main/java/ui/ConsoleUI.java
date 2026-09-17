@@ -238,7 +238,7 @@ public class ConsoleUI {
                 case "4" -> {
                     return;
                 }
-                default -> System.out.println("Invalid choice");
+                default -> System.out.println(ConsoleColors.RED + "Invalid choice." + ConsoleColors.RESET);
             }
         }
     }
@@ -281,22 +281,22 @@ public class ConsoleUI {
                 case "1" -> {
                     String name = readRequiredText("New name");
                     service.editMemberName(member.getId(), name);
-                    System.out.println("Name updated successfully.");
+                    System.out.println(ConsoleColors.GREEN + "Name updated successfully." + ConsoleColors.RESET);
                 }
                 case "2" -> {
                     String email = readValidEmail();
                     service.editMemberEmail(member.getId(), email);
-                    System.out.println("Email updated successfully.");
+                    System.out.println(ConsoleColors.GREEN + "Email updated successfully." + ConsoleColors.RESET);
                 }
                 case "3" -> {
                     String phoneNumber = readValidPhoneNumber();
                     service.editMemberPhoneNumber(member.getId(), phoneNumber);
-                    System.out.println("Phone number updated successfully.");
+                    System.out.println(ConsoleColors.GREEN + "Phone number updated successfully." + ConsoleColors.RESET);
                 }
                 case "4" -> {
                     return;
                 }
-                default -> System.out.println("Invalid choice");
+                default -> System.out.println(ConsoleColors.RED + "Invalid choice" + ConsoleColors.RESET);
             }
         }
     }
@@ -446,7 +446,7 @@ public class ConsoleUI {
 
         for (Loan l : loans) {
             String returned = l.getReturnedDate() == null
-                    ? "Active"
+                    ? ConsoleColors.GREEN + "Active" + ConsoleColors.RESET
                     : l.getReturnedDate().format(DATE_FORMATTER);
 
             System.out.println(
