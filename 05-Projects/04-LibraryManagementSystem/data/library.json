@@ -134,7 +134,15 @@
       "bookId": 12,
       "memberId": 1,
       "borrowedDate": "2026-09-11",
-      "dueDate": "2026-09-12"
+      "dueDate": "2026-09-12",
+      "returnedDate": "2026-09-16"
+    },
+    {
+      "id": 5,
+      "bookId": 7,
+      "memberId": 2,
+      "borrowedDate": "2026-09-17",
+      "dueDate": "2026-09-18"
     }
   ]
 }
