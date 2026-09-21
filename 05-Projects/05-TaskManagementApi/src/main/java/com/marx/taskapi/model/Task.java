@@ -62,6 +62,11 @@ public class Task {
                 TaskPriority priority,
                 LocalDate dueDate) {
 
+        validateTitle(title);
+        validatePriority(priority);
+        validateDueDate(dueDate);
+        validateDescription(description);
+
         this.title = title;
         this.description = description;
         this.priority = priority;
@@ -100,21 +105,25 @@ public class Task {
     public LocalDateTime getUpdatedAt() {
         return updatedAt;
     }
-    //----------------------------------------------------------------------
+//----------------------------------------------------------------------------
 
     public void setTitle(String title) {
+        validateTitle(title);
         this.title = title;
     }
 
     public void setDescription(String description) {
+        validateDescription(description);
         this.description = description;
     }
 
     public void setPriority(TaskPriority priority) {
+        validatePriority(priority);
         this.priority = priority;
     }
 
     public void setDueDate(LocalDate dueDate) {
+        validateDueDate(dueDate);
         this.dueDate = dueDate;
     }
 
@@ -128,5 +137,36 @@ public class Task {
 
     public void markToDo() {
         this.status = TaskStatus.TO_DO;
+    }
+//----------------------------------------------------------------------------
+
+    private static void validateTitle(String title) {
+        if (title == null || title.isBlank() || title.length() > 100) {
+            throw new IllegalArgumentException(
+                    "Title must not be blank and must be at most 100 characters."
+            );
+        }
+    }
+
+    private static void validatePriority(TaskPriority priority) {
+        if (priority == null) {
+            throw new IllegalArgumentException(
+                    "Priority must not be null."
+            );
+        }
+    }
+
+    private static void validateDueDate(LocalDate dueDate) {
+        if (dueDate == null) {
+            throw new IllegalArgumentException(
+                    "Due date must not be null."
+            );
+        }
+    }
+
+    private static void validateDescription(String description) {
+        if (description != null && description.length() > 1000) {
+            throw new IllegalArgumentException("Description must be at most 1000 characters.");
+        }
     }
 }
