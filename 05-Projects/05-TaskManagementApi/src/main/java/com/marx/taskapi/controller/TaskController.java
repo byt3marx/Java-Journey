@@ -1,8 +1,10 @@
 package com.marx.taskapi.controller;
 
+import com.marx.taskapi.dto.UpdateTaskDescriptionRequest;
 import com.marx.taskapi.model.Task;
 import com.marx.taskapi.service.TaskService;
 import com.marx.taskapi.dto.CreateTaskRequest;
+import com.marx.taskapi.dto.UpdateTaskTitleRequest;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -11,6 +13,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.PatchMapping;
+import org.springframework.web.bind.annotation.DeleteMapping;
 
 import java.util.List;
 
@@ -48,5 +52,34 @@ public class TaskController {
         );
 
         return ResponseEntity.status(201).body(createdTask);
+    }
+
+    @PatchMapping("/{id}/title")
+    public ResponseEntity<Task> updateTaskTitle(
+            @PathVariable Long id,
+            @RequestBody UpdateTaskTitleRequest request) {
+
+        return taskService.updateTaskTitle(id, request.title())
+                .map(task -> ResponseEntity.ok(task))
+                .orElseGet(() -> ResponseEntity.notFound().build());
+    }
+
+    @PatchMapping("/{id}/description")
+    public ResponseEntity<Task> updateTaskDescription(
+            @PathVariable Long id,
+            @RequestBody UpdateTaskDescriptionRequest request) {
+        return taskService.updateTaskDescription(id, request.description())
+                .map(task -> ResponseEntity.ok(task))
+                .orElseGet(() -> ResponseEntity.notFound().build());
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deleteTask(@PathVariable Long id) {
+
+        if (taskService.deleteTask(id).isPresent()) {
+            return ResponseEntity.noContent().build();
+        }
+
+        return ResponseEntity.notFound().build();
     }
 }
