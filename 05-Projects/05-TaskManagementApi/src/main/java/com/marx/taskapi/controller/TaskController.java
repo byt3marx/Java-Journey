@@ -6,6 +6,7 @@ import com.marx.taskapi.service.TaskService;
 import com.marx.taskapi.dto.CreateTaskRequest;
 import com.marx.taskapi.dto.UpdateTaskTitleRequest;
 
+import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -43,7 +44,7 @@ public class TaskController {
 
     @PostMapping
     public ResponseEntity<Task> createTask(
-            @RequestBody CreateTaskRequest request) {
+            @Valid @RequestBody CreateTaskRequest request) {
         Task createdTask = taskService.createTask(
                 request.title(),
                 request.description(),
@@ -57,7 +58,7 @@ public class TaskController {
     @PatchMapping("/{id}/title")
     public ResponseEntity<Task> updateTaskTitle(
             @PathVariable Long id,
-            @RequestBody UpdateTaskTitleRequest request) {
+            @Valid @RequestBody UpdateTaskTitleRequest request) {
 
         return taskService.updateTaskTitle(id, request.title())
                 .map(task -> ResponseEntity.ok(task))
@@ -67,7 +68,7 @@ public class TaskController {
     @PatchMapping("/{id}/description")
     public ResponseEntity<Task> updateTaskDescription(
             @PathVariable Long id,
-            @RequestBody UpdateTaskDescriptionRequest request) {
+            @Valid @RequestBody UpdateTaskDescriptionRequest request) {
         return taskService.updateTaskDescription(id, request.description())
                 .map(task -> ResponseEntity.ok(task))
                 .orElseGet(() -> ResponseEntity.notFound().build());
