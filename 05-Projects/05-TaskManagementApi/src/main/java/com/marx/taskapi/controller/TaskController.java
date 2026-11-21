@@ -5,6 +5,7 @@ import com.marx.taskapi.model.Task;
 import com.marx.taskapi.service.TaskService;
 import com.marx.taskapi.dto.CreateTaskRequest;
 import com.marx.taskapi.dto.UpdateTaskTitleRequest;
+import com.marx.taskapi.dto.UpdateTaskStatusRequest;
 
 import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
@@ -83,4 +84,15 @@ public class TaskController {
 
         return ResponseEntity.notFound().build();
     }
+
+    @PatchMapping("/{id}/status")
+    public ResponseEntity<Task> updateTaskStatus(
+            @PathVariable Long id,
+            @Valid @RequestBody UpdateTaskStatusRequest request) {
+
+        return taskService.updateTaskStatus(id, request.status())
+                .map(task -> ResponseEntity.ok(task))
+                .orElseGet(() -> ResponseEntity.notFound().build());
+        }
+
 }

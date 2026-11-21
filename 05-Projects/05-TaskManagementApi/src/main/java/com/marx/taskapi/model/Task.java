@@ -74,6 +74,14 @@ public class Task {
         this.status = TaskStatus.TO_DO;
     }
 
+    public void setStatus(TaskStatus status) {
+        if (status == null) {
+            throw new IllegalArgumentException("Status cannot be null");
+        }
+
+        this.status = status;
+    }
+
     public Long getId() {
         return id;
     }

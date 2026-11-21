@@ -17,8 +17,8 @@ public class GlobalExceptionHandler {
             MethodArgumentNotValidException exception) {
         Map<String, String> errors = new LinkedHashMap<>();
 
-        for (FieldError fieldlError : exception.getBindingResult().getFieldErrors()) {
-            errors.put(fieldlError.getField(), fieldlError.getDefaultMessage());
+        for (FieldError fieldError : exception.getBindingResult().getFieldErrors()) {
+            errors.put(fieldError.getField(), fieldError.getDefaultMessage());
         }
 
         return ResponseEntity.badRequest().body(errors);

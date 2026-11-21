@@ -3,6 +3,7 @@ package com.marx.taskapi.service;
 import com.marx.taskapi.model.Task;
 import com.marx.taskapi.model.TaskPriority;
 import com.marx.taskapi.repository.TaskRepository;
+import com.marx.taskapi.model.TaskStatus;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
@@ -47,6 +48,14 @@ public class TaskService {
         return taskRepository.findById(id)
                 .map(task -> {
                     task.setDescription(description);
+                    return taskRepository.save(task);
+                });
+    }
+
+    public Optional<Task> updateTaskStatus(Long id, TaskStatus status) {
+        return taskRepository.findById(id)
+                .map(task -> {
+                    task.setStatus(status);
                     return taskRepository.save(task);
                 });
     }
