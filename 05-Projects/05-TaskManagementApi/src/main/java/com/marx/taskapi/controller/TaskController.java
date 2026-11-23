@@ -2,6 +2,8 @@ package com.marx.taskapi.controller;
 
 import com.marx.taskapi.dto.UpdateTaskDescriptionRequest;
 import com.marx.taskapi.model.Task;
+import com.marx.taskapi.model.TaskPriority;
+import com.marx.taskapi.model.TaskStatus;
 import com.marx.taskapi.service.TaskService;
 import com.marx.taskapi.dto.CreateTaskRequest;
 import com.marx.taskapi.dto.UpdateTaskTitleRequest;
@@ -94,5 +96,17 @@ public class TaskController {
                 .map(task -> ResponseEntity.ok(task))
                 .orElseGet(() -> ResponseEntity.notFound().build());
         }
+
+    @GetMapping("/status/{status}")
+    public List<Task> getTasksByStatus(
+            @PathVariable TaskStatus status) {
+        return taskService.getTasksByStatus(status);
+    }
+
+    @GetMapping("/priority/{priority}")
+    public List<Task> getTasksByPriority(
+            @PathVariable TaskPriority priority) {
+        return taskService.getTasksByPriority(priority);
+    }
 
 }

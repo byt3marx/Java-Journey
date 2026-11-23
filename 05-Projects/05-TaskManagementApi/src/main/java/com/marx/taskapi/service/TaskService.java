@@ -36,6 +36,14 @@ public class TaskService {
         return taskRepository.findById(id);
     }
 
+    public List<Task> getTasksByStatus(TaskStatus status) {
+        return taskRepository.findByStatus(status);
+    }
+
+    public List<Task> getTasksByPriority(TaskPriority priority) {
+        return taskRepository.findByPriority(priority);
+    }
+
     public Optional<Task> updateTaskTitle(Long id, String title) {
         return taskRepository.findById(id)
                 .map(task -> {
