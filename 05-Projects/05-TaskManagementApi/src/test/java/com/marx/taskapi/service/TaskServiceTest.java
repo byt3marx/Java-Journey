@@ -2,6 +2,7 @@ package com.marx.taskapi.service;
 
 import com.marx.taskapi.model.Task;
 import com.marx.taskapi.model.TaskPriority;
+import com.marx.taskapi.model.TaskStatus;
 import com.marx.taskapi.repository.TaskRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -70,5 +71,40 @@ public class TaskServiceTest {
 
         assertTrue(result.isEmpty());
         verify(taskRepository).findById(999L);
+    }
+
+    @Test
+    void updateTaskStatusUpdatesAndSavesTaskWhenTaskExists() {
+        Task task = new Task(
+                "Test status update",
+                "Change TO_DO to IN_PROGRESS",
+                TaskPriority.HIGH,
+                LocalDate.now().plusDays(1)
+        );
+
+        when(taskRepository.findById(1L))
+                .thenReturn(Optional.of(task));
+
+        when(taskRepository.save(task))
+                .thenReturn(task);
+
+        Optional<Task> result = taskService.updateTaskStatus(1L, TaskStatus.IN_PROGRESS);
+
+        assertTrue(result.isPresent());
+        assertEquals(TaskStatus.IN_PROGRESS, result.get().getStatus());
+
+        verify(taskRepository).findById(1L);
+        verify(taskRepository).save(task);
+    }
+
+    @Test
+    void updateTaskStatusDoesNotSaveWhenTaskDoesNotExist() {
+        when(taskRepository.findById(999L))
+                .thenReturn(Optional.empty());
+
+        Optional<Task> result = taskService.updateTaskStatus(999L, TaskStatus.DONE);
+
+        verify(taskRepository).findById(999L);
+        verify(taskRepository, never()).save(any(Task.class));
     }
 }
