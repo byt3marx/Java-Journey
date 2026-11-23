@@ -72,6 +72,22 @@ public class TaskService {
                 });
     }
 
+    public Optional<Task> updateTaskPriority(Long id, TaskPriority priority) {
+        return taskRepository.findById(id)
+                .map(task -> {
+                    task.setPriority(priority);
+                    return taskRepository.save(task);
+                });
+    }
+
+    public Optional<Task> updateTaskDueDate(Long id, LocalDate dueDate) {
+        return taskRepository.findById(id)
+                .map(task -> {
+                    task.setDueDate(dueDate);
+                    return taskRepository.save(task);
+                });
+    }
+
     public Optional<Task> deleteTask(Long id) {
         return taskRepository.findById(id)
                 .map(task -> {

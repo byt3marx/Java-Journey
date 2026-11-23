@@ -1,15 +1,13 @@
 package com.marx.taskapi.controller;
 
-import com.marx.taskapi.dto.UpdateTaskDescriptionRequest;
+import com.marx.taskapi.dto.*;
 import com.marx.taskapi.model.Task;
 import com.marx.taskapi.model.TaskPriority;
 import com.marx.taskapi.model.TaskStatus;
 import com.marx.taskapi.service.TaskService;
-import com.marx.taskapi.dto.CreateTaskRequest;
-import com.marx.taskapi.dto.UpdateTaskTitleRequest;
-import com.marx.taskapi.dto.UpdateTaskStatusRequest;
 
 import jakarta.validation.Valid;
+import org.apache.coyote.Response;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -42,6 +40,7 @@ public class TaskController {
 
     @GetMapping("/{id}")
     public ResponseEntity<Task> getTaskById(@PathVariable Long id) {
+
         return taskService.getTaskById(id)
                 .map(task -> ResponseEntity.ok(task))
                 .orElseGet(() -> ResponseEntity.notFound().build());
@@ -74,7 +73,28 @@ public class TaskController {
     public ResponseEntity<Task> updateTaskDescription(
             @PathVariable Long id,
             @Valid @RequestBody UpdateTaskDescriptionRequest request) {
+
         return taskService.updateTaskDescription(id, request.description())
+                .map(task -> ResponseEntity.ok(task))
+                .orElseGet(() -> ResponseEntity.notFound().build());
+    }
+
+    @PatchMapping("/{id}/priority")
+    public ResponseEntity<Task> updateTaskPriority(
+            @PathVariable Long id,
+            @Valid @RequestBody UpdateTaskPriorityRequest request) {
+
+        return taskService.updateTaskPriority(id, request.priority())
+                .map(task -> ResponseEntity.ok(task))
+                .orElseGet(() -> ResponseEntity.notFound().build());
+    }
+
+    @PatchMapping("/{id}/due-date")
+    public ResponseEntity<Task> updateTaskDueDate(
+            @PathVariable Long id,
+            @Valid @RequestBody UpdateTaskDueDateRequest request) {
+
+        return taskService.updateTaskDueDate(id, request.dueDate())
                 .map(task -> ResponseEntity.ok(task))
                 .orElseGet(() -> ResponseEntity.notFound().build());
     }
@@ -102,12 +122,14 @@ public class TaskController {
     @GetMapping("/status/{status}")
     public List<Task> getTasksByStatus(
             @PathVariable TaskStatus status) {
+
         return taskService.getTasksByStatus(status);
     }
 
     @GetMapping("/priority/{priority}")
     public List<Task> getTasksByPriority(
             @PathVariable TaskPriority priority) {
+
         return taskService.getTasksByPriority(priority);
     }
 
