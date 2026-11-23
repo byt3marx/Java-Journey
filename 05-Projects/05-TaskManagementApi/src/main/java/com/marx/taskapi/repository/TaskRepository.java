@@ -5,10 +5,12 @@ import com.marx.taskapi.model.TaskPriority;
 import com.marx.taskapi.model.TaskStatus;
 import org.springframework.data.jpa.repository.JpaRepository;
 
+import java.time.LocalDate;
 import java.util.List;
 
 public interface TaskRepository extends JpaRepository<Task, Long> {
 
     List<Task> findByStatus(TaskStatus status);
     List<Task> findByPriority(TaskPriority priority);
+    List<Task> findByDueDate(LocalDate dueDate);
 }

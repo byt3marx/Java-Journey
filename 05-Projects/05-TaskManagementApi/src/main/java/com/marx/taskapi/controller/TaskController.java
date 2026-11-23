@@ -10,6 +10,7 @@ import com.marx.taskapi.dto.UpdateTaskTitleRequest;
 import com.marx.taskapi.dto.UpdateTaskStatusRequest;
 
 import jakarta.validation.Valid;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -20,6 +21,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.DeleteMapping;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @RestController
@@ -107,6 +109,15 @@ public class TaskController {
     public List<Task> getTasksByPriority(
             @PathVariable TaskPriority priority) {
         return taskService.getTasksByPriority(priority);
+    }
+
+    @GetMapping("/due-date/{dueDate}")
+    public List<Task> getTaskByDueDate(
+            @PathVariable
+            @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
+            LocalDate dueDate) {
+
+        return taskService.getTasksByDueDate(dueDate);
     }
 
 }

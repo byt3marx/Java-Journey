@@ -44,6 +44,10 @@ public class TaskService {
         return taskRepository.findByPriority(priority);
     }
 
+    public List<Task> getTasksByDueDate(LocalDate dueDate) {
+        return taskRepository.findByDueDate(dueDate);
+    }
+
     public Optional<Task> updateTaskTitle(Long id, String title) {
         return taskRepository.findById(id)
                 .map(task -> {
