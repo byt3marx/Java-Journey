@@ -6,16 +6,18 @@ import com.marx.taskapi.service.TaskService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.webmvc.test.autoconfigure.WebMvcTest;
+import org.springframework.http.MediaType;
 import org.springframework.test.context.bean.override.mockito.MockitoBean;
 import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.web.bind.annotation.RequestBody;
 
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
-import static org.mockito.Mockito.validateMockitoUsage;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -79,6 +81,76 @@ class TaskControllerTest {
 
         mockMvc.perform(get("/api/tasks/999"))
                 .andExpect(status().isNotFound());
+    }
+
+    @Test
+    void createTaskReturnsCreatedAndTaskAsJson() throws Exception {
+        LocalDate dueDate = LocalDate.now().plusDays(10);
+
+        Task createdTask = new Task(
+                "Create controller test",
+                "Test POST endpoint",
+                TaskPriority.HIGH,
+                dueDate
+        );
+
+        when(taskService.createTask(
+                "Create controller test",
+                "Test POST endpoint",
+                TaskPriority.HIGH,
+                dueDate
+        )).thenReturn(createdTask);
+
+        String requestBody = """
+                {
+                "title": "Create controller test",
+                "description": "Test POST endpoint",
+                "priority": "HIGH",
+                "dueDate": "%s"
+                }
+                """.formatted(dueDate);
+
+        mockMvc.perform(post("/api/tasks")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(requestBody))
+                .andExpect(status().isCreated())
+                .andExpect(jsonPath("$.title").value("Create controller test"))
+                .andExpect(jsonPath("$.priority").value("HIGH"))
+                .andExpect(jsonPath("$.status").value("TO_DO"));
+
+        verify(taskService).createTask(
+                "Create controller test",
+                "Test POST endpoint",
+                TaskPriority.HIGH,
+                dueDate
+        );
+    }
+
+    @Test
+    void createTaskReturnsBadRequestForInvalidInput() throws Exception {
+        LocalDate pastDate = LocalDate.now().minusDays(1);
+
+        String requestBody = """
+                {
+                "title": "   ",
+                "description": "Invalid task",
+                "priority": null,
+                "dueDate": "%s"
+                }
+                """.formatted(pastDate);
+
+        mockMvc.perform(post("/api/tasks")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(requestBody))
+                .andExpect(status().isBadRequest())
+                .andExpect(jsonPath("$.title")
+                        .value("Title is required"))
+                .andExpect(jsonPath("$.priority")
+                        .value("Priority is required"))
+                .andExpect(jsonPath("$.dueDate")
+                        .value("Due date cannot be in the past"));
+
+        verifyNoInteractions(taskService);
     }
 
 }
