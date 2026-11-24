@@ -107,4 +107,61 @@ public class TaskServiceTest {
         verify(taskRepository).findById(999L);
         verify(taskRepository, never()).save(any(Task.class));
     }
+
+    @Test
+    void deleteTaskDeletesAndReturnsTaskWhenTaskExists() {
+        Task task = new Task(
+                "Delete task",
+                "Test successful deletion",
+                TaskPriority.LOW,
+                LocalDate.now().plusDays(1)
+        );
+
+        when(taskRepository.findById(1L))
+                .thenReturn(Optional.of(task));
+
+        Optional<Task> result = taskService.deleteTask(1L);
+
+        assertTrue(result.isPresent());
+        assertSame(task, result.get());
+
+        verify(taskRepository).findById(1L);
+        verify(taskRepository).delete(task);
+    }
+
+    @Test
+    void deleteTaskDoesNotDeleteWhenTaskDoesNotExist() {
+        when(taskRepository.findById(999L))
+                .thenReturn(Optional.empty());
+
+        Optional<Task> result = taskService.deleteTask(999L);
+
+        assertTrue(result.isEmpty());
+
+        verify(taskRepository).findById(999L);
+        verify(taskRepository, never()).delete(any(Task.class));
+    }
+
+    @Test
+    void createTaskCreatesSavesAndReturnsTask() {
+        LocalDate dueDate = LocalDate.now().plusDays(7);
+
+        when(taskRepository.save(any(Task.class)))
+                .thenAnswer(invocation -> invocation.getArgument(0));
+
+        Task result = taskService.createTask(
+                "Create test",
+                "Test task creation",
+                TaskPriority.HIGH,
+                dueDate
+        );
+
+        assertEquals("Create test", result.getTitle());
+        assertEquals("Test task creation", result.getDescription());
+        assertEquals(TaskPriority.HIGH, result.getPriority());
+        assertEquals(TaskStatus.TO_DO, result.getStatus());
+        assertEquals(dueDate, result.getDueDate());
+
+        verify(taskRepository).save(result);
+    }
 }
