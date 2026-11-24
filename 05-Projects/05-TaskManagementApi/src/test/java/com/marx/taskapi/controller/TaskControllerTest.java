@@ -2,6 +2,7 @@ package com.marx.taskapi.controller;
 
 import com.marx.taskapi.model.Task;
 import com.marx.taskapi.model.TaskPriority;
+import com.marx.taskapi.model.TaskStatus;
 import com.marx.taskapi.service.TaskService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,15 +10,13 @@ import org.springframework.boot.webmvc.test.autoconfigure.WebMvcTest;
 import org.springframework.http.MediaType;
 import org.springframework.test.context.bean.override.mockito.MockitoBean;
 import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.web.bind.annotation.RequestBody;
 
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
 import static org.mockito.Mockito.*;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -151,6 +150,86 @@ class TaskControllerTest {
                         .value("Due date cannot be in the past"));
 
         verifyNoInteractions(taskService);
+    }
+
+    @Test
+    void updateTaskStatusReturnsOkWhenTaskExists() throws Exception {
+        Task updatedTask = new Task(
+                "Update status",
+                "Test PATCH endpoint",
+                TaskPriority.HIGH,
+                LocalDate.now().plusDays(1)
+        );
+
+        updatedTask.setStatus(TaskStatus.IN_PROGRESS);
+        when(taskService.updateTaskStatus(1L, TaskStatus.IN_PROGRESS))
+                .thenReturn(Optional.of(updatedTask));
+
+        String requestBody = """
+                {
+                "status": "IN_PROGRESS"
+                }
+                """;
+
+        mockMvc.perform(patch("/api/tasks/1/status")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(requestBody))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.title")
+                        .value("Update status"))
+                .andExpect(jsonPath("$.status")
+                        .value("IN_PROGRESS"));
+
+        verify(taskService).updateTaskStatus(1L, TaskStatus.IN_PROGRESS);
+    }
+
+    @Test
+    void updateTaskStatusReturnsNotFoundWhenTaskDoesNotExist() throws Exception {
+        when(taskService.updateTaskStatus(999L, TaskStatus.DONE))
+                .thenReturn(Optional.empty());
+
+        String requestBody = """
+                {
+                "status": "DONE"
+                }
+                """;
+
+        mockMvc.perform(patch("/api/tasks/999/status")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(requestBody))
+                .andExpect(status().isNotFound());
+
+        verify(taskService)
+                .updateTaskStatus(999L, TaskStatus.DONE);
+    }
+
+    @Test
+    void deleteTaskReturnsNoContentWhenTaskExists() throws Exception {
+        Task task = new Task(
+                "Delete controller test",
+                "Task to delete",
+                TaskPriority.LOW,
+                LocalDate.now().plusDays(1)
+        );
+
+        when(taskService.deleteTask(1L))
+                .thenReturn(Optional.of(task));
+
+        mockMvc.perform(delete("/api/tasks/1"))
+                .andExpect(status().isNoContent());
+
+        verify(taskService).deleteTask(1L);
+    }
+
+    @Test
+    void deleteTaskReturnsNotFoundWhenTaskDoesNotExist() throws Exception {
+        when(taskService.deleteTask(999L))
+                .thenReturn(Optional.empty());
+
+        mockMvc.perform(delete("/api/tasks/999"))
+                .andExpect(status().isNotFound());
+
+        verify(taskService).deleteTask(999L);
     }
 
 }
