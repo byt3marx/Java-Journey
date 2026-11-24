@@ -164,4 +164,26 @@ public class TaskServiceTest {
 
         verify(taskRepository).save(result);
     }
+
+    @Test
+    void getTasksByStatusReturnsMatchingTasks() {
+        Task task = new Task(
+                "Filtered task",
+                "Task with matching status",
+                TaskPriority.MEDIUM,
+                LocalDate.now().plusDays(1)
+        );
+
+        task.setStatus(TaskStatus.IN_PROGRESS);
+
+        when(taskRepository.findByStatus(TaskStatus.IN_PROGRESS))
+                .thenReturn(List.of(task));
+
+        List<Task> result = taskService.getTasksByStatus(TaskStatus.IN_PROGRESS);
+
+        assertEquals(1, result.size());
+        assertSame(task, result.get(0));
+
+        verify(taskRepository).findByStatus(TaskStatus.IN_PROGRESS);
+    }
 }
